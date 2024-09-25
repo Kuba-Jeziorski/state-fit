@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-// import { PENDING, IN_PROGRESS, FINISHED } from "./constants/constants";
 import { AppState, StateFunction } from "./constants/types";
 
 import { Opening } from "./components/Opening";
@@ -9,15 +8,10 @@ import { Home } from "./components/Home";
 import { Summary } from "./components/Summary";
 
 import "./index.css";
+import { NavigationPlaceholder } from "./components/NavigationPlaceholder";
 
 function App() {
   const [appState, setAppState] = useState<AppState>("pending");
-
-  // const appIsPending = appState === PENDING;
-  // const appIsInProgress = appState === IN_PROGRESS;
-  // const appIsFinished = appState === FINISHED;
-
-  const navigate = useNavigate();
 
   const handleAppState = (stateFunction: StateFunction, state: AppState) => {
     stateFunction(() => state);
@@ -26,12 +20,12 @@ function App() {
   return (
     <>
       <BrowserRouter>
+      <NavigationPlaceholder/>
         <Routes>
           <Route
           path="/open"
             element={
               <Opening
-                navigate={navigate}
                 applicationState={appState}
                 onPush={() => handleAppState(setAppState, "in-progress")}
               />

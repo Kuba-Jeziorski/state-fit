@@ -1,18 +1,15 @@
 import { useEffect } from "react";
 import { IN_PROGRESS } from "../constants/constants";
 import { AppStateChangeFunction } from "../constants/types";
-import { NavigateFunction } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-type AppStyleChangeAndNavigate = AppStateChangeFunction & {
-  navigate: NavigateFunction
-}
+export const Opening = ({ applicationState, onPush }: AppStateChangeFunction) => {
 
-export const Opening = ({ navigate, applicationState, onPush }: AppStyleChangeAndNavigate) => {
+  const navigate = useNavigate();
 
   useEffect(()=>{
     if(applicationState === IN_PROGRESS) {
-      // navigate("/");
-      console.log(navigate)
+      navigate("/");
     }
   },[applicationState,navigate])
 
