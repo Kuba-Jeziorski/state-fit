@@ -1,10 +1,12 @@
 import { IN_PROGRESS } from "../constants/constants";
 import { AppStateChangeFunction } from "../constants/types";
 
-export const Home = ({ onPush }: AppStateChangeFunction) => {
+export const Home = ({ applicationState, onPush }: AppStateChangeFunction) => {
   const changeState = () => {
     onPush(IN_PROGRESS);
   };
+
+  console.log(applicationState)
 
   return (
     <>

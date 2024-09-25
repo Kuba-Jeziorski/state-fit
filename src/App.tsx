@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 
-import { PENDING, IN_PROGRESS, FINISHED } from "./constants/constants";
+// import { PENDING, IN_PROGRESS, FINISHED } from "./constants/constants";
 import { AppState, StateFunction } from "./constants/types";
 
 import { Opening } from "./components/Opening";
@@ -17,6 +17,8 @@ function App() {
   // const appIsInProgress = appState === IN_PROGRESS;
   // const appIsFinished = appState === FINISHED;
 
+  const navigate = useNavigate();
+
   const handleAppState = (stateFunction: StateFunction, state: AppState) => {
     stateFunction(() => state);
   };
@@ -26,17 +28,20 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route
-            index
+          path="/open"
             element={
               <Opening
+                navigate={navigate}
+                applicationState={appState}
                 onPush={() => handleAppState(setAppState, "in-progress")}
               />
             }
           />
           <Route
-            path="/home"
+            path="/"
             element={
-              <Home onPush={() => handleAppState(setAppState, "finished")} />
+              
+              <Home applicationState={appState} onPush={() => handleAppState(setAppState, "finished")} />
             }
           />
           <Route path="/summary" element={<Summary />} />

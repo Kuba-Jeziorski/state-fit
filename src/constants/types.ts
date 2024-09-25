@@ -5,5 +5,6 @@ export type AppState = typeof PENDING | typeof IN_PROGRESS | typeof FINISHED;
 export type StateFunction = React.Dispatch<React.SetStateAction<AppState>>;
 
 export type AppStateChangeFunction = {
+  applicationState: AppState
   onPush: (newState: AppState) => void;
 };
