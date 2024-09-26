@@ -6,3 +6,13 @@
   --color-iceberg: #c4dad2;
   --color-lily-white: #e9efec;
 }
+
+* {
+  box-sizing: border-box;
+}
+
+.wrapper {
+  max-width: 1000px;
+  border: 1px solid black;
+  padding: 10px;
+}

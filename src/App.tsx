@@ -1,54 +1,58 @@
 import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import { AppState, StateFunction } from "./constants/types";
-
-import { Opening } from "./components/Opening";
-import { Home } from "./components/Home";
-import { Summary } from "./components/Summary";
-
 import "./index.css";
-import { NavigationPlaceholder } from "./components/NavigationPlaceholder";
+
+import { AppState, TrainingState } from "./constants/types";
+import { Opening } from "./pages/Opening";
+import { Home } from "./pages/Home";
+import { Summary } from "./pages/Summary";
+// import { Navigation } from "./pages/Navigation";
+import { Training } from "./pages/Training";
 
 function App() {
-  const [appState, setAppState] = useState<AppState>("pending");
+  const [appState, setAppState] = useState<AppState>(() => {
+    return (localStorage.getItem("appState") as AppState) || "logged-out";
+  });
 
-  const handleAppState = (stateFunction: StateFunction, state: AppState) => {
-    stateFunction(() => state);
-  };
-
+  const [trainingState, setTrainingState] = useState<TrainingState>(() => {
+    return (
+      (localStorage.getItem("trainingState") as TrainingState) || "training-off"
+    );
+  });
   return (
     <>
       <BrowserRouter>
-      <NavigationPlaceholder/>
+        {/* <Navigation /> */}
         <Routes>
           <Route
-          path="/open"
+            path="/"
             element={
-              <Opening
-                applicationState={appState}
-                onPush={() => handleAppState(setAppState, "in-progress")}
+              <Home
+                appState={appState}
+                setAppState={setAppState}
+                trainingState={trainingState}
+                setTrainingState={setTrainingState}
               />
             }
           />
           <Route
-            path="/"
-            element={
-              
-              <Home applicationState={appState} onPush={() => handleAppState(setAppState, "finished")} />
-            }
+            path="/open"
+            element={<Opening appState={appState} setAppState={setAppState} />}
           />
           <Route path="/summary" element={<Summary />} />
+          <Route
+            path="/training"
+            element={
+              <Training
+                appState={appState}
+                trainingState={trainingState}
+                setTrainingState={setTrainingState}
+              />
+            }
+          />
         </Routes>
       </BrowserRouter>
-
-      {/* {appIsPending && (
-        <Opening onPush={() => handleAppState(setAppState, "in-progress")} />
-      )}
-      {appIsInProgress && (
-        <Home onPush={() => handleAppState(setAppState, "finished")} />
-      )} */}
-      {/* {appIsFinished && <Summary />} */}
     </>
   );
 }
