@@ -19,12 +19,14 @@ export const ConfirmModal = ({
   return (
     <div className="confirmModalOverlay">
       <div className="confirmModalBox">
-        <div className="confirmModalClose"></div>
+        <div className="confirmModalClose" onClick={handleDeclineFunction}>
+          &#10005;
+        </div>
         <div className="confirmModalContent">
           <p className="confirmModalDescription">{confirmMessage}</p>
           <div className="confirmModalButtons">
             <button
-              className="confirmModalButton accept"
+              className="confirmModalButton accepted"
               onClick={handleAcceptFunction}
             >
               Accept

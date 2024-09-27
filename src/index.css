@@ -1,10 +1,13 @@
 /* styles */
 
 :root {
-  --color-tiber: #16423c;
-  --color-patina: #6a9c89;
-  --color-iceberg: #c4dad2;
-  --color-lily-white: #e9efec;
+  --color-tiber: rgb(22, 66, 60);
+  --color-tiber-06: rgba(22, 66, 60, 0.6);
+  --color-patina: rgb(106, 156, 137);
+  --color-iceberg: rgb(196, 218, 210);
+  --color-lily-white: rgb(233, 239, 236);
+  --color-muted-red: rgb(207, 83, 79);
+  --color-muted-red-06: rgba(207, 83, 79, 0.6);
 }
 
 * {
@@ -15,4 +18,83 @@
   max-width: 1000px;
   border: 1px solid black;
   padding: 10px;
+}
+
+.confirmModalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-tiber-06);
+}
+
+.confirmModalBox {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  width: 500px;
+  height: 200px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.confirmModalClose {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: -45px;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  color: var(--color-tiber);
+  cursor: pointer;
+}
+
+.confirmModalContent {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.confirmModalDescription {
+  font-size: 25px;
+  color: var(--color-tiber);
+}
+
+.confirmModalButtons {
+  display: flex;
+  gap: 40px;
+}
+
+.confirmModalButton {
+  background: transparent;
+  outline: none;
+  border: none;
+  border: 1px solid black;
+  padding: 15px 30px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter 0.3s;
+}
+
+.confirmModalButton:hover {
+  filter: brightness(1.2);
+}
+
+.confirmModalButton.accepted {
+  background-color: var(--color-patina);
+}
+
+.confirmModalButton.declined {
+  background-color: var(--color-muted-red-06);
 }
