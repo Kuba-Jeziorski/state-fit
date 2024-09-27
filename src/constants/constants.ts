@@ -3,3 +3,4 @@ export const LOGGED_IN = "logged-in";
 
 export const TRAINING_ON = "training-on";
 export const TRAINING_OFF = "training-off";
+export const trainingConfirmMessage = "Do you want to start new training?";

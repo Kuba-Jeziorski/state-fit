@@ -3,8 +3,12 @@ import {
   TrainingStateValueWithUpdater,
 } from "../constants/types";
 import { useRedirectIfLoggedOut } from "../utils/useRedirectIfLoggedOut";
-// import { useRedirectIfTrainingOff } from "../utils/useRedirectIfTrainingOff";
-import { TRAINING_OFF, TRAINING_ON } from "../constants/constants";
+import {
+  LOGGED_IN,
+  TRAINING_OFF,
+  TRAINING_ON,
+  trainingConfirmMessage,
+} from "../constants/constants";
 import { useNavigate } from "react-router-dom";
 import { Title } from "../components/Title";
 import { TrainingForm } from "../components/TrainingForm";
@@ -19,13 +23,16 @@ export const Training = ({
 }: TrainingProps) => {
   const navigate = useNavigate();
 
+  const isLoggedIn = appState === LOGGED_IN;
+  const isTrainingOn = trainingState === TRAINING_ON;
+
   const redirectToHome = () => {
     navigate("/");
   };
 
   const redirectToSummary = () => {
-    navigate('/summary');
-  }
+    navigate("/summary");
+  };
 
   const finishTraining = () => {
     setTrainingState(TRAINING_OFF);
@@ -33,20 +40,17 @@ export const Training = ({
     redirectToSummary();
   };
 
-  useEffect(()=>{
-    if(trainingState === TRAINING_OFF) {
-
-    if (confirm(`Do you want to start new training?`)) {
-      setTrainingState(TRAINING_ON);
-      localStorage.setItem("trainingState", TRAINING_ON);
-    } else {
-      redirectToHome();
+  //TODO:  happens twice
+  useEffect(() => {
+    if (isLoggedIn && !isTrainingOn) {
+      if (confirm(trainingConfirmMessage)) {
+        setTrainingState(TRAINING_ON);
+        localStorage.setItem("trainingState", TRAINING_ON);
+      } else {
+        redirectToHome();
+      }
     }
-  }
-
-  },[trainingState, setTrainingState])
-
-  
+  }, [trainingState, setTrainingState]);
 
   useRedirectIfLoggedOut(appState);
 
