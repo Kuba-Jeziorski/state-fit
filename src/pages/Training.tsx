@@ -12,7 +12,8 @@ import {
 import { useNavigate } from "react-router-dom";
 import { Title } from "../components/Title";
 import { TrainingForm } from "../components/TrainingForm";
-import { useEffect } from "react";
+import { useState } from "react";
+import { ConfirmModal } from "../components/ConfirmModal";
 
 type TrainingProps = AppStateValue & TrainingStateValueWithUpdater;
 
@@ -21,38 +22,37 @@ export const Training = ({
   trainingState,
   setTrainingState,
 }: TrainingProps) => {
-  const navigate = useNavigate();
+  const [isModalVisibe, setIsModalVisible] = useState(true);
 
+  const navigate = useNavigate();
   const isLoggedIn = appState === LOGGED_IN;
   const isTrainingOn = trainingState === TRAINING_ON;
+  const isConfirmModalDisplayed = isLoggedIn && !isTrainingOn;
 
   const redirectToHome = () => {
     navigate("/");
   };
-
   const redirectToSummary = () => {
     navigate("/summary");
   };
-
   const finishTraining = () => {
     setTrainingState(TRAINING_OFF);
     localStorage.setItem("trainingState", TRAINING_OFF);
+    setIsModalVisible(false);
     redirectToSummary();
   };
-
-  //TODO:  happens twice
-  useEffect(() => {
-    if (isLoggedIn && !isTrainingOn) {
-      if (confirm(trainingConfirmMessage)) {
-        setTrainingState(TRAINING_ON);
-        localStorage.setItem("trainingState", TRAINING_ON);
-      } else {
-        redirectToHome();
-      }
-    }
-  }, [trainingState, setTrainingState]);
+  const newTrainingConfirmed = () => {
+    setTrainingState(TRAINING_ON);
+    localStorage.setItem("trainingState", TRAINING_ON);
+    setIsModalVisible(false);
+  };
+  const newTrainingNotConfirmed = () => {
+    setIsModalVisible(false);
+    redirectToHome();
+  };
 
   useRedirectIfLoggedOut(appState);
+  console.log(isModalVisibe);
 
   return (
     <>
@@ -60,6 +60,13 @@ export const Training = ({
       <Title tag="h1">New training</Title>
       <TrainingForm />
       <button onClick={finishTraining}>Finish training</button>
+      {isConfirmModalDisplayed && (
+        <ConfirmModal
+          confirmMessage={trainingConfirmMessage}
+          confirmAcceptFunction={newTrainingConfirmed}
+          confirmDeclineFunction={newTrainingNotConfirmed}
+        />
+      )}
     </>
   );
 };

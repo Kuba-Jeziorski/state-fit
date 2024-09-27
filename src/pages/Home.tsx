@@ -1,11 +1,18 @@
 import { useNavigate } from "react-router-dom";
-import { LOGGED_OUT, TRAINING_OFF, TRAINING_ON } from "../constants/constants";
+import {
+  LOGGED_OUT,
+  loggingConfirmMessage,
+  TRAINING_OFF,
+  TRAINING_ON,
+} from "../constants/constants";
 import {
   AppStateValueWithUpdater,
   TrainingStateValueWithUpdater,
 } from "../constants/types";
 import { useRedirectIfLoggedOut } from "../utils/useRedirectIfLoggedOut";
 import { Title } from "../components/Title";
+import { useState } from "react";
+import { ConfirmModal } from "../components/ConfirmModal";
 
 type HomeProps = AppStateValueWithUpdater & TrainingStateValueWithUpdater;
 
@@ -15,6 +22,8 @@ export const Home = ({
   trainingState,
   setTrainingState,
 }: HomeProps) => {
+  const [isLogoutPressed, setIsLoggoutPressed] = useState(false);
+
   const isTrainingOn = trainingState === TRAINING_ON;
   const navigate = useNavigate();
 
@@ -29,15 +38,18 @@ export const Home = ({
     localStorage.setItem("trainingState", TRAINING_ON);
     navigateToTraining();
   };
-  const logOut = () => {
-    if (confirm(`Are you sure?`)) {
-      setAppState(LOGGED_OUT);
-      localStorage.setItem("appState", LOGGED_OUT);
-      setTrainingState(TRAINING_OFF);
-      localStorage.setItem("trainingState", TRAINING_OFF);
-    } else {
-      return;
-    }
+  const handleIsLogoutPressed = () => {
+    setIsLoggoutPressed(true);
+  };
+  const logOutConfirmed = () => {
+    setAppState(LOGGED_OUT);
+    localStorage.setItem("appState", LOGGED_OUT);
+    setTrainingState(TRAINING_OFF);
+    localStorage.setItem("trainingState", TRAINING_OFF);
+    setIsLoggoutPressed(false);
+  };
+  const logOutNotConfirmed = () => {
+    setIsLoggoutPressed(false);
   };
 
   useRedirectIfLoggedOut(appState);
@@ -49,7 +61,14 @@ export const Home = ({
         {isTrainingOn ? "Current Training" : "Start New Training"}
       </button>
       <button onClick={navigateToSummary}>See Summary</button>
-      <button onClick={logOut}>Log me out</button>
+      <button onClick={handleIsLogoutPressed}>Log me out</button>
+      {isLogoutPressed && (
+        <ConfirmModal
+          confirmMessage={loggingConfirmMessage}
+          confirmAcceptFunction={logOutConfirmed}
+          confirmDeclineFunction={logOutNotConfirmed}
+        />
+      )}
     </>
   );
 };
