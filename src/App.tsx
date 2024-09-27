@@ -7,7 +7,6 @@ import { AppState, TrainingState } from "./constants/types";
 import { Opening } from "./pages/Opening";
 import { Home } from "./pages/Home";
 import { Summary } from "./pages/Summary";
-// import { Navigation } from "./pages/Navigation";
 import { Training } from "./pages/Training";
 
 function App() {
@@ -23,7 +22,6 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        {/* <Navigation /> */}
         <Routes>
           <Route
             path="/"

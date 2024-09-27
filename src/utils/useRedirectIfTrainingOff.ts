@@ -9,7 +9,6 @@ export const useRedirectIfTrainingOff = (
 ) => {
   const navigate = useNavigate();
 
-  console.log(appState);
 
   useEffect(() => {
     if (trainingState === TRAINING_OFF && appState === LOGGED_OUT) {
