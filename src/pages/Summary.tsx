@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { usePageTitle } from "../utils/usePageTitle";
 
 export const Summary = () => {
   const navigate = useNavigate();
@@ -6,6 +7,9 @@ export const Summary = () => {
   const useRedirectToHome = () => {
     navigate("/");
   };
+
+  usePageTitle('Summary');
+
   return (
     <>
       <button onClick={useRedirectToHome}>HOME</button>

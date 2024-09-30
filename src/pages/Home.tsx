@@ -13,6 +13,7 @@ import { useRedirectIfLoggedOut } from "../utils/useRedirectIfLoggedOut";
 import { Title } from "../components/Title";
 import { useState } from "react";
 import { ConfirmModal } from "../components/ConfirmModal";
+import { usePageTitle } from "../utils/usePageTitle";
 
 type HomeProps = AppStateValueWithUpdater & TrainingStateValueWithUpdater;
 
@@ -51,6 +52,8 @@ export const Home = ({
   const logOutNotConfirmed = () => {
     setIsLoggoutPressed(false);
   };
+
+  usePageTitle('Home');
 
   useRedirectIfLoggedOut(appState);
 

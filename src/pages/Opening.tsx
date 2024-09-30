@@ -1,6 +1,7 @@
 import { AppStateValueWithUpdater } from "../constants/types";
 import { LOGGED_IN } from "../constants/constants";
 import { useRedirectIfLoggedIn } from "../utils/useRedirectIfLoggedIn";
+import { usePageTitle } from "../utils/usePageTitle";
 
 export const Opening = ({
   appState,
@@ -10,6 +11,8 @@ export const Opening = ({
     setAppState(LOGGED_IN);
     localStorage.setItem("appState", LOGGED_IN);
   };
+
+  usePageTitle('Log in');
 
   useRedirectIfLoggedIn(appState);
 

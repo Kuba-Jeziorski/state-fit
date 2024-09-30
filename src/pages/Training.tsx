@@ -14,6 +14,7 @@ import { Title } from "../components/Title";
 import { TrainingForm } from "../components/TrainingForm";
 import { useState } from "react";
 import { ConfirmModal } from "../components/ConfirmModal";
+import { usePageTitle } from "../utils/usePageTitle";
 
 type TrainingProps = AppStateValue & TrainingStateValueWithUpdater;
 
@@ -52,6 +53,7 @@ export const Training = ({
   };
 
   useRedirectIfLoggedOut(appState);
+  usePageTitle('Training')
   console.log(isModalVisibe);
 
   return (
