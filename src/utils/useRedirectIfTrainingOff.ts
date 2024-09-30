@@ -8,14 +8,17 @@ export const useRedirectIfTrainingOff = (
   trainingState: TrainingState
 ) => {
   const navigate = useNavigate();
-
+  const isTrainingOffAndLoggedOut =
+    trainingState === TRAINING_OFF && appState === LOGGED_OUT;
+  const isTrainingOffAndLoggedIn =
+    trainingState === TRAINING_OFF && appState === LOGGED_IN;
 
   useEffect(() => {
-    if (trainingState === TRAINING_OFF && appState === LOGGED_OUT) {
+    if (isTrainingOffAndLoggedOut) {
       navigate("/");
     }
-    if (trainingState === TRAINING_OFF && appState === LOGGED_IN) {
+    if (isTrainingOffAndLoggedIn) {
       navigate("/summary");
     }
-  }, [appState, trainingState, navigate]);
+  }, [isTrainingOffAndLoggedOut, isTrainingOffAndLoggedIn, navigate]);
 };

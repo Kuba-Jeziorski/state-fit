@@ -5,10 +5,11 @@ import { AppState } from "../constants/types";
 
 export const useRedirectIfLoggedOut = (appState: AppState) => {
   const navigate = useNavigate();
+  const isLoggedOut = appState === LOGGED_OUT;
 
   useEffect(() => {
-    if (appState === LOGGED_OUT) {
-      navigate("/open");
+    if (isLoggedOut) {
+      navigate("/opening");
     }
-  }, [appState, navigate]);
+  }, [isLoggedOut, navigate]);
 };

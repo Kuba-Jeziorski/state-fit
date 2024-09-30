@@ -42,34 +42,39 @@ export const Home = ({
   const handleIsLogoutPressed = () => {
     setIsLoggoutPressed(true);
   };
-  const logOutConfirmed = () => {
+  const logOutConfirmAccepted = () => {
     setAppState(LOGGED_OUT);
     localStorage.setItem("appState", LOGGED_OUT);
     setTrainingState(TRAINING_OFF);
     localStorage.setItem("trainingState", TRAINING_OFF);
     setIsLoggoutPressed(false);
   };
-  const logOutNotConfirmed = () => {
+  const logOutConfirmDeclined = () => {
     setIsLoggoutPressed(false);
   };
 
-  usePageTitle('Home');
-
+  usePageTitle("Home");
   useRedirectIfLoggedOut(appState);
 
   return (
     <>
       <Title tag="h1">Home</Title>
-      <button onClick={startTraining}>
-        {isTrainingOn ? "Current Training" : "Start New Training"}
-      </button>
-      <button onClick={navigateToSummary}>See Summary</button>
-      <button onClick={handleIsLogoutPressed}>Log me out</button>
+      <div className="buttonWrapper">
+        <button className="button primary" onClick={startTraining}>
+          {isTrainingOn ? "Current Training" : "Start New Training"}
+        </button>
+        <button className="button primary" onClick={navigateToSummary}>
+          See Summary
+        </button>
+        <button className="button primary" onClick={handleIsLogoutPressed}>
+          Log me out
+        </button>
+      </div>
       {isLogoutPressed && (
         <ConfirmModal
           confirmMessage={loggingConfirmMessage}
-          confirmAcceptFunction={logOutConfirmed}
-          confirmDeclineFunction={logOutNotConfirmed}
+          confirmAcceptFunction={logOutConfirmAccepted}
+          confirmDeclineFunction={logOutConfirmDeclined}
         />
       )}
     </>

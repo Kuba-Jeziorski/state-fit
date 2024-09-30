@@ -35,7 +35,7 @@ function App() {
             }
           />
           <Route
-            path="/open"
+            path="/opening"
             element={<Opening appState={appState} setAppState={setAppState} />}
           />
           <Route path="/summary" element={<Summary />} />

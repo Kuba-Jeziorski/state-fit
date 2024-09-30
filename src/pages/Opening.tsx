@@ -12,13 +12,14 @@ export const Opening = ({
     localStorage.setItem("appState", LOGGED_IN);
   };
 
-  usePageTitle('Log in');
-
+  usePageTitle("Log in");
   useRedirectIfLoggedIn(appState);
 
   return (
     <>
-      <button onClick={logIn}>Log in</button>
+      <button className="button primary" onClick={logIn}>
+        Log in
+      </button>
     </>
   );
 };

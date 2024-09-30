@@ -8,11 +8,13 @@ export const Summary = () => {
     navigate("/");
   };
 
-  usePageTitle('Summary');
+  usePageTitle("Summary");
 
   return (
     <>
-      <button onClick={useRedirectToHome}>HOME</button>
+      <button className="button primary" onClick={useRedirectToHome}>
+        HOME
+      </button>
       <h1>Summary</h1>
     </>
   );

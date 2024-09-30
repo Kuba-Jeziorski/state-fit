@@ -5,10 +5,12 @@ import { AppState } from "../constants/types";
 
 export const useRedirectIfLoggedIn = (applicationState: AppState) => {
   const navigate = useNavigate();
+  const isLoggedIn = applicationState === LOGGED_IN;
+
   useEffect(() => {
-    if (applicationState === LOGGED_IN) {
+    if (isLoggedIn) {
       localStorage.setItem("appState", LOGGED_IN);
       navigate("/");
     }
-  }, [applicationState, navigate]);
+  }, [isLoggedIn, navigate]);
 };

@@ -4,4 +4,6 @@ export const loggingConfirmMessage = "Are you sure you want to log out?";
 
 export const TRAINING_ON = "training-on";
 export const TRAINING_OFF = "training-off";
-export const trainingConfirmMessage = "Do you want to start new training?";
+export const newTrainingConfirmMessage = "Do you want to start new training?";
+export const finishTrainingConfirmMessage =
+  "Do you want to finish the training?";

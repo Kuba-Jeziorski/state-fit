@@ -9,30 +9,19 @@ export const ConfirmModal = ({
   confirmAcceptFunction,
   confirmDeclineFunction,
 }: ConfirmModal) => {
-  const handleAcceptFunction = () => {
-    confirmAcceptFunction();
-  };
-  const handleDeclineFunction = () => {
-    confirmDeclineFunction();
-  };
-
   return (
     <div className="confirmModalOverlay">
       <div className="confirmModalBox">
         <div className="confirmModalContent">
           <p className="confirmModalDescription">{confirmMessage}</p>
           <div className="confirmModalButtons">
-            
             <button
-              className="confirmModalButton declined"
-              onClick={handleDeclineFunction}
+              className="button secondary"
+              onClick={confirmDeclineFunction}
             >
               Decline
             </button>
-            <button
-              className="confirmModalButton accepted"
-              onClick={handleAcceptFunction}
-            >
+            <button className="button primary" onClick={confirmAcceptFunction}>
               Accept
             </button>
           </div>
