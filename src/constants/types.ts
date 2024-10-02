@@ -26,3 +26,48 @@ export type TrainingStateUpdater = {
 
 export type TrainingStateValueWithUpdater = TrainingStateValue &
   TrainingStateUpdater;
+
+// trainings
+
+export type ExerciseSet =
+  | {
+      id: number;
+      type: "chest";
+      weight: number;
+      reps: number;
+    }
+  | {
+      id: number;
+      type: "back";
+      weight: number;
+    }
+  | {
+      id: number;
+      type: "legs";
+    }
+  | {
+      id: number;
+      type: "running";
+      distance: number;
+      pace: number;
+    };
+
+export type ExerciseSets = Record<string, ExerciseSet>;
+
+export type Exercise = {
+  id: string;
+  exerciseTypeId: string;
+  setIds: string[];
+};
+
+export type Exercises = Record<string, Exercise>;
+
+export type Training = {
+  id: string;
+  date: string;
+  exerciseIds: string[];
+};
+
+export type Trainings = {
+  [key: string]: Training;
+};

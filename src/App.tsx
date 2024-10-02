@@ -19,6 +19,7 @@ function App() {
       (localStorage.getItem("trainingState") as TrainingState) || "training-off"
     );
   });
+
   return (
     <>
       <BrowserRouter>
