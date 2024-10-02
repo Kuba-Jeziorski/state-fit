@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import "./index.css";
 
@@ -20,38 +20,38 @@ function App() {
     );
   });
 
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: (
+        <Home
+          appState={appState}
+          setAppState={setAppState}
+          trainingState={trainingState}
+          setTrainingState={setTrainingState}
+        />
+      ),
+    },
+    {
+      path: "/opening",
+      element: <Opening appState={appState} setAppState={setAppState} />,
+    },
+    {
+      path: "/training",
+      element: (
+        <Training
+          appState={appState}
+          trainingState={trainingState}
+          setTrainingState={setTrainingState}
+        />
+      ),
+    },
+    { path: "/summary", element: <Summary /> },
+  ]);
+
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Home
-                appState={appState}
-                setAppState={setAppState}
-                trainingState={trainingState}
-                setTrainingState={setTrainingState}
-              />
-            }
-          />
-          <Route
-            path="/opening"
-            element={<Opening appState={appState} setAppState={setAppState} />}
-          />
-          <Route path="/summary" element={<Summary />} />
-          <Route
-            path="/training"
-            element={
-              <Training
-                appState={appState}
-                trainingState={trainingState}
-                setTrainingState={setTrainingState}
-              />
-            }
-          />
-        </Routes>
-      </BrowserRouter>
+      <RouterProvider router={router} />
     </>
   );
 }
