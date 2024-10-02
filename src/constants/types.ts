@@ -57,14 +57,14 @@ export type ExerciseSets = Record<string, ExerciseSet>;
 export type Exercise = {
   id: string;
   exerciseTypeId: string;
-  setIds: string[];
+  exerciseSetIds: string[];
 };
 
 export type Exercises = Record<string, Exercise>;
 
 export type Training = {
   id: string;
-  date: string;
+  date: number;
   exerciseIds: string[];
 };
 

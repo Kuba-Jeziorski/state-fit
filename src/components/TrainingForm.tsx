@@ -1,6 +1,18 @@
-import { useState } from "react";
+import { atom, useAtomValue } from "jotai";
+import { currentTrainingIdAtom } from "../atoms/current-training-id-atom";
+import { trainingsAtom } from "../atoms/trainings-atom";
+
+const currentTrainingAtom = atom((get) => {
+  const id = get(currentTrainingIdAtom);
+  const trainings = get(trainingsAtom);
+  if (id === null) {
+    return null;
+  }
+  return trainings[id];
+});
 
 export const TrainingForm = () => {
+  const currentTraining = useAtomValue(currentTrainingAtom);
   return (
     <>
       <form>
@@ -12,6 +24,7 @@ export const TrainingForm = () => {
           }}
         >
           <label htmlFor={`exercises-1`}>Choose an exercise</label>
+          <p>{currentTraining?.date}</p>
           <select
             style={{ marginBottom: "10px" }}
             name={`exercises-1`}

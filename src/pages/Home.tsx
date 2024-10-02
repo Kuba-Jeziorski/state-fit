@@ -14,6 +14,7 @@ import { Title } from "../components/Title";
 import { useState } from "react";
 import { ConfirmModal } from "../components/ConfirmModal";
 import { usePageTitle } from "../utils/usePageTitle";
+import { useStartTraining } from "../utils/useStartTraining";
 
 type HomeProps = AppStateValueWithUpdater & TrainingStateValueWithUpdater;
 
@@ -28,15 +29,19 @@ export const Home = ({
   const isTrainingOn = trainingState === TRAINING_ON;
   const navigate = useNavigate();
 
+  const startTraining = useStartTraining();
+
   const navigateToSummary = () => {
     navigate("/summary");
   };
   const navigateToTraining = () => {
     navigate("/training");
   };
-  const startTraining = () => {
+  const startNewTraining = () => {
     setTrainingState(TRAINING_ON);
+    startTraining();
     localStorage.setItem("trainingState", TRAINING_ON);
+
     navigateToTraining();
   };
   const handleIsLogoutPressed = () => {
@@ -60,7 +65,7 @@ export const Home = ({
     <>
       <Title tag="h1">Home</Title>
       <div className="buttonWrapper">
-        <button className="button primary" onClick={startTraining}>
+        <button className="button primary" onClick={startNewTraining}>
           {isTrainingOn ? "Current Training" : "Start New Training"}
         </button>
         <button className="button primary" onClick={navigateToSummary}>

@@ -16,6 +16,7 @@ import { TrainingForm } from "../components/TrainingForm";
 import { useState } from "react";
 import { ConfirmModal } from "../components/ConfirmModal";
 import { usePageTitle } from "../utils/usePageTitle";
+import { useStartTraining } from "../utils/useStartTraining";
 
 type TrainingProps = AppStateValue & TrainingStateValueWithUpdater;
 
@@ -30,6 +31,8 @@ export const Training = ({
   const isLoggedIn = appState === LOGGED_IN;
   const isTrainingOn = trainingState === TRAINING_ON;
   const isNewTrainingModalDisplayed = isLoggedIn && !isTrainingOn;
+
+  const startTraining = useStartTraining();
 
   const redirectToHome = () => {
     navigate("/");
@@ -52,6 +55,7 @@ export const Training = ({
   const newTrainingAccepted = () => {
     setTrainingState(TRAINING_ON);
     localStorage.setItem("trainingState", TRAINING_ON);
+    startTraining();
     setIsModalVisible(false);
   };
   const newTrainingDeclined = () => {
