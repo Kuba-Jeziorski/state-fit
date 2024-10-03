@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 
-export const useRedirectToHome = () => {
+export const useRedirectToSummary = () => {
   const navigate = useNavigate();
   return () => {
-    navigate("/");
+    navigate("/summary");
   };
 };

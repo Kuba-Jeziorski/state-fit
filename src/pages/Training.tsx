@@ -10,13 +10,14 @@ import {
   finishTrainingConfirmMessage,
   newTrainingConfirmMessage,
 } from "../constants/constants";
-import { useNavigate } from "react-router-dom";
 import { Title } from "../components/Title";
 import { TrainingForm } from "../components/TrainingForm";
 import { useState } from "react";
 import { ConfirmModal } from "../components/ConfirmModal";
 import { usePageTitle } from "../utils/usePageTitle";
 import { useStartTraining } from "../utils/useStartTraining";
+import { useRedirectToSummary } from "../utils/useRedirectToSummary";
+import { useRedirectToHome } from "../utils/useRedirectToHome";
 
 type TrainingProps = AppStateValue & TrainingStateValueWithUpdater;
 
@@ -27,19 +28,14 @@ export const Training = ({
 }: TrainingProps) => {
   const [isModalVisibe, setIsModalVisible] = useState(false);
 
-  const navigate = useNavigate();
   const isLoggedIn = appState === LOGGED_IN;
   const isTrainingOn = trainingState === TRAINING_ON;
   const isNewTrainingModalDisplayed = isLoggedIn && !isTrainingOn;
 
   const startTraining = useStartTraining();
+  const redirectToSummary = useRedirectToSummary();
+  const redirectToHome = useRedirectToHome();
 
-  const redirectToHome = () => {
-    navigate("/");
-  };
-  const redirectToSummary = () => {
-    navigate("/summary");
-  };
   const finishTrainingConfirmation = () => {
     setIsModalVisible(true);
   };

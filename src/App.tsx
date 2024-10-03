@@ -8,6 +8,7 @@ import { Opening } from "./pages/Opening";
 import { Home } from "./pages/Home";
 import { Summary } from "./pages/Summary";
 import { Training } from "./pages/Training";
+import { NoPage } from "./pages/NoPage";
 
 function App() {
   const [appState, setAppState] = useState<AppState>(() => {
@@ -47,13 +48,10 @@ function App() {
       ),
     },
     { path: "/summary", element: <Summary /> },
+    { path: "*", element: <NoPage /> },
   ]);
 
-  return (
-    <>
-      <RouterProvider router={router} />
-    </>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

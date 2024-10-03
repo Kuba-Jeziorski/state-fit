@@ -1,17 +1,15 @@
-import { usePageTitle } from "../utils/usePageTitle";
+import { Title } from "../components/Title";
 import { useRedirectToHome } from "../utils/useRedirectToHome";
 
-export const Summary = () => {
+export const NoPage = () => {
   const redirectToHome = useRedirectToHome();
-
-  usePageTitle("Summary");
 
   return (
     <>
+      <Title tag="h1">Nothing to do here!</Title>
       <button className="button primary" onClick={redirectToHome}>
         HOME
       </button>
-      <h1>Summary</h1>
     </>
   );
 };

@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import {
   LOGGED_OUT,
   loggingConfirmMessage,
@@ -15,6 +14,8 @@ import { useState } from "react";
 import { ConfirmModal } from "../components/ConfirmModal";
 import { usePageTitle } from "../utils/usePageTitle";
 import { useStartTraining } from "../utils/useStartTraining";
+import { useRedirectToSummary } from "../utils/useRedirectToSummary";
+import { useRedirectToTraining } from "../utils/useRedirectToTraining";
 
 type HomeProps = AppStateValueWithUpdater & TrainingStateValueWithUpdater;
 
@@ -27,22 +28,16 @@ export const Home = ({
   const [isLogoutPressed, setIsLoggoutPressed] = useState(false);
 
   const isTrainingOn = trainingState === TRAINING_ON;
-  const navigate = useNavigate();
 
   const startTraining = useStartTraining();
+  const redirectToTraining = useRedirectToTraining();
+  const redirectToSummary = useRedirectToSummary();
 
-  const navigateToSummary = () => {
-    navigate("/summary");
-  };
-  const navigateToTraining = () => {
-    navigate("/training");
-  };
   const startNewTraining = () => {
     setTrainingState(TRAINING_ON);
     startTraining();
     localStorage.setItem("trainingState", TRAINING_ON);
-
-    navigateToTraining();
+    redirectToTraining();
   };
   const handleIsLogoutPressed = () => {
     setIsLoggoutPressed(true);
@@ -68,7 +63,7 @@ export const Home = ({
         <button className="button primary" onClick={startNewTraining}>
           {isTrainingOn ? "Current Training" : "Start New Training"}
         </button>
-        <button className="button primary" onClick={navigateToSummary}>
+        <button className="button primary" onClick={redirectToSummary}>
           See Summary
         </button>
         <button className="button primary" onClick={handleIsLogoutPressed}>
