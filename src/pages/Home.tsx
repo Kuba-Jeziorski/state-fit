@@ -13,7 +13,6 @@ import { Title } from "../components/Title";
 import { useState } from "react";
 import { ConfirmModal } from "../components/ConfirmModal";
 import { usePageTitle } from "../utils/usePageTitle";
-import { useStartTraining } from "../utils/useStartTraining";
 import { useRedirectToSummary } from "../utils/useRedirectToSummary";
 import { useRedirectToTraining } from "../utils/useRedirectToTraining";
 
@@ -29,14 +28,10 @@ export const Home = ({
 
   const isTrainingOn = trainingState === TRAINING_ON;
 
-  const startTraining = useStartTraining();
   const redirectToTraining = useRedirectToTraining();
   const redirectToSummary = useRedirectToSummary();
 
   const startNewTraining = () => {
-    setTrainingState(TRAINING_ON);
-    startTraining();
-    localStorage.setItem("trainingState", TRAINING_ON);
     redirectToTraining();
   };
   const handleIsLogoutPressed = () => {

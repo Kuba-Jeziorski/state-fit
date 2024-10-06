@@ -4,7 +4,6 @@ import {
 } from "../constants/types";
 import { useRedirectIfLoggedOut } from "../utils/useRedirectIfLoggedOut";
 import {
-  LOGGED_IN,
   TRAINING_OFF,
   TRAINING_ON,
   finishTrainingConfirmMessage,
@@ -26,36 +25,35 @@ export const Training = ({
   trainingState,
   setTrainingState,
 }: TrainingProps) => {
-  const [isModalVisibe, setIsModalVisible] = useState(false);
+  const [isFinishTrainingModalVisible, setIsFinishTrainingModalVisible] =
+    useState(false);
 
-  const isLoggedIn = appState === LOGGED_IN;
   const isTrainingOn = trainingState === TRAINING_ON;
-  const isNewTrainingModalDisplayed = isLoggedIn && !isTrainingOn;
 
   const startTraining = useStartTraining();
   const redirectToSummary = useRedirectToSummary();
   const redirectToHome = useRedirectToHome();
 
   const finishTrainingConfirmation = () => {
-    setIsModalVisible(true);
+    setIsFinishTrainingModalVisible(true);
   };
   const finishTrainingAccepted = () => {
     setTrainingState(TRAINING_OFF);
     localStorage.setItem("trainingState", TRAINING_OFF);
-    setIsModalVisible(false);
+    setIsFinishTrainingModalVisible(false);
     redirectToSummary();
   };
   const finishTrainingDeclined = () => {
-    setIsModalVisible(false);
+    setIsFinishTrainingModalVisible(false);
   };
   const newTrainingAccepted = () => {
     setTrainingState(TRAINING_ON);
     localStorage.setItem("trainingState", TRAINING_ON);
     startTraining();
-    setIsModalVisible(false);
+    setIsFinishTrainingModalVisible(false);
   };
   const newTrainingDeclined = () => {
-    setIsModalVisible(false);
+    setIsFinishTrainingModalVisible(false);
     redirectToHome();
   };
 
@@ -64,26 +62,34 @@ export const Training = ({
 
   return (
     <>
-      <button className="button primary" onClick={redirectToHome}>
-        HOME
-      </button>
-      <Title tag="h1">New training</Title>
-      <TrainingForm />
-      <button className="button primary" onClick={finishTrainingConfirmation}>
-        Finish training
-      </button>
-      {isNewTrainingModalDisplayed && (
+      {isTrainingOn && (
+        <>
+          <button className="button primary" onClick={redirectToHome}>
+            HOME
+          </button>
+          <Title tag="h1">New training</Title>
+          <TrainingForm />
+          <button
+            className="button primary"
+            onClick={finishTrainingConfirmation}
+          >
+            Finish training
+          </button>
+          {isFinishTrainingModalVisible && (
+            <ConfirmModal
+              confirmMessage={finishTrainingConfirmMessage}
+              confirmAcceptFunction={finishTrainingAccepted}
+              confirmDeclineFunction={finishTrainingDeclined}
+            />
+          )}
+        </>
+      )}
+
+      {!isTrainingOn && (
         <ConfirmModal
           confirmMessage={newTrainingConfirmMessage}
           confirmAcceptFunction={newTrainingAccepted}
           confirmDeclineFunction={newTrainingDeclined}
-        />
-      )}
-      {isModalVisibe && (
-        <ConfirmModal
-          confirmMessage={finishTrainingConfirmMessage}
-          confirmAcceptFunction={finishTrainingAccepted}
-          confirmDeclineFunction={finishTrainingDeclined}
         />
       )}
     </>
