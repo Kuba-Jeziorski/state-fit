@@ -29,28 +29,62 @@ export type TrainingStateValueWithUpdater = TrainingStateValue &
 
 // trainings
 
-export type ExerciseSet =
-  | {
-      id: number;
-      type: "chest";
-      weight: number;
-      reps: number;
+export type ExerciseSet = 
+    {
+      id: number,
+      type: "Incline dumbbell press",
+      weight: number,
+      reps: number,
     }
-  | {
-      id: number;
-      type: "back";
-      weight: number;
+    | {
+      id: number,
+      type: "Dumbbell flyes",
+      weight: number,
+      reps: number,
+    } | {
+      id: number,
+      type: "Bench press",
+      weight: number,
+      reps: number,
+    }| {
+      id: number,
+      type: "Dumbbell bench press",
+      weight: number,
+      reps: number,
+    } | {
+      id: number,
+      type: "Decline dumbbell press",
+      weight: number,
+      reps: number,
+    } | {
+      id: number,
+      type: "Push up",
+      reps: number
+    }| {
+      id: number,
+      type: "Incline push up",
+      reps: number
+    }| {
+      id: number,
+      type: "Decline push up",
+      reps: number
     }
-  | {
-      id: number;
-      type: "legs";
-    }
-  | {
-      id: number;
-      type: "running";
-      distance: number;
-      pace: number;
-    };
+    
+  // | {
+  //     id: number;
+  //     type: "back";
+  //     weight: number;
+  //   }
+  // | {
+  //     id: number;
+  //     type: "legs";
+  //   }
+  // | {
+  //     id: number;
+  //     type: "running";
+  //     distance: number;
+  //     pace: number;
+  //   };
 
 export type ExerciseSets = Record<string, ExerciseSet>;
 
