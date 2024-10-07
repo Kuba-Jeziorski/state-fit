@@ -50,10 +50,8 @@ export const Training = ({
     setTrainingState(TRAINING_ON);
     localStorage.setItem("trainingState", TRAINING_ON);
     startTraining();
-    setIsFinishTrainingModalVisible(false);
   };
   const newTrainingDeclined = () => {
-    setIsFinishTrainingModalVisible(false);
     redirectToHome();
   };
 
