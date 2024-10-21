@@ -99,3 +99,19 @@ body {
   width: 100%;
   gap: 20px;
 }
+
+.training {
+  border: 1px solid black;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.set {
+  border: 1px solid red;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+select {
+  margin-bottom: 10px;
+}

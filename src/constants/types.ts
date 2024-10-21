@@ -27,47 +27,58 @@ export type TrainingStateUpdater = {
 export type TrainingStateValueWithUpdater = TrainingStateValue &
   TrainingStateUpdater;
 
-// trainings
-
+// TRAINING FORM
+// single set
 export type ExerciseSet =
   | {
-      id: number;
+      id: string;
+      type: "Dumbbells flat bench press";
+      weight: number;
+      reps: number;
+    }
+  | {
+      id: string;
       type: "chest";
       weight: number;
       reps: number;
     }
   | {
-      id: number;
+      id: string;
       type: "back";
       weight: number;
     }
   | {
-      id: number;
+      id: string;
       type: "legs";
     }
   | {
-      id: number;
+      id: string;
       type: "running";
       distance: number;
       pace: number;
     };
 
+// all sets of single exercise
 export type ExerciseSets = Record<string, ExerciseSet>;
 
+// all exercises of particular body part (i.e. chest, back, legs)
 export type Exercise = {
   id: string;
   exerciseTypeId: string;
   exerciseSetIds: string[];
 };
 
+// all exercises of single training day
 export type Exercises = Record<string, Exercise>;
 
+// single training day
 export type Training = {
   id: string;
   date: number;
   exerciseIds: string[];
 };
 
+// all trainings
 export type Trainings = {
   [key: string]: Training;
 };
