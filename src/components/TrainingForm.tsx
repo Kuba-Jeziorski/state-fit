@@ -49,22 +49,22 @@ const SingleSet = () => {
 const SingleExercise = () => {
   const [sets, setSets] = useAtom(exerciseSetsAtom);
 
-  const addNewSet = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    const random = Math.ceil(Math.random() * 10);
-    setSets((sets) => {
-      return {
-        ...sets,
-        [`${random}-${random}`]: {
-          id: `${random}`,
-          type: "chest",
-          weight: 0,
-          reps: 0,
-        },
-      };
-    });
-    console.log(sets);
-  };
+  // const addNewSet = (e: React.MouseEvent<HTMLButtonElement>) => {
+  //   e.preventDefault();
+  //   const random = Math.ceil(Math.random() * 10);
+  //   setSets((sets) => {
+  //     return {
+  //       ...sets,
+  //       [`${random}-${random}`]: {
+  //         id: `${random}`,
+  //         type: "chest",
+  //         weight: 0,
+  //         reps: 0,
+  //       },
+  //     };
+  //   });
+  //   console.log(sets);
+  // };
 
   return (
     <div className="training">
