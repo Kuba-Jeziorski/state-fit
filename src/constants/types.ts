@@ -27,35 +27,53 @@ export type TrainingStateUpdater = {
 export type TrainingStateValueWithUpdater = TrainingStateValue &
   TrainingStateUpdater;
 
-// TRAINING FORM
-// single set
+// trainings
+
 export type ExerciseSet =
   | {
-      id: string;
-      type: "Dumbbells flat bench press";
+      id: number;
+      type: "Incline dumbbell press";
       weight: number;
       reps: number;
     }
   | {
-      id: string;
-      type: "chest";
+      id: number;
+      type: "Dumbbell flyes";
       weight: number;
       reps: number;
     }
   | {
-      id: string;
-      type: "back";
+      id: number;
+      type: "Bench press";
       weight: number;
+      reps: number;
     }
   | {
-      id: string;
-      type: "legs";
+      id: number;
+      type: "Dumbbell bench press";
+      weight: number;
+      reps: number;
     }
   | {
-      id: string;
-      type: "running";
-      distance: number;
-      pace: number;
+      id: number;
+      type: "Decline dumbbell press";
+      weight: number;
+      reps: number;
+    }
+  | {
+      id: number;
+      type: "Push up";
+      reps: number;
+    }
+  | {
+      id: number;
+      type: "Incline push up";
+      reps: number;
+    }
+  | {
+      id: number;
+      type: "Decline push up";
+      reps: number;
     };
 
 // all sets of single exercise
