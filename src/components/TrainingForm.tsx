@@ -2,7 +2,23 @@ import { atom, useAtom, useAtomValue } from "jotai";
 import { currentTrainingIdAtom } from "../atoms/current-training-id-atom";
 import { trainingsAtom } from "../atoms/trainings-atom";
 import { exerciseSetsAtom } from "../atoms/exercise-sets-atom";
-import { exercisesAtom } from "../atoms/exercises-atom";
+import { ExerciseSets, PossibleSelectOptions } from "../constants/types";
+import { hasWeight } from "../utils/hasWeight";
+import { hasReps } from "../utils/hasReps";
+import {
+  ALL_CHEST_EXERCISES,
+  DEFAULT_NUMERIC_INPUT_PLACEHOLDER_VALUE,
+} from "../constants/constants";
+import { useState } from "react";
+// import { exercisesAtom } from "../atoms/exercises-atom";
+
+const getFormatedDate = () => {
+  const currentDate = new Date();
+  const currentDay = currentDate.getDay();
+  const currentMonth = currentDate.getMonth();
+  const currentYear = currentDate.getFullYear();
+  return `${currentDay}_${currentMonth}_${currentYear}`;
+};
 
 // single training
 const currentTrainingAtom = atom((get) => {
@@ -14,96 +30,104 @@ const currentTrainingAtom = atom((get) => {
   return trainings[id];
 });
 
-// all exercises of single training day
-const currentExercisesAtom = atom((get) => {
-  const id = crypto.randomUUID();
-  const exercises = get(exercisesAtom);
-  if (id === null) {
-    return null;
-  }
-  return exercises[id];
-});
+type SingleSetProps = {
+  currentSet: string;
+  sets: ExerciseSets;
+};
 
-// single exercise sets
-const currentExerciseSetAtom = atom((get) => {
-  const id = crypto.randomUUID();
-  const sets = get(exerciseSetsAtom);
-  if (id === null) {
-    return null;
-  }
-  return sets[id];
-});
+const SingleSet = ({ currentSet, sets }: SingleSetProps) => {
+  const currentSetObject = sets[currentSet];
+  const currentSetIndex = currentSetObject.id.split("-")[0];
 
-const SingleSet = () => {
+  const hasRepsCheck = hasReps(currentSetObject);
+  const hasWeightCheck = hasWeight(currentSetObject);
+
+  const currentSetRepsPlaceholder = hasRepsCheck
+    ? currentSetObject.reps.toString()
+    : "";
+  const currentSetWeightPlaceholder = hasWeightCheck
+    ? currentSetObject.weight.toString()
+    : "";
+
   return (
     <div className="set">
-      <p>SET 1</p>
-      <label>Weight</label>
-      <input type="number" />
-      <label>Reps</label>
-      <input type="number" />
+      <p>SET {currentSetIndex}</p>
+      {hasRepsCheck && (
+        <>
+          <label>Weight</label>
+          <input type="number" placeholder={currentSetRepsPlaceholder} />
+        </>
+      )}
+      {hasWeightCheck && (
+        <>
+          <label>Reps</label>
+          <input type="number" placeholder={currentSetWeightPlaceholder} />
+        </>
+      )}
     </div>
   );
 };
 
 const SingleExercise = () => {
   const [sets, setSets] = useAtom(exerciseSetsAtom);
+  const [selectedExercise, setSelectedExercise] =
+    useState<PossibleSelectOptions>("Incline dumbbell press");
 
-  // const addNewSet = (e: React.MouseEvent<HTMLButtonElement>) => {
-  //   e.preventDefault();
-  //   const random = Math.ceil(Math.random() * 10);
-  //   setSets((sets) => {
-  //     return {
-  //       ...sets,
-  //       [`${random}-${random}`]: {
-  //         id: `${random}`,
-  //         type: "chest",
-  //         weight: 0,
-  //         reps: 0,
-  //       },
-  //     };
-  //   });
-  //   console.log(sets);
-  // };
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value as PossibleSelectOptions;
+    setSelectedExercise(value);
+  };
+
+  const addSet = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    const id = crypto.randomUUID();
+
+    setSets((sets) => {
+      const newId = Object.keys(sets).length + 1;
+
+      const newSets = {
+        ...sets,
+        [id]: {
+          id: `${newId}-${getFormatedDate()}`,
+          type: selectedExercise,
+          weight: DEFAULT_NUMERIC_INPUT_PLACEHOLDER_VALUE,
+          reps: DEFAULT_NUMERIC_INPUT_PLACEHOLDER_VALUE,
+        },
+      };
+      console.log(newSets);
+      return newSets;
+    });
+  };
 
   return (
     <div className="training">
       <label>Choose an exercise</label>
-      <select id={`exercises-1`}>
-        <option value="" defaultChecked disabled>
-          Select exercise
-        </option>
-        <optgroup label="chest">
-          <option value="Dumbbells flat bench press">Chest1</option>
-          <option value="chest2">Chest2</option>
-          <option value="chest3">Chest3</option>
-        </optgroup>
-        <optgroup label="back">
-          <option value="back1">Back1</option>
-          <option value="back2">Back2</option>
-          <option value="back3">Back3</option>
-        </optgroup>
-        <optgroup label="legs">
-          <option value="legs1">Legs1</option>
-          <option value="legs2">Legs2</option>
-          <option value="legs3">Legs3</option>
+      <select
+        value={selectedExercise}
+        onChange={handleChange}
+        disabled={Object.keys(sets).length !== 0}
+      >
+        <optgroup label="Chest">
+          {ALL_CHEST_EXERCISES.map((exercise) => {
+            return <option key={exercise}>{exercise}</option>;
+          })}
         </optgroup>
       </select>
-      {sets && Object.keys(sets).map((key) => <p>{key}</p>)}
-      <SingleSet />
+      {sets &&
+        Object.keys(sets).map((key) => {
+          return <SingleSet key={key} currentSet={key} sets={sets} />;
+        })}
 
-      <button onClick={addNewSet}>ADD ANOTHER SET</button>
+      <button onClick={addSet}>
+        {Object.keys(sets).length === 0 ? "ADD FIRST SET" : "ADD ANOTHER SET"}
+      </button>
     </div>
   );
 };
 
 export const TrainingForm = () => {
   const currentTraining = useAtomValue(currentTrainingAtom);
-  console.log(currentTraining);
-  const currentExercise = useAtomValue(currentExercisesAtom);
-  console.log(currentExercise);
-  const currentExerciseSet = useAtomValue(currentExerciseSetAtom);
-  console.log(currentExerciseSet);
+  console.log(currentTraining ?? "not provided");
 
   return (
     <>

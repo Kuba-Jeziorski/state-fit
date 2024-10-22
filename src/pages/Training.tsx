@@ -6,8 +6,8 @@ import { useRedirectIfLoggedOut } from "../utils/useRedirectIfLoggedOut";
 import {
   TRAINING_OFF,
   TRAINING_ON,
-  finishTrainingConfirmMessage,
-  newTrainingConfirmMessage,
+  FINISH_TRAINING_CONFIRM_MESSAGE,
+  NEW_TRAINING_CONFIRM_MESSAGE,
 } from "../constants/constants";
 import { Title } from "../components/Title";
 import { TrainingForm } from "../components/TrainingForm";
@@ -75,7 +75,7 @@ export const Training = ({
           </button>
           {isFinishTrainingModalVisible && (
             <ConfirmModal
-              confirmMessage={finishTrainingConfirmMessage}
+              confirmMessage={FINISH_TRAINING_CONFIRM_MESSAGE}
               confirmAcceptFunction={finishTrainingAccepted}
               confirmDeclineFunction={finishTrainingDeclined}
             />
@@ -85,7 +85,7 @@ export const Training = ({
 
       {!isTrainingOn && (
         <ConfirmModal
-          confirmMessage={newTrainingConfirmMessage}
+          confirmMessage={NEW_TRAINING_CONFIRM_MESSAGE}
           confirmAcceptFunction={newTrainingAccepted}
           confirmDeclineFunction={newTrainingDeclined}
         />

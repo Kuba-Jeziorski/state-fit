@@ -31,48 +31,20 @@ export type TrainingStateValueWithUpdater = TrainingStateValue &
 
 export type ExerciseSet =
   | {
-      id: number;
+      id: string;
       type: "Incline dumbbell press";
       weight: number;
       reps: number;
     }
   | {
-      id: number;
+      id: string;
       type: "Dumbbell flyes";
       weight: number;
       reps: number;
     }
   | {
-      id: number;
-      type: "Bench press";
-      weight: number;
-      reps: number;
-    }
-  | {
-      id: number;
-      type: "Dumbbell bench press";
-      weight: number;
-      reps: number;
-    }
-  | {
-      id: number;
-      type: "Decline dumbbell press";
-      weight: number;
-      reps: number;
-    }
-  | {
-      id: number;
+      id: string;
       type: "Push up";
-      reps: number;
-    }
-  | {
-      id: number;
-      type: "Incline push up";
-      reps: number;
-    }
-  | {
-      id: number;
-      type: "Decline push up";
       reps: number;
     };
 
@@ -100,3 +72,8 @@ export type Training = {
 export type Trainings = {
   [key: string]: Training;
 };
+
+export type PossibleSelectOptions =
+  | "Incline dumbbell press"
+  | "Dumbbell flyes"
+  | "Push up";
