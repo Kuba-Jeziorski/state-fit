@@ -43,6 +43,7 @@ export const Home = ({
     setTrainingState(TRAINING_OFF);
     localStorage.setItem("trainingState", TRAINING_OFF);
     setIsLoggoutPressed(false);
+    localStorage.setItem("currentTraining", "not-set")
   };
   const logOutConfirmDeclined = () => {
     setIsLoggoutPressed(false);

@@ -10,7 +10,7 @@ import {
   DEFAULT_NUMERIC_INPUT_PLACEHOLDER_VALUE,
 } from "../constants/constants";
 import { useState } from "react";
-// import { exercisesAtom } from "../atoms/exercises-atom";
+import { exercisesAtom } from "../atoms/exercises-atom";
 
 const getFormatedDate = () => {
   const currentDate = new Date();
@@ -27,6 +27,7 @@ const currentTrainingAtom = atom((get) => {
   if (id === null) {
     return null;
   }
+  localStorage.setItem("currentTraining", id);
   return trainings[id];
 });
 
@@ -67,6 +68,38 @@ const SingleSet = ({ currentSet, sets }: SingleSetProps) => {
     </div>
   );
 };
+
+const AllExercises = () => {
+  const [exercises, setExercises] = useAtom(exercisesAtom);
+  console.log(exercises);
+
+  const addExercise = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    console.log(exerciseSetsAtom);
+
+    const id = crypto.randomUUID();
+
+    setExercises(exercises => {
+      const newId = Object.keys(exercises).length + 1;
+
+      const newExercises = {
+        ...exercises,
+        [id]: {
+          id: `${newId}-${getFormatedDate()}`,
+          exerciseTypeId: 'a',
+          exerciseSetIds:[]
+        }
+      }
+      console.log(newExercises);
+      return newExercises;
+    })
+  }
+
+  return <>
+  <button onClick={addExercise}>{Object.keys(exercises).length === 0 ? <p>Add first exercise</p> : <p>Add another exercise</p>}</button>
+  </>
+}
 
 const SingleExercise = () => {
   const [sets, setSets] = useAtom(exerciseSetsAtom);
@@ -127,13 +160,16 @@ const SingleExercise = () => {
 
 export const TrainingForm = () => {
   const currentTraining = useAtomValue(currentTrainingAtom);
-  console.log(currentTraining ?? "not provided");
-
+  const currentTrainingId = localStorage.getItem("currentTraining");
+  console.log(currentTraining);
   return (
     <>
+    <p>{currentTrainingId}</p>
       <form>
+        <p>All</p>
+        <AllExercises/>
+        <p>/All</p>
         <SingleExercise />
-        <button style={{ marginBottom: "10px" }}>ADD ANOTHER EXERCISE</button>
       </form>
     </>
   );
