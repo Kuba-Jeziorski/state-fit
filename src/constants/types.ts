@@ -73,7 +73,7 @@ export type Trainings = {
   [key: string]: Training;
 };
 
-export type PossibleSelectOptions =
+export type SelectExercises =
   | "Incline dumbbell press"
   | "Dumbbell flyes"
   | "Push up";

@@ -1,8 +1,8 @@
-import { atom, useAtom, useAtomValue } from "jotai";
+import { atom, useAtom, useAtomValue, useSetAtom } from "jotai";
 import { currentTrainingIdAtom } from "../atoms/current-training-id-atom";
 import { trainingsAtom } from "../atoms/trainings-atom";
 import { exerciseSetsAtom } from "../atoms/exercise-sets-atom";
-import { ExerciseSets, PossibleSelectOptions } from "../constants/types";
+import { ExerciseSets, SelectExercises } from "../constants/types";
 import { hasWeight } from "../utils/hasWeight";
 import { hasReps } from "../utils/hasReps";
 import {
@@ -71,6 +71,10 @@ const SingleSet = ({ currentSet, sets }: SingleSetProps) => {
 
 const AllExercises = () => {
   const [exercises, setExercises] = useAtom(exercisesAtom);
+  const setTrainings = useSetAtom(trainingsAtom);
+  const currentTrainingId = useAtomValue(currentTrainingIdAtom);
+
+  const isExercisesEmpty = Object.keys(exercises).length === 0;
   console.log(exercises);
 
   const addExercise = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -80,34 +84,57 @@ const AllExercises = () => {
 
     const id = crypto.randomUUID();
 
-    setExercises(exercises => {
+    setExercises((exercises) => {
       const newId = Object.keys(exercises).length + 1;
 
       const newExercises = {
         ...exercises,
         [id]: {
           id: `${newId}-${getFormatedDate()}`,
-          exerciseTypeId: 'a',
-          exerciseSetIds:[]
+          exerciseTypeId: `a-${newId}`,
+          exerciseSetIds: [],
+        },
+      };
+      setTrainings((trainings) => {
+        if (currentTrainingId === null) {
+          throw new Error("current triannig is is null!");
         }
-      }
-      console.log(newExercises);
+        const currentTraining = trainings[currentTrainingId];
+        return {
+          ...trainings,
+          [currentTrainingId]: {
+            ...currentTraining,
+            exerciseIds: [...currentTraining.exerciseIds, newExercises[id].id],
+          },
+        };
+      });
       return newExercises;
-    })
-  }
+    });
+  };
 
-  return <>
-  <button onClick={addExercise}>{Object.keys(exercises).length === 0 ? <p>Add first exercise</p> : <p>Add another exercise</p>}</button>
-  </>
-}
+  return (
+    <>
+      <button onClick={addExercise}>
+        {isExercisesEmpty ? (
+          <p>Add first exercise</p>
+        ) : (
+          <p>Add another exercise</p>
+        )}
+      </button>
+    </>
+  );
+};
 
 const SingleExercise = () => {
   const [sets, setSets] = useAtom(exerciseSetsAtom);
-  const [selectedExercise, setSelectedExercise] =
-    useState<PossibleSelectOptions>("Incline dumbbell press");
+  const [selectedExercise, setSelectedExercise] = useState<SelectExercises>(
+    "Incline dumbbell press"
+  );
+
+  const isSetsEmpty = Object.keys(sets).length === 0;
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = e.target.value as PossibleSelectOptions;
+    const value = e.target.value as SelectExercises;
     setSelectedExercise(value);
   };
 
@@ -152,7 +179,7 @@ const SingleExercise = () => {
         })}
 
       <button onClick={addSet}>
-        {Object.keys(sets).length === 0 ? "ADD FIRST SET" : "ADD ANOTHER SET"}
+        {isSetsEmpty ? "ADD FIRST SET" : "ADD ANOTHER SET"}
       </button>
     </div>
   );
@@ -164,11 +191,10 @@ export const TrainingForm = () => {
   console.log(currentTraining);
   return (
     <>
-    <p>{currentTrainingId}</p>
+      <p>{currentTrainingId}</p>
       <form>
-        <p>All</p>
-        <AllExercises/>
-        <p>/All</p>
+        <AllExercises />
+        <p>SingleExercise below</p>
         <SingleExercise />
       </form>
     </>

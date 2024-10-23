@@ -1,4 +1,4 @@
-import { PossibleSelectOptions } from "./types";
+import { SelectExercises } from "./types";
 
 export const LOGGED_OUT = "logged-out";
 export const LOGGED_IN = "logged-in";
@@ -11,7 +11,7 @@ export const NEW_TRAINING_CONFIRM_MESSAGE =
 export const FINISH_TRAINING_CONFIRM_MESSAGE =
   "Do you want to finish the training?";
 
-export const ALL_CHEST_EXERCISES: PossibleSelectOptions[] = [
+export const ALL_CHEST_EXERCISES: SelectExercises[] = [
   "Incline dumbbell press",
   "Dumbbell flyes",
   "Push up",
