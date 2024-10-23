@@ -40,7 +40,7 @@ export const Training = ({
   const finishTrainingAccepted = () => {
     setTrainingState(TRAINING_OFF);
     localStorage.setItem("trainingState", TRAINING_OFF);
-    localStorage.setItem("currentTraining", "not-set")
+    localStorage.setItem("currentTraining", "not-set");
     setIsFinishTrainingModalVisible(false);
     redirectToSummary();
   };
