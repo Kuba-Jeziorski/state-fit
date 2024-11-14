@@ -1,4 +1,9 @@
-import { atom } from "jotai";
+import { atomWithStorage } from "jotai/utils";
 
 // single training day
-export const currentTrainingIdAtom = atom<null | string>(null);
+export const currentTrainingIdAtom = atomWithStorage<null | string>(
+  "currentTrainingId",
+  null
+);
+
+// kiedy ten id jest nullem i ma mieć nową wartość to trzeba zrobić useSetAtom na tym atomie

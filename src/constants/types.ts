@@ -29,49 +29,53 @@ export type TrainingStateValueWithUpdater = TrainingStateValue &
 
 // trainings
 
+type ExerciseSetId = string;
+
 export type ExerciseSet =
   | {
-      id: string;
+      id: ExerciseSetId;
       type: "Incline dumbbell press";
       weight: number;
       reps: number;
     }
   | {
-      id: string;
+      id: ExerciseSetId;
       type: "Dumbbell flyes";
       weight: number;
       reps: number;
     }
   | {
-      id: string;
+      id: ExerciseSetId;
       type: "Push up";
       reps: number;
     };
 
 // all sets of single exercise
-export type ExerciseSets = Record<string, ExerciseSet>;
+export type ExerciseSets = Record<ExerciseSetId, ExerciseSet>;
+
+export type ExerciseId = string;
 
 // all exercises of particular body part (i.e. chest, back, legs)
 export type Exercise = {
-  id: string;
+  id: ExerciseId;
   exerciseTypeId: string;
   exerciseSetIds: string[];
 };
 
 // all exercises of single training day
-export type Exercises = Record<string, Exercise>;
+export type Exercises = Record<ExerciseId, Exercise>;
+
+type TrainingId = string;
 
 // single training day
 export type Training = {
-  id: string;
+  id: TrainingId;
   date: number;
   exerciseIds: string[];
 };
 
 // all trainings
-export type Trainings = {
-  [key: string]: Training;
-};
+export type Trainings = Record<TrainingId, Training>;
 
 export type SelectExercises =
   | "Incline dumbbell press"
