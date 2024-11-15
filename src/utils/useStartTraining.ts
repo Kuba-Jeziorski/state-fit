@@ -20,6 +20,5 @@ export const useStartTraining = () => {
       };
     });
     setCurrentTrainingId(uuid);
-    localStorage.setItem("currentTraining", uuid);
   }, [setTrainings, setCurrentTrainingId]);
 };

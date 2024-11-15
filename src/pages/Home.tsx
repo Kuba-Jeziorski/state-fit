@@ -16,6 +16,10 @@ import { usePageTitle } from "../utils/usePageTitle";
 import { useRedirectToSummary } from "../utils/useRedirectToSummary";
 import { useRedirectToTraining } from "../utils/useRedirectToTraining";
 import { Button } from "../components/Button";
+import { currentTrainingIdAtom } from "../atoms/current-training-id-atom";
+import { useSetAtom } from "jotai";
+import { appStateAtom } from "../atoms/app-state-atom";
+import { trainingStateAtom } from "../atoms/training-state-atom";
 
 type HomeProps = AppStateValueWithUpdater & TrainingStateValueWithUpdater;
 
@@ -26,6 +30,10 @@ export const Home = ({
   setTrainingState,
 }: HomeProps) => {
   const [isLogoutPressed, setIsLoggoutPressed] = useState(false);
+
+  const setCurrentTrainingId = useSetAtom(currentTrainingIdAtom);
+  const setAppStateValue = useSetAtom(appStateAtom);
+  const setTraningStateValue = useSetAtom(trainingStateAtom);
 
   const isTrainingOn = trainingState === TRAINING_ON;
   const trainingButtonCaption = isTrainingOn
@@ -43,11 +51,11 @@ export const Home = ({
   };
   const logOutConfirmAccepted = () => {
     setAppState(LOGGED_OUT);
-    localStorage.setItem("appState", LOGGED_OUT);
+    setAppStateValue(LOGGED_OUT);
     setTrainingState(TRAINING_OFF);
-    localStorage.setItem("trainingState", TRAINING_OFF);
+    setTraningStateValue(TRAINING_OFF);
     setIsLoggoutPressed(false);
-    localStorage.setItem("currentTraining", "not-set");
+    setCurrentTrainingId(null);
   };
   const logOutConfirmDeclined = () => {
     setIsLoggoutPressed(false);

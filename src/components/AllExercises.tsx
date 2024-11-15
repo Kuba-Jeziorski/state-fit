@@ -34,5 +34,3 @@ export const AllExercises = () => {
     </>
   );
 };
-
-// wyciągnąc button do osobnego komponentu

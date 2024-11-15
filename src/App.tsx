@@ -9,17 +9,17 @@ import { Home } from "./pages/Home";
 import { Summary } from "./pages/Summary";
 import { Training } from "./pages/Training";
 import { NoPage } from "./pages/NoPage";
+import { useAtomValue } from "jotai";
+import { appStateAtom } from "./atoms/app-state-atom";
+import { trainingStateAtom } from "./atoms/training-state-atom";
 
 function App() {
-  const [appState, setAppState] = useState<AppState>(() => {
-    return (localStorage.getItem("appState") as AppState) || "logged-out";
-  });
+  const appStateValue = useAtomValue(appStateAtom);
+  const trainingStateValue = useAtomValue(trainingStateAtom);
 
-  const [trainingState, setTrainingState] = useState<TrainingState>(() => {
-    return (
-      (localStorage.getItem("trainingState") as TrainingState) || "training-off"
-    );
-  });
+  const [appState, setAppState] = useState<AppState>(appStateValue);
+  const [trainingState, setTrainingState] =
+    useState<TrainingState>(trainingStateValue);
 
   const router = createBrowserRouter([
     {

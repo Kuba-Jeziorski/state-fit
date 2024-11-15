@@ -18,6 +18,9 @@ import { useStartTraining } from "../utils/useStartTraining";
 import { useRedirectToSummary } from "../utils/useRedirectToSummary";
 import { useRedirectToHome } from "../utils/useRedirectToHome";
 import { Button } from "../components/Button";
+import { useSetAtom } from "jotai";
+import { currentTrainingIdAtom } from "../atoms/current-training-id-atom";
+import { trainingStateAtom } from "../atoms/training-state-atom";
 
 type TrainingProps = AppStateValue & TrainingStateValueWithUpdater;
 
@@ -28,6 +31,9 @@ export const Training = ({
 }: TrainingProps) => {
   const [isFinishTrainingModalVisible, setIsFinishTrainingModalVisible] =
     useState(false);
+
+  const setCurrentTrainingId = useSetAtom(currentTrainingIdAtom);
+  const setTraningStateValue = useSetAtom(trainingStateAtom);
 
   const isTrainingOn = trainingState === TRAINING_ON;
 
@@ -40,8 +46,8 @@ export const Training = ({
   };
   const finishTrainingAccepted = () => {
     setTrainingState(TRAINING_OFF);
-    localStorage.setItem("trainingState", TRAINING_OFF);
-    localStorage.setItem("currentTraining", "not-set");
+    setTraningStateValue(TRAINING_OFF);
+    setCurrentTrainingId(null);
     setIsFinishTrainingModalVisible(false);
     redirectToSummary();
   };
@@ -50,7 +56,7 @@ export const Training = ({
   };
   const newTrainingAccepted = () => {
     setTrainingState(TRAINING_ON);
-    localStorage.setItem("trainingState", TRAINING_ON);
+    setTraningStateValue(TRAINING_ON);
     startTraining();
   };
   const newTrainingDeclined = () => {
