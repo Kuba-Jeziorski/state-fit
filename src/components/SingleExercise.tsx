@@ -4,6 +4,8 @@ import { exercisesAtom } from "../atoms/exercises-atom";
 import {
   DEFAULT_NUMERIC_INPUT_PLACEHOLDER_VALUE,
   ALL_CHEST_EXERCISES,
+  FIRST_SET_CAPTION,
+  ANOTHER_SET_CAPTION,
 } from "../constants/constants";
 import { ExerciseSets, SelectExercises } from "../constants/types";
 import { SingleSet } from "./SingleSetProps";
@@ -22,7 +24,7 @@ export const SingleExercise = ({ exerciseId }: SingleExericseProp) => {
 
   const isSetsEmpty = Object.keys(sets).length === 0;
 
-  const buttonCaption = isSetsEmpty ? "ADD FIRST SET" : "ADD ANOTHER SET";
+  const buttonCaption = isSetsEmpty ? FIRST_SET_CAPTION : ANOTHER_SET_CAPTION;
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value as SelectExercises;
@@ -85,7 +87,11 @@ export const SingleExercise = ({ exerciseId }: SingleExericseProp) => {
         Object.keys(sets).map((key) => {
           return <SingleSet key={key} currentSet={key} sets={sets} />;
         })}
-      <Button caption={buttonCaption} handleFunction={addSet} />
+      <Button
+        caption={buttonCaption}
+        handleFunction={addSet}
+        classes="button primary"
+      />
     </div>
   );
 };

@@ -17,4 +17,10 @@ export const ALL_CHEST_EXERCISES: SelectExercises[] = [
   "Push up",
 ];
 
+export const FIRST_EXERCISE_CAPTION = "ADD FIRST EXERCISE";
+export const ANOTHER_EXERCISE_CAPTION = "ADD ANOTHER EXERCISE";
+
+export const FIRST_SET_CAPTION = "ADD FIRST SET";
+export const ANOTHER_SET_CAPTION = "ADD ANOTHER SET";
+
 export const DEFAULT_NUMERIC_INPUT_PLACEHOLDER_VALUE = 0;

@@ -4,6 +4,10 @@ import { SingleExercise } from "./SingleExercise";
 import { exerciseCreateAtom } from "../atoms/writeonly/exercise-create-atom";
 import { currentTrainingIdAtom } from "../atoms/current-training-id-atom";
 import { Button } from "./Button";
+import {
+  ANOTHER_EXERCISE_CAPTION,
+  FIRST_EXERCISE_CAPTION,
+} from "../constants/constants";
 
 export const AllExercises = () => {
   const exercises = useAtomValue(exercisesAtom);
@@ -13,8 +17,8 @@ export const AllExercises = () => {
   const isExercisesEmpty = Object.keys(exercises).length === 0;
 
   const buttonCaption = isExercisesEmpty
-    ? "Add first exercise"
-    : "Add another exercise";
+    ? FIRST_EXERCISE_CAPTION
+    : ANOTHER_EXERCISE_CAPTION;
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -30,7 +34,11 @@ export const AllExercises = () => {
           return <SingleExercise key={key} exerciseId={key} />;
         })}
 
-      <Button caption={buttonCaption} handleFunction={handleClick} />
+      <Button
+        caption={buttonCaption}
+        handleFunction={handleClick}
+        classes="button primary"
+      />
     </>
   );
 };
