@@ -1,3 +1,5 @@
+import { Button } from "./Button";
+
 type ConfirmModal = {
   confirmMessage: string;
   confirmAcceptFunction: () => void;
@@ -15,15 +17,16 @@ export const ConfirmModal = ({
         <div className="confirmModalContent">
           <p className="confirmModalDescription">{confirmMessage}</p>
           <div className="confirmModalButtons">
-            <button
-              className="button secondary"
-              onClick={confirmDeclineFunction}
-            >
-              Decline
-            </button>
-            <button className="button primary" onClick={confirmAcceptFunction}>
-              Accept
-            </button>
+            <Button
+              caption="Decline"
+              handleFunction={confirmDeclineFunction}
+              classes="button secondary"
+            />
+            <Button
+              caption="Accept"
+              handleFunction={confirmAcceptFunction}
+              classes="button primary"
+            />
           </div>
         </div>
       </div>

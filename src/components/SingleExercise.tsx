@@ -7,6 +7,7 @@ import {
 } from "../constants/constants";
 import { ExerciseSets, SelectExercises } from "../constants/types";
 import { SingleSet } from "./SingleSetProps";
+import { Button } from "./Button";
 
 type SingleExericseProp = {
   exerciseId: string;
@@ -20,6 +21,8 @@ export const SingleExercise = ({ exerciseId }: SingleExericseProp) => {
   const setExercises = useSetAtom(exercisesAtom);
 
   const isSetsEmpty = Object.keys(sets).length === 0;
+
+  const buttonCaption = isSetsEmpty ? "ADD FIRST SET" : "ADD ANOTHER SET";
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value as SelectExercises;
@@ -82,10 +85,7 @@ export const SingleExercise = ({ exerciseId }: SingleExericseProp) => {
         Object.keys(sets).map((key) => {
           return <SingleSet key={key} currentSet={key} sets={sets} />;
         })}
-
-      <button onClick={addSet}>
-        {isSetsEmpty ? "ADD FIRST SET" : "ADD ANOTHER SET"}
-      </button>
+      <Button caption={buttonCaption} handleFunction={addSet} />
     </div>
   );
 };

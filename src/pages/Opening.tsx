@@ -2,6 +2,7 @@ import { AppStateValueWithUpdater } from "../constants/types";
 import { LOGGED_IN } from "../constants/constants";
 import { useRedirectIfLoggedIn } from "../utils/useRedirectIfLoggedIn";
 import { usePageTitle } from "../utils/usePageTitle";
+import { Button } from "../components/Button";
 
 export const Opening = ({
   appState,
@@ -17,9 +18,11 @@ export const Opening = ({
 
   return (
     <>
-      <button className="button primary" onClick={logIn}>
-        Log in
-      </button>
+      <Button
+        caption="Log in"
+        handleFunction={logIn}
+        classes="button primary"
+      />
     </>
   );
 };

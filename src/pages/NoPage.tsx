@@ -1,3 +1,4 @@
+import { Button } from "../components/Button";
 import { Title } from "../components/Title";
 import { useRedirectToHome } from "../utils/useRedirectToHome";
 
@@ -7,9 +8,11 @@ export const NoPage = () => {
   return (
     <>
       <Title tag="h1">Nothing to do here!</Title>
-      <button className="button primary" onClick={redirectToHome}>
-        HOME
-      </button>
+      <Button
+        caption="HOME"
+        handleFunction={redirectToHome}
+        classes="button primary"
+      />
     </>
   );
 };

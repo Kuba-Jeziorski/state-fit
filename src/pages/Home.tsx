@@ -15,6 +15,7 @@ import { ConfirmModal } from "../components/ConfirmModal";
 import { usePageTitle } from "../utils/usePageTitle";
 import { useRedirectToSummary } from "../utils/useRedirectToSummary";
 import { useRedirectToTraining } from "../utils/useRedirectToTraining";
+import { Button } from "../components/Button";
 
 type HomeProps = AppStateValueWithUpdater & TrainingStateValueWithUpdater;
 
@@ -27,6 +28,9 @@ export const Home = ({
   const [isLogoutPressed, setIsLoggoutPressed] = useState(false);
 
   const isTrainingOn = trainingState === TRAINING_ON;
+  const trainingButtonCaption = isTrainingOn
+    ? "Current Training"
+    : "Start New Training";
 
   const redirectToTraining = useRedirectToTraining();
   const redirectToSummary = useRedirectToSummary();
@@ -56,15 +60,21 @@ export const Home = ({
     <>
       <Title tag="h1">Home</Title>
       <div className="buttonWrapper">
-        <button className="button primary" onClick={startNewTraining}>
-          {isTrainingOn ? "Current Training" : "Start New Training"}
-        </button>
-        <button className="button primary" onClick={redirectToSummary}>
-          See Summary
-        </button>
-        <button className="button primary" onClick={handleIsLogoutPressed}>
-          Log me out
-        </button>
+        <Button
+          caption={trainingButtonCaption}
+          handleFunction={startNewTraining}
+          classes="button primary"
+        />
+        <Button
+          caption="See Summary"
+          handleFunction={redirectToSummary}
+          classes="button primary"
+        />
+        <Button
+          caption="Log me out"
+          handleFunction={handleIsLogoutPressed}
+          classes="button primary"
+        />
       </div>
       {isLogoutPressed && (
         <ConfirmModal

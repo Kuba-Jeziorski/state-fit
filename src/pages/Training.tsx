@@ -17,6 +17,7 @@ import { usePageTitle } from "../utils/usePageTitle";
 import { useStartTraining } from "../utils/useStartTraining";
 import { useRedirectToSummary } from "../utils/useRedirectToSummary";
 import { useRedirectToHome } from "../utils/useRedirectToHome";
+import { Button } from "../components/Button";
 
 type TrainingProps = AppStateValue & TrainingStateValueWithUpdater;
 
@@ -63,17 +64,18 @@ export const Training = ({
     <>
       {isTrainingOn && (
         <>
-          <button className="button primary" onClick={redirectToHome}>
-            HOME
-          </button>
+          <Button
+            caption="HOME"
+            handleFunction={redirectToHome}
+            classes="button primary"
+          />
           <Title tag="h1">New training</Title>
           <TrainingForm />
-          <button
-            className="button primary"
-            onClick={finishTrainingConfirmation}
-          >
-            Finish training
-          </button>
+          <Button
+            caption="Finish training"
+            handleFunction={finishTrainingConfirmation}
+            classes="button primary"
+          />
           {isFinishTrainingModalVisible && (
             <ConfirmModal
               confirmMessage={FINISH_TRAINING_CONFIRM_MESSAGE}
