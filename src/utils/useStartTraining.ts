@@ -9,6 +9,8 @@ export const useStartTraining = () => {
 
   return useCallback(() => {
     const uuid = crypto.randomUUID();
+    setCurrentTrainingId(uuid);
+
     setTrainings((oldTrainings) => {
       return {
         ...oldTrainings,
@@ -19,6 +21,5 @@ export const useStartTraining = () => {
         },
       };
     });
-    setCurrentTrainingId(uuid);
   }, [setTrainings, setCurrentTrainingId]);
 };

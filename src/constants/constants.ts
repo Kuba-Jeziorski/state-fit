@@ -2,7 +2,7 @@ import { SelectExercises } from "./types";
 
 export const LOGGED_OUT = "logged-out";
 export const LOGGED_IN = "logged-in";
-export const loggingConfirmMessage = "Are you sure you want to log out?";
+export const LOGGING_CONFIRM_MESSAGE = "Are you sure you want to log out?";
 
 export const TRAINING_ON = "training-on";
 export const TRAINING_OFF = "training-off";
@@ -24,3 +24,10 @@ export const FIRST_SET_CAPTION = "ADD FIRST SET";
 export const ANOTHER_SET_CAPTION = "ADD ANOTHER SET";
 
 export const DEFAULT_NUMERIC_INPUT_PLACEHOLDER_VALUE = 0;
+
+export const CURRENT_TRAINING_CAPTION = "Current Training";
+export const START_NEW_TRAINING_CAPTION = "Start New Training";
+
+export const FINISH_TRAINING_CAPTION = "Finish training";
+export const HOME_CAPTION = "HOME";
+export const TRAINING_CAPTION = "Training";

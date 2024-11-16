@@ -8,6 +8,7 @@ import {
   ANOTHER_EXERCISE_CAPTION,
   FIRST_EXERCISE_CAPTION,
 } from "../constants/constants";
+import { Title } from "./Title";
 
 export const AllExercises = () => {
   const exercises = useAtomValue(exercisesAtom);
@@ -27,10 +28,9 @@ export const AllExercises = () => {
 
   return (
     <>
-      <h2>Current training id: {currentTrainingId}</h2>
+      <Title tag="h2">Current training id: {currentTrainingId}</Title>
       {exercises &&
         Object.keys(exercises).map((key) => {
-          console.log(key);
           return <SingleExercise key={key} exerciseId={key} />;
         })}
 

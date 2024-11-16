@@ -14,10 +14,15 @@ export const updateCurrentTrainingAtom = atom(
     const currentTrainingId = get(currentTrainingIdAtom);
 
     if (currentTrainingId === null) {
-      throw new Error("current triannig is null!");
+      throw new Error("current triannig id is null!");
+    }
+
+    if (Object.keys(trainings).length === 0) {
+      throw new Error("trainings object is empty!");
     }
 
     const currentTraining = trainings[currentTrainingId];
+
     set(trainingsAtom, {
       ...trainings,
       [currentTrainingId]: {

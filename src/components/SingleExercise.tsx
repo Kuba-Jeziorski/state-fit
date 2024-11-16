@@ -21,6 +21,7 @@ export const SingleExercise = ({ exerciseId }: SingleExericseProp) => {
     "Incline dumbbell press"
   );
   const setExercises = useSetAtom(exercisesAtom);
+  // const exercisesValue = useAtomValue(exercisesAtom);
 
   const isSetsEmpty = Object.keys(sets).length === 0;
 
@@ -33,10 +34,11 @@ export const SingleExercise = ({ exerciseId }: SingleExericseProp) => {
 
   const addSet = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    // console.log(exercisesValue);
 
-    const newSetId = crypto.randomUUID(); // Generate a new ID for the set
+    const newSetId = crypto.randomUUID();
 
-    const newId = Date.now().toString(); // Generate an ID for the set object
+    const newId = Date.now().toString();
     setSets((prevSets) => {
       const newSets = {
         ...prevSets,

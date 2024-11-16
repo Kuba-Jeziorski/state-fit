@@ -1,13 +1,12 @@
 import {
+  CURRENT_TRAINING_CAPTION,
   LOGGED_OUT,
-  loggingConfirmMessage,
+  LOGGING_CONFIRM_MESSAGE,
+  START_NEW_TRAINING_CAPTION,
   TRAINING_OFF,
   TRAINING_ON,
 } from "../constants/constants";
-import {
-  AppStateValueWithUpdater,
-  TrainingStateValueWithUpdater,
-} from "../constants/types";
+
 import { useRedirectIfLoggedOut } from "../utils/useRedirectIfLoggedOut";
 import { Title } from "../components/Title";
 import { useState } from "react";
@@ -17,28 +16,23 @@ import { useRedirectToSummary } from "../utils/useRedirectToSummary";
 import { useRedirectToTraining } from "../utils/useRedirectToTraining";
 import { Button } from "../components/Button";
 import { currentTrainingIdAtom } from "../atoms/current-training-id-atom";
-import { useSetAtom } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import { appStateAtom } from "../atoms/app-state-atom";
 import { trainingStateAtom } from "../atoms/training-state-atom";
 
-type HomeProps = AppStateValueWithUpdater & TrainingStateValueWithUpdater;
-
-export const Home = ({
-  appState,
-  setAppState,
-  trainingState,
-  setTrainingState,
-}: HomeProps) => {
+export const Home = () => {
   const [isLogoutPressed, setIsLoggoutPressed] = useState(false);
 
   const setCurrentTrainingId = useSetAtom(currentTrainingIdAtom);
+  const appStateValue = useAtomValue(appStateAtom);
   const setAppStateValue = useSetAtom(appStateAtom);
+  const trainingStateValue = useAtomValue(trainingStateAtom);
   const setTraningStateValue = useSetAtom(trainingStateAtom);
 
-  const isTrainingOn = trainingState === TRAINING_ON;
+  const isTrainingOn = trainingStateValue === TRAINING_ON;
   const trainingButtonCaption = isTrainingOn
-    ? "Current Training"
-    : "Start New Training";
+    ? CURRENT_TRAINING_CAPTION
+    : START_NEW_TRAINING_CAPTION;
 
   const redirectToTraining = useRedirectToTraining();
   const redirectToSummary = useRedirectToSummary();
@@ -50,9 +44,7 @@ export const Home = ({
     setIsLoggoutPressed(true);
   };
   const logOutConfirmAccepted = () => {
-    setAppState(LOGGED_OUT);
     setAppStateValue(LOGGED_OUT);
-    setTrainingState(TRAINING_OFF);
     setTraningStateValue(TRAINING_OFF);
     setIsLoggoutPressed(false);
     setCurrentTrainingId(null);
@@ -62,7 +54,7 @@ export const Home = ({
   };
 
   usePageTitle("Home");
-  useRedirectIfLoggedOut(appState);
+  useRedirectIfLoggedOut(appStateValue);
 
   return (
     <>
@@ -86,7 +78,7 @@ export const Home = ({
       </div>
       {isLogoutPressed && (
         <ConfirmModal
-          confirmMessage={loggingConfirmMessage}
+          confirmMessage={LOGGING_CONFIRM_MESSAGE}
           confirmAcceptFunction={logOutConfirmAccepted}
           confirmDeclineFunction={logOutConfirmDeclined}
         />

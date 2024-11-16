@@ -1,4 +1,5 @@
 import { Button } from "../components/Button";
+import { Title } from "../components/Title";
 import { usePageTitle } from "../utils/usePageTitle";
 import { useRedirectToHome } from "../utils/useRedirectToHome";
 
@@ -14,7 +15,7 @@ export const Summary = () => {
         handleFunction={redirectToHome}
         classes="button primary"
       />
-      <h1>Summary</h1>
+      <Title tag="h1">Summary</Title>
     </>
   );
 };

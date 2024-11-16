@@ -1,13 +1,12 @@
-import {
-  AppStateValue,
-  TrainingStateValueWithUpdater,
-} from "../constants/types";
 import { useRedirectIfLoggedOut } from "../utils/useRedirectIfLoggedOut";
 import {
   TRAINING_OFF,
   TRAINING_ON,
   FINISH_TRAINING_CONFIRM_MESSAGE,
   NEW_TRAINING_CONFIRM_MESSAGE,
+  FINISH_TRAINING_CAPTION,
+  HOME_CAPTION,
+  TRAINING_CAPTION,
 } from "../constants/constants";
 import { Title } from "../components/Title";
 import { TrainingForm } from "../components/TrainingForm";
@@ -18,24 +17,20 @@ import { useStartTraining } from "../utils/useStartTraining";
 import { useRedirectToSummary } from "../utils/useRedirectToSummary";
 import { useRedirectToHome } from "../utils/useRedirectToHome";
 import { Button } from "../components/Button";
-import { useSetAtom } from "jotai";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { currentTrainingIdAtom } from "../atoms/current-training-id-atom";
 import { trainingStateAtom } from "../atoms/training-state-atom";
+import { appStateAtom } from "../atoms/app-state-atom";
 
-type TrainingProps = AppStateValue & TrainingStateValueWithUpdater;
-
-export const Training = ({
-  appState,
-  trainingState,
-  setTrainingState,
-}: TrainingProps) => {
+export const Training = () => {
   const [isFinishTrainingModalVisible, setIsFinishTrainingModalVisible] =
     useState(false);
 
   const setCurrentTrainingId = useSetAtom(currentTrainingIdAtom);
-  const setTraningStateValue = useSetAtom(trainingStateAtom);
+  const appStateValue = useAtomValue(appStateAtom);
+  const [trainingStateValue, setTraningStateValue] = useAtom(trainingStateAtom);
 
-  const isTrainingOn = trainingState === TRAINING_ON;
+  const isTrainingOn = trainingStateValue === TRAINING_ON;
 
   const startTraining = useStartTraining();
   const redirectToSummary = useRedirectToSummary();
@@ -45,7 +40,6 @@ export const Training = ({
     setIsFinishTrainingModalVisible(true);
   };
   const finishTrainingAccepted = () => {
-    setTrainingState(TRAINING_OFF);
     setTraningStateValue(TRAINING_OFF);
     setCurrentTrainingId(null);
     setIsFinishTrainingModalVisible(false);
@@ -55,7 +49,6 @@ export const Training = ({
     setIsFinishTrainingModalVisible(false);
   };
   const newTrainingAccepted = () => {
-    setTrainingState(TRAINING_ON);
     setTraningStateValue(TRAINING_ON);
     startTraining();
   };
@@ -63,22 +56,22 @@ export const Training = ({
     redirectToHome();
   };
 
-  useRedirectIfLoggedOut(appState);
-  usePageTitle("Training");
+  useRedirectIfLoggedOut(appStateValue);
+  usePageTitle(TRAINING_CAPTION);
 
   return (
     <>
       {isTrainingOn && (
         <>
           <Button
-            caption="HOME"
+            caption={HOME_CAPTION}
             handleFunction={redirectToHome}
             classes="button primary"
           />
           <Title tag="h1">New training</Title>
           <TrainingForm />
           <Button
-            caption="Finish training"
+            caption={FINISH_TRAINING_CAPTION}
             handleFunction={finishTrainingConfirmation}
             classes="button primary"
           />
