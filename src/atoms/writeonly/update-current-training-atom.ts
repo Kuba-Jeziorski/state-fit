@@ -17,11 +17,14 @@ export const updateCurrentTrainingAtom = atom(
       throw new Error("current triannig id is null!");
     }
 
-    if (Object.keys(trainings).length === 0) {
-      throw new Error("trainings object is empty!");
-    }
+    const defaultTrainingExercise = {
+      id: currentTrainingId,
+      date: Date.now(),
+      exerciseIds: [payload.id],
+    };
 
-    const currentTraining = trainings[currentTrainingId];
+    const currentTraining =
+      trainings[currentTrainingId] || defaultTrainingExercise;
 
     set(trainingsAtom, {
       ...trainings,
