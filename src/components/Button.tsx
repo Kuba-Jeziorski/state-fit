@@ -11,11 +11,3 @@ export const Button = ({ caption, handleFunction, classes }: ButtonProps) => {
     </button>
   );
 };
-
-/*
-{isExercisesEmpty ? (
-        <p>Add first exercise</p>
-      ) : (
-        <p>Add another exercise</p>
-      )}
-*/

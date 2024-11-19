@@ -21,7 +21,6 @@ export const SingleExercise = ({ exerciseId }: SingleExericseProp) => {
     "Incline dumbbell press"
   );
   const setExercises = useSetAtom(exercisesAtom);
-  // const exercisesValue = useAtomValue(exercisesAtom);
 
   const isSetsEmpty = Object.keys(sets).length === 0;
 
@@ -34,7 +33,6 @@ export const SingleExercise = ({ exerciseId }: SingleExericseProp) => {
 
   const addSet = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    // console.log(exercisesValue);
 
     const newSetId = crypto.randomUUID();
 
@@ -52,18 +50,17 @@ export const SingleExercise = ({ exerciseId }: SingleExericseProp) => {
       return newSets;
     });
 
-    // Update the exercise to include the new set ID
     setExercises((prevExercises) => {
-      const exercise = prevExercises[exerciseId]; // Find the current exercise
+      const exercise = prevExercises[exerciseId];
 
       const updatedExercise = {
         ...exercise,
-        exerciseSetIds: [...exercise.exerciseSetIds, newSetId], // Add the new set ID to exerciseSetIds
+        exerciseSetIds: [...exercise.exerciseSetIds, newSetId],
       };
 
       return {
         ...prevExercises,
-        [exerciseId]: updatedExercise, // Update the specific exercise
+        [exerciseId]: updatedExercise,
       };
     });
   };

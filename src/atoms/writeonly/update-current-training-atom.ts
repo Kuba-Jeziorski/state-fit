@@ -33,5 +33,7 @@ export const updateCurrentTrainingAtom = atom(
         exerciseIds: [...currentTraining.exerciseIds, payload.id],
       },
     });
+    console.log(`currentTraining: `);
+    console.log(currentTraining);
   }
 );
