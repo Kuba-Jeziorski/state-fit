@@ -5,11 +5,11 @@ import { hasWeight } from "../utils/hasWeight";
 type SingleSetProps = {
   currentSet: string;
   sets: ExerciseSets;
+  id: string;
 };
 
-export const SingleSet = ({ currentSet, sets }: SingleSetProps) => {
+export const SingleSet = ({ currentSet, sets, id }: SingleSetProps) => {
   const currentSetObject = sets[currentSet];
-  const currentSetIndex = currentSetObject.id.split("-")[0];
 
   const hasRepsCheck = hasReps(currentSetObject);
   const hasWeightCheck = hasWeight(currentSetObject);
@@ -23,7 +23,7 @@ export const SingleSet = ({ currentSet, sets }: SingleSetProps) => {
 
   return (
     <div className="set">
-      <p>SET {currentSetIndex}</p>
+      <p>SET {id}</p>
       {hasRepsCheck && (
         <>
           <label>Weight</label>

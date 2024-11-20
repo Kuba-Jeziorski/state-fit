@@ -19,6 +19,9 @@ import { currentTrainingIdAtom } from "../atoms/current-training-id-atom";
 import { useAtomValue, useSetAtom } from "jotai";
 import { appStateAtom } from "../atoms/app-state-atom";
 import { trainingStateAtom } from "../atoms/training-state-atom";
+import { exercisesAtom } from "../atoms/exercises-atom";
+import { exerciseSetsAtom } from "../atoms/exercise-sets-atom";
+import { trainingsAtom } from "../atoms/trainings-atom";
 
 export const Home = () => {
   const [isLogoutPressed, setIsLoggoutPressed] = useState(false);
@@ -28,6 +31,10 @@ export const Home = () => {
   const setAppStateValue = useSetAtom(appStateAtom);
   const trainingStateValue = useAtomValue(trainingStateAtom);
   const setTraningStateValue = useSetAtom(trainingStateAtom);
+
+  const trainingsValue = useSetAtom(trainingsAtom);
+  const exercisesValue = useSetAtom(exercisesAtom);
+  const exerciseSetsValue = useSetAtom(exerciseSetsAtom);
 
   const isTrainingOn = trainingStateValue === TRAINING_ON;
   const trainingButtonCaption = isTrainingOn
@@ -48,6 +55,10 @@ export const Home = () => {
     setTraningStateValue(TRAINING_OFF);
     setIsLoggoutPressed(false);
     setCurrentTrainingId(null);
+
+    trainingsValue({});
+    exercisesValue({});
+    exerciseSetsValue({});
   };
   const logOutConfirmDeclined = () => {
     setIsLoggoutPressed(false);

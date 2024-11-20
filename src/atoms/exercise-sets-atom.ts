@@ -1,5 +1,8 @@
-import { atom } from "jotai";
 import { ExerciseSets } from "../constants/types";
+import { atomWithStorage } from "jotai/utils";
 
 // all sets of single exercise (i.e. Dumbbells flat bench press)
-export const exerciseSetsAtom = atom<ExerciseSets>({});
+export const exerciseSetsAtom = atomWithStorage<ExerciseSets>(
+  "exercise-sets",
+  {}
+);

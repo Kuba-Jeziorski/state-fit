@@ -17,14 +17,11 @@ export const updateCurrentTrainingAtom = atom(
       throw new Error("current triannig id is null!");
     }
 
-    const defaultTrainingExercise = {
-      id: currentTrainingId,
-      date: Date.now(),
-      exerciseIds: [payload.id],
-    };
+    const currentTraining = trainings[currentTrainingId];
 
-    const currentTraining =
-      trainings[currentTrainingId] || defaultTrainingExercise;
+    console.log(`trainings`, trainings);
+    console.log(`currentTrainingId`, currentTrainingId);
+    console.log(`currentTraining`, currentTraining);
 
     set(trainingsAtom, {
       ...trainings,
@@ -33,7 +30,5 @@ export const updateCurrentTrainingAtom = atom(
         exerciseIds: [...currentTraining.exerciseIds, payload.id],
       },
     });
-    console.log(`currentTraining: `);
-    console.log(currentTraining);
   }
 );

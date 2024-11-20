@@ -13,7 +13,6 @@ import { TrainingForm } from "../components/TrainingForm";
 import { useState } from "react";
 import { ConfirmModal } from "../components/ConfirmModal";
 import { usePageTitle } from "../utils/usePageTitle";
-import { useStartTraining } from "../utils/useStartTraining";
 import { useRedirectToSummary } from "../utils/useRedirectToSummary";
 import { useRedirectToHome } from "../utils/useRedirectToHome";
 import { Button } from "../components/Button";
@@ -21,6 +20,10 @@ import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { currentTrainingIdAtom } from "../atoms/current-training-id-atom";
 import { trainingStateAtom } from "../atoms/training-state-atom";
 import { appStateAtom } from "../atoms/app-state-atom";
+import { startTrainingAtom } from "../atoms/writeonly/start-training-atom";
+import { trainingsAtom } from "../atoms/trainings-atom";
+import { exercisesAtom } from "../atoms/exercises-atom";
+import { exerciseSetsAtom } from "../atoms/exercise-sets-atom";
 
 export const Training = () => {
   const [isFinishTrainingModalVisible, setIsFinishTrainingModalVisible] =
@@ -29,10 +32,13 @@ export const Training = () => {
   const setCurrentTrainingId = useSetAtom(currentTrainingIdAtom);
   const appStateValue = useAtomValue(appStateAtom);
   const [trainingStateValue, setTraningStateValue] = useAtom(trainingStateAtom);
+  const trainingsValue = useSetAtom(trainingsAtom);
+  const exercisesValue = useSetAtom(exercisesAtom);
+  const exerciseSetsValue = useSetAtom(exerciseSetsAtom);
 
   const isTrainingOn = trainingStateValue === TRAINING_ON;
 
-  const startTraining = useStartTraining();
+  const startTraining = useSetAtom(startTrainingAtom);
   const redirectToSummary = useRedirectToSummary();
   const redirectToHome = useRedirectToHome();
 
@@ -44,6 +50,10 @@ export const Training = () => {
     setCurrentTrainingId(null);
     setIsFinishTrainingModalVisible(false);
     redirectToSummary();
+
+    trainingsValue({});
+    exercisesValue({});
+    exerciseSetsValue({});
   };
   const finishTrainingDeclined = () => {
     setIsFinishTrainingModalVisible(false);

@@ -1,5 +1,5 @@
-import { useSetAtom } from "jotai";
-import { useState } from "react";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { useMemo, useState } from "react";
 import { exercisesAtom } from "../atoms/exercises-atom";
 import {
   DEFAULT_NUMERIC_INPUT_PLACEHOLDER_VALUE,
@@ -7,22 +7,32 @@ import {
   FIRST_SET_CAPTION,
   ANOTHER_SET_CAPTION,
 } from "../constants/constants";
-import { ExerciseSets, SelectExercises } from "../constants/types";
+import { SelectExercises } from "../constants/types";
 import { SingleSet } from "./SingleSetProps";
 import { Button } from "./Button";
+import { currentExerciseSetsAtom } from "../atoms/readonly/current-exercise-sets";
+import { exerciseSetsAtom } from "../atoms/exercise-sets-atom";
 
 type SingleExericseProp = {
   exerciseId: string;
 };
 
 export const SingleExercise = ({ exerciseId }: SingleExericseProp) => {
-  const [sets, setSets] = useState<ExerciseSets>({});
+  const [sets, setSets] = useAtom(exerciseSetsAtom);
+
+  const currentExerciseAtom = useMemo(
+    () => currentExerciseSetsAtom(exerciseId),
+    [exerciseId]
+  );
+  const currentExercise = useAtomValue(currentExerciseAtom);
+  const currentExerciseSets = currentExercise.exerciseSetIds;
+
   const [selectedExercise, setSelectedExercise] = useState<SelectExercises>(
     "Incline dumbbell press"
   );
   const setExercises = useSetAtom(exercisesAtom);
 
-  const isSetsEmpty = Object.keys(sets).length === 0;
+  const isSetsEmpty = currentExerciseSets.length === 0;
 
   const buttonCaption = isSetsEmpty ? FIRST_SET_CAPTION : ANOTHER_SET_CAPTION;
 
@@ -36,17 +46,17 @@ export const SingleExercise = ({ exerciseId }: SingleExericseProp) => {
 
     const newSetId = crypto.randomUUID();
 
-    const newId = Date.now().toString();
     setSets((prevSets) => {
       const newSets = {
         ...prevSets,
         [newSetId]: {
-          id: newId,
+          id: newSetId,
           type: selectedExercise,
           weight: DEFAULT_NUMERIC_INPUT_PLACEHOLDER_VALUE,
           reps: DEFAULT_NUMERIC_INPUT_PLACEHOLDER_VALUE,
         },
       };
+
       return newSets;
     });
 
@@ -84,7 +94,7 @@ export const SingleExercise = ({ exerciseId }: SingleExericseProp) => {
       </select>
       {sets &&
         Object.keys(sets).map((key) => {
-          return <SingleSet key={key} currentSet={key} sets={sets} />;
+          return <SingleSet key={key} currentSet={key} sets={sets} id={key} />;
         })}
       <Button
         caption={buttonCaption}
