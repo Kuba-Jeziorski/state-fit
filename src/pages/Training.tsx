@@ -1,69 +1,39 @@
 import { useRedirectIfLoggedOut } from "../utils/useRedirectIfLoggedOut";
 import {
-  TRAINING_OFF,
-  TRAINING_ON,
-  FINISH_TRAINING_CONFIRM_MESSAGE,
-  NEW_TRAINING_CONFIRM_MESSAGE,
   FINISH_TRAINING_CAPTION,
   HOME_CAPTION,
   TRAINING_CAPTION,
+  TRAINING_OFF,
 } from "../constants/constants";
 import { Title } from "../components/Title";
 import { TrainingForm } from "../components/TrainingForm";
-import { useState } from "react";
-import { ConfirmModal } from "../components/ConfirmModal";
 import { usePageTitle } from "../utils/usePageTitle";
-import { useRedirectToSummary } from "../utils/useRedirectToSummary";
 import { useRedirectToHome } from "../utils/useRedirectToHome";
 import { Button } from "../components/Button";
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { currentTrainingIdAtom } from "../atoms/current-training-id-atom";
-import { trainingStateAtom } from "../atoms/training-state-atom";
+import { useAtom, useAtomValue } from "jotai";
 import { appStateAtom } from "../atoms/app-state-atom";
-import { startTrainingAtom } from "../atoms/writeonly/start-training-atom";
-import { trainingsAtom } from "../atoms/trainings-atom";
-import { exercisesAtom } from "../atoms/exercises-atom";
-import { exerciseSetsAtom } from "../atoms/exercise-sets-atom";
+import { TrainingModal } from "../components/TrainingModal";
+import { trainingModalStateAtom } from "../atoms/training-modal-state-atom";
+import { useEffect } from "react";
+import { trainingStateAtom } from "../atoms/training-state-atom";
 
 export const Training = () => {
-  const [isFinishTrainingModalVisible, setIsFinishTrainingModalVisible] =
-    useState(false);
-
-  const setCurrentTrainingId = useSetAtom(currentTrainingIdAtom);
+  const [trainingModalState, setTrainingModalState] = useAtom(
+    trainingModalStateAtom
+  );
+  const trainingState = useAtomValue(trainingStateAtom);
   const appStateValue = useAtomValue(appStateAtom);
-  const [trainingStateValue, setTraningStateValue] = useAtom(trainingStateAtom);
-  const trainingsValue = useSetAtom(trainingsAtom);
-  const exercisesValue = useSetAtom(exercisesAtom);
-  const exerciseSetsValue = useSetAtom(exerciseSetsAtom);
 
-  const isTrainingOn = trainingStateValue === TRAINING_ON;
+  useEffect(() => {
+    if (trainingState === TRAINING_OFF) {
+      setTrainingModalState("new");
+    }
+  }, [setTrainingModalState, trainingState]);
 
-  const startTraining = useSetAtom(startTrainingAtom);
-  const redirectToSummary = useRedirectToSummary();
   const redirectToHome = useRedirectToHome();
 
   const finishTrainingConfirmation = () => {
-    setIsFinishTrainingModalVisible(true);
-  };
-  const finishTrainingAccepted = () => {
-    setTraningStateValue(TRAINING_OFF);
-    setCurrentTrainingId(null);
-    setIsFinishTrainingModalVisible(false);
-    redirectToSummary();
-
-    trainingsValue({});
-    exercisesValue({});
-    exerciseSetsValue({});
-  };
-  const finishTrainingDeclined = () => {
-    setIsFinishTrainingModalVisible(false);
-  };
-  const newTrainingAccepted = () => {
-    setTraningStateValue(TRAINING_ON);
-    startTraining();
-  };
-  const newTrainingDeclined = () => {
-    redirectToHome();
+    setTrainingModalState("finish");
   };
 
   useRedirectIfLoggedOut(appStateValue);
@@ -71,7 +41,7 @@ export const Training = () => {
 
   return (
     <>
-      {isTrainingOn && (
+      {trainingModalState !== "new" && (
         <>
           <Button
             caption={HOME_CAPTION}
@@ -85,23 +55,9 @@ export const Training = () => {
             handleFunction={finishTrainingConfirmation}
             classes="button primary"
           />
-          {isFinishTrainingModalVisible && (
-            <ConfirmModal
-              confirmMessage={FINISH_TRAINING_CONFIRM_MESSAGE}
-              confirmAcceptFunction={finishTrainingAccepted}
-              confirmDeclineFunction={finishTrainingDeclined}
-            />
-          )}
         </>
       )}
-
-      {!isTrainingOn && (
-        <ConfirmModal
-          confirmMessage={NEW_TRAINING_CONFIRM_MESSAGE}
-          confirmAcceptFunction={newTrainingAccepted}
-          confirmDeclineFunction={newTrainingDeclined}
-        />
-      )}
+      <TrainingModal />
     </>
   );
 };
