@@ -8,6 +8,9 @@ import { exerciseSetsAtom } from "../atoms/exercise-sets-atom";
 import {
   FINISH_TRAINING_CONFIRM_MESSAGE,
   NEW_TRAINING_CONFIRM_MESSAGE,
+  TRAINING_MODAL_STATE_FINISH,
+  TRAINING_MODAL_STATE_NEW,
+  TRAINING_MODAL_STATE_NULL,
   TRAINING_OFF,
   TRAINING_ON,
 } from "../constants/constants";
@@ -34,7 +37,7 @@ export const TrainingModal = () => {
   const finishTrainingAccepted = () => {
     trainingStateValue(TRAINING_OFF);
     setCurrentTrainingId(null);
-    setTrainingModalState(null);
+    setTrainingModalState(TRAINING_MODAL_STATE_NULL);
     redirectToSummary();
 
     trainingsValue({});
@@ -42,22 +45,22 @@ export const TrainingModal = () => {
     exerciseSetsValue({});
   };
   const finishTrainingDeclined = () => {
-    setTrainingModalState(null);
+    setTrainingModalState(TRAINING_MODAL_STATE_NULL);
   };
   const newTrainingAccepted = () => {
     trainingStateValue(TRAINING_ON);
-    setTrainingModalState(null);
+    setTrainingModalState(TRAINING_MODAL_STATE_NULL);
     startTraining();
   };
   const newTrainingDeclined = () => {
     redirectToHome();
   };
 
-  if (trainingModalState === null) {
+  if (trainingModalState === TRAINING_MODAL_STATE_NULL) {
     return;
   }
 
-  if (trainingModalState === "new") {
+  if (trainingModalState === TRAINING_MODAL_STATE_NEW) {
     return (
       <ConfirmModal
         confirmMessage={NEW_TRAINING_CONFIRM_MESSAGE}
@@ -66,7 +69,7 @@ export const TrainingModal = () => {
       />
     );
   }
-  if (trainingModalState === "finish") {
+  if (trainingModalState === TRAINING_MODAL_STATE_FINISH) {
     return (
       <ConfirmModal
         confirmMessage={FINISH_TRAINING_CONFIRM_MESSAGE}

@@ -21,6 +21,11 @@ body {
   font-family: sans-serif;
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+}
+
 .button {
   background: transparent;
   outline: none;
@@ -44,6 +49,14 @@ body {
 
 .button.secondary {
   color: var(--color-patina);
+}
+
+.button.temporary-mt {
+  margin-top: 20px;
+}
+
+.button[type="submit"] {
+  margin-top: 20px;
 }
 
 .buttonWrapper {

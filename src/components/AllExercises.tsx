@@ -34,11 +34,13 @@ export const AllExercises = () => {
           return <SingleExercise key={key} exerciseId={key} />;
         })}
 
-      <Button
-        caption={buttonCaption}
-        handleFunction={handleClick}
-        classes="button primary"
-      />
+      <div>
+        <Button
+          caption={buttonCaption}
+          handleFunction={handleClick}
+          classes="button primary"
+        />
+      </div>
     </>
   );
 };

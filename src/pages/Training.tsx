@@ -3,6 +3,8 @@ import {
   FINISH_TRAINING_CAPTION,
   HOME_CAPTION,
   TRAINING_CAPTION,
+  TRAINING_MODAL_STATE_FINISH,
+  TRAINING_MODAL_STATE_NEW,
   TRAINING_OFF,
 } from "../constants/constants";
 import { Title } from "../components/Title";
@@ -26,14 +28,15 @@ export const Training = () => {
 
   useEffect(() => {
     if (trainingState === TRAINING_OFF) {
-      setTrainingModalState("new");
+      console.log(`test`);
+      setTrainingModalState(TRAINING_MODAL_STATE_NEW);
     }
   }, [setTrainingModalState, trainingState]);
 
   const redirectToHome = useRedirectToHome();
 
   const finishTrainingConfirmation = () => {
-    setTrainingModalState("finish");
+    setTrainingModalState(TRAINING_MODAL_STATE_FINISH);
   };
 
   useRedirectIfLoggedOut(appStateValue);
@@ -41,7 +44,7 @@ export const Training = () => {
 
   return (
     <>
-      {trainingModalState !== "new" && (
+      {trainingModalState !== TRAINING_MODAL_STATE_NEW && (
         <>
           <Button
             caption={HOME_CAPTION}
@@ -53,7 +56,7 @@ export const Training = () => {
           <Button
             caption={FINISH_TRAINING_CAPTION}
             handleFunction={finishTrainingConfirmation}
-            classes="button primary"
+            classes="button primary temporary-mt"
           />
         </>
       )}
