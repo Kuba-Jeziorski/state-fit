@@ -19,10 +19,6 @@ export const updateCurrentTrainingAtom = atom(
 
     const currentTraining = trainings[currentTrainingId];
 
-    console.log(`trainings`, trainings);
-    console.log(`currentTrainingId`, currentTrainingId);
-    console.log(`currentTraining`, currentTraining);
-
     set(trainingsAtom, {
       ...trainings,
       [currentTrainingId]: {

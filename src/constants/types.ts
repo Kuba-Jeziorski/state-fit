@@ -1,7 +1,16 @@
-import { LOGGED_IN, LOGGED_OUT, TRAINING_OFF, TRAINING_ON } from "./constants";
+import {
+  LOGGED_IN,
+  LOGGED_OUT,
+  LOGGED_UNKNOWN,
+  TRAINING_OFF,
+  TRAINING_ON,
+} from "./constants";
 
 // appState
-export type AppState = typeof LOGGED_IN | typeof LOGGED_OUT;
+export type AppState =
+  | typeof LOGGED_IN
+  | typeof LOGGED_OUT
+  | typeof LOGGED_UNKNOWN;
 
 export type AppStateValue = {
   appState: AppState;

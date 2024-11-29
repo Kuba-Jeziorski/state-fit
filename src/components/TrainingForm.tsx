@@ -13,7 +13,6 @@ const testFetch = async () => {
     "http://localhost:3000/trainings",
     testTraining
   );
-  console.log("Added data", response.data);
 };
 
 type TrainingFormWrapperProps = {

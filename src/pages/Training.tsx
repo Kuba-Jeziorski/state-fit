@@ -25,10 +25,10 @@ export const Training = () => {
   );
   const trainingState = useAtomValue(trainingStateAtom);
   const appStateValue = useAtomValue(appStateAtom);
+  useRedirectIfLoggedOut(appStateValue);
 
   useEffect(() => {
     if (trainingState === TRAINING_OFF) {
-      console.log(`test`);
       setTrainingModalState(TRAINING_MODAL_STATE_NEW);
     }
   }, [setTrainingModalState, trainingState]);
@@ -39,7 +39,6 @@ export const Training = () => {
     setTrainingModalState(TRAINING_MODAL_STATE_FINISH);
   };
 
-  useRedirectIfLoggedOut(appStateValue);
   usePageTitle(TRAINING_CAPTION);
 
   return (

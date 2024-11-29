@@ -2,6 +2,7 @@ import { SelectExercises } from "./types";
 
 export const LOGGED_OUT = "logged-out";
 export const LOGGED_IN = "logged-in";
+export const LOGGED_UNKNOWN = "logged-unknown";
 export const LOGGING_CONFIRM_MESSAGE = "Are you sure you want to log out?";
 
 export const TRAINING_ON = "training-on";
