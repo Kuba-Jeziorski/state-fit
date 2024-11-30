@@ -1,13 +1,11 @@
 import {
   CURRENT_TRAINING_CAPTION,
-  LOGGED_OUT,
   LOGGING_CONFIRM_MESSAGE,
   START_NEW_TRAINING_CAPTION,
   TRAINING_OFF,
   TRAINING_ON,
 } from "../constants/constants";
 
-import { useRedirectIfLoggedOut } from "../utils/useRedirectIfLoggedOut";
 import { Title } from "../components/Title";
 import { useState } from "react";
 import { ConfirmModal } from "../components/ConfirmModal";
@@ -17,24 +15,24 @@ import { useRedirectToTraining } from "../utils/useRedirectToTraining";
 import { Button } from "../components/Button";
 import { currentTrainingIdAtom } from "../atoms/current-training-id-atom";
 import { useAtomValue, useSetAtom } from "jotai";
-import { appStateAtom } from "../atoms/app-state-atom";
 import { trainingStateAtom } from "../atoms/training-state-atom";
 import { exercisesAtom } from "../atoms/exercises-atom";
 import { exerciseSetsAtom } from "../atoms/exercise-sets-atom";
 import { trainingsAtom } from "../atoms/trainings-atom";
+import { tokenAtom } from "../atoms/readonly/token-atop";
 
 export const Home = () => {
   const [isLogoutPressed, setIsLoggoutPressed] = useState(false);
 
   const setCurrentTrainingId = useSetAtom(currentTrainingIdAtom);
-  const appStateValue = useAtomValue(appStateAtom);
-  const setAppStateValue = useSetAtom(appStateAtom);
   const trainingStateValue = useAtomValue(trainingStateAtom);
   const setTraningStateValue = useSetAtom(trainingStateAtom);
 
   const trainingsValue = useSetAtom(trainingsAtom);
   const exercisesValue = useSetAtom(exercisesAtom);
   const exerciseSetsValue = useSetAtom(exerciseSetsAtom);
+
+  const setToken = useSetAtom(tokenAtom);
 
   const isTrainingOn = trainingStateValue === TRAINING_ON;
   const trainingButtonCaption = isTrainingOn
@@ -51,7 +49,7 @@ export const Home = () => {
     setIsLoggoutPressed(true);
   };
   const logOutConfirmAccepted = () => {
-    setAppStateValue(LOGGED_OUT);
+    setToken(null);
     setTraningStateValue(TRAINING_OFF);
     setIsLoggoutPressed(false);
     setCurrentTrainingId(null);
@@ -65,7 +63,6 @@ export const Home = () => {
   };
 
   usePageTitle("Home");
-  useRedirectIfLoggedOut(appStateValue);
 
   return (
     <>

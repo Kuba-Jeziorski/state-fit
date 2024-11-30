@@ -1,8 +1,5 @@
 import { SelectExercises } from "./types";
 
-export const LOGGED_OUT = "logged-out";
-export const LOGGED_IN = "logged-in";
-export const LOGGED_UNKNOWN = "logged-unknown";
 export const LOGGING_CONFIRM_MESSAGE = "Are you sure you want to log out?";
 
 export const TRAINING_ON = "training-on";
@@ -36,3 +33,5 @@ export const TRAINING_CAPTION = "Training";
 export const TRAINING_MODAL_STATE_NEW = "new";
 export const TRAINING_MODAL_STATE_FINISH = "finish";
 export const TRAINING_MODAL_STATE_NULL = null;
+
+export const TOKEN_PROVIDED = "token-provided";

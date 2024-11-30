@@ -10,7 +10,7 @@ import {
 import { SelectExercises } from "../constants/types";
 import { SingleSet } from "./SingleSetProps";
 import { Button } from "./Button";
-import { currentExerciseSetsAtom } from "../atoms/readonly/current-exercise-sets";
+import { currentExerciseSetsAtom } from "../atoms/readonly/current-exercise-sets-atom";
 import { exerciseSetsAtom } from "../atoms/exercise-sets-atom";
 
 type SingleExericseProp = {

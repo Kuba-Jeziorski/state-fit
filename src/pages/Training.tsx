@@ -1,4 +1,3 @@
-import { useRedirectIfLoggedOut } from "../utils/useRedirectIfLoggedOut";
 import {
   FINISH_TRAINING_CAPTION,
   HOME_CAPTION,
@@ -13,7 +12,6 @@ import { usePageTitle } from "../utils/usePageTitle";
 import { useRedirectToHome } from "../utils/useRedirectToHome";
 import { Button } from "../components/Button";
 import { useAtom, useAtomValue } from "jotai";
-import { appStateAtom } from "../atoms/app-state-atom";
 import { TrainingModal } from "../components/TrainingModal";
 import { trainingModalStateAtom } from "../atoms/training-modal-state-atom";
 import { useEffect } from "react";
@@ -24,8 +22,6 @@ export const Training = () => {
     trainingModalStateAtom
   );
   const trainingState = useAtomValue(trainingStateAtom);
-  const appStateValue = useAtomValue(appStateAtom);
-  useRedirectIfLoggedOut(appStateValue);
 
   useEffect(() => {
     if (trainingState === TRAINING_OFF) {

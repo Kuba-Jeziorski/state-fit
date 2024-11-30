@@ -1,21 +1,20 @@
-import { LOGGED_IN } from "../constants/constants";
-import { useRedirectIfLoggedIn } from "../utils/useRedirectIfLoggedIn";
+import { TOKEN_PROVIDED } from "../constants/constants";
 import { usePageTitle } from "../utils/usePageTitle";
 import { Button } from "../components/Button";
-import { useAtom } from "jotai";
-import { appStateAtom } from "../atoms/app-state-atom";
+import { useSetAtom } from "jotai";
+import { tokenAtom } from "../atoms/readonly/token-atop";
+import { useRedirectToHome } from "../utils/useRedirectToHome";
 
 export const Opening = () => {
-  const [appStateValue, setAppStateValue] = useAtom(appStateAtom);
+  const setToken = useSetAtom(tokenAtom);
+  const redirectToHome = useRedirectToHome();
 
   const logIn = () => {
-    setAppStateValue(LOGGED_IN);
-    setAppStateValue(LOGGED_IN);
+    setToken(TOKEN_PROVIDED);
+    redirectToHome();
   };
 
   usePageTitle("Log in");
-  useRedirectIfLoggedIn(appStateValue);
-
   return (
     <>
       <Button
