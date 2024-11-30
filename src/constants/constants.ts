@@ -1,5 +1,9 @@
 import { SelectExercises } from "./types";
 
+export const HOME_PAGE_TITLE = "Home";
+export const OPENING_PAGE_TITLE = "Log in";
+export const SUMMARY_PAGE_TITLE = "Summary";
+
 export const LOGGING_CONFIRM_MESSAGE = "Are you sure you want to log out?";
 
 export const TRAINING_ON = "training-on";
@@ -29,5 +33,6 @@ export const START_NEW_TRAINING_CAPTION = "Start New Training";
 export const FINISH_TRAINING_CAPTION = "Finish training";
 export const HOME_CAPTION = "HOME";
 export const TRAINING_CAPTION = "Training";
+export const OPENING_CAPTION = "Log in";
 
 export const TOKEN_PROVIDED = "token-provided";

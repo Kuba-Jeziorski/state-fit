@@ -35,7 +35,6 @@ export const Training = () => {
   const handleFinishTraining = () => {
     setTrainingFinishModal(true);
   };
-
   const trainingFinishConfirmAccepted = () => {
     trainingStateValue(TRAINING_OFF);
     setCurrentTrainingId(null);

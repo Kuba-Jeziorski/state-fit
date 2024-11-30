@@ -1,5 +1,6 @@
 import {
   CURRENT_TRAINING_CAPTION,
+  HOME_PAGE_TITLE,
   LOGGING_CONFIRM_MESSAGE,
   START_NEW_TRAINING_CAPTION,
   TRAINING_OFF,
@@ -78,7 +79,7 @@ export const Home = () => {
     setIsLoggoutPressed(false);
   };
 
-  usePageTitle("Home");
+  usePageTitle(HOME_PAGE_TITLE);
 
   return (
     <>
