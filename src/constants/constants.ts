@@ -30,8 +30,4 @@ export const FINISH_TRAINING_CAPTION = "Finish training";
 export const HOME_CAPTION = "HOME";
 export const TRAINING_CAPTION = "Training";
 
-export const TRAINING_MODAL_STATE_NEW = "new";
-export const TRAINING_MODAL_STATE_FINISH = "finish";
-export const TRAINING_MODAL_STATE_NULL = null;
-
 export const TOKEN_PROVIDED = "token-provided";

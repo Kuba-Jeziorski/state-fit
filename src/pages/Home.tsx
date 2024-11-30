@@ -14,27 +14,30 @@ import { useRedirectToSummary } from "../utils/useRedirectToSummary";
 import { useRedirectToTraining } from "../utils/useRedirectToTraining";
 import { Button } from "../components/Button";
 import { currentTrainingIdAtom } from "../atoms/current-training-id-atom";
-import { useAtomValue, useSetAtom } from "jotai";
+import { useAtom, useSetAtom } from "jotai";
 import { trainingStateAtom } from "../atoms/training-state-atom";
 import { exercisesAtom } from "../atoms/exercises-atom";
 import { exerciseSetsAtom } from "../atoms/exercise-sets-atom";
 import { trainingsAtom } from "../atoms/trainings-atom";
 import { tokenAtom } from "../atoms/readonly/token-atop";
+import { startTrainingAtom } from "../atoms/writeonly/start-training-atom";
 
 export const Home = () => {
   const [isLogoutPressed, setIsLoggoutPressed] = useState(false);
+  const [isTrainingPressed, setIsTrainingPressed] = useState(false);
+
+  const [trainingStateValue, setTraningState] = useAtom(trainingStateAtom);
 
   const setCurrentTrainingId = useSetAtom(currentTrainingIdAtom);
-  const trainingStateValue = useAtomValue(trainingStateAtom);
-  const setTraningStateValue = useSetAtom(trainingStateAtom);
-
-  const trainingsValue = useSetAtom(trainingsAtom);
-  const exercisesValue = useSetAtom(exercisesAtom);
-  const exerciseSetsValue = useSetAtom(exerciseSetsAtom);
-
+  const setTrainings = useSetAtom(trainingsAtom);
+  const setExercises = useSetAtom(exercisesAtom);
+  const setExerciseSets = useSetAtom(exerciseSetsAtom);
   const setToken = useSetAtom(tokenAtom);
+  //
+  const startTraining = useSetAtom(startTrainingAtom);
 
   const isTrainingOn = trainingStateValue === TRAINING_ON;
+
   const trainingButtonCaption = isTrainingOn
     ? CURRENT_TRAINING_CAPTION
     : START_NEW_TRAINING_CAPTION;
@@ -42,21 +45,34 @@ export const Home = () => {
   const redirectToTraining = useRedirectToTraining();
   const redirectToSummary = useRedirectToSummary();
 
-  const startNewTraining = () => {
+  const handleIsTrainingPressed = () => {
+    if (isTrainingOn) {
+      redirectToTraining();
+    } else {
+      setIsTrainingPressed(true);
+    }
+  };
+  const trainingConfirmAccepted = () => {
+    setTraningState(TRAINING_ON);
+    startTraining();
+
+    setIsTrainingPressed(false);
     redirectToTraining();
+  };
+  const trainingConfirmDeclined = () => {
+    setIsTrainingPressed(false);
   };
   const handleIsLogoutPressed = () => {
     setIsLoggoutPressed(true);
   };
   const logOutConfirmAccepted = () => {
     setToken(null);
-    setTraningStateValue(TRAINING_OFF);
+    setTraningState(TRAINING_OFF);
     setIsLoggoutPressed(false);
     setCurrentTrainingId(null);
-
-    trainingsValue({});
-    exercisesValue({});
-    exerciseSetsValue({});
+    setTrainings({});
+    setExercises({});
+    setExerciseSets({});
   };
   const logOutConfirmDeclined = () => {
     setIsLoggoutPressed(false);
@@ -70,7 +86,7 @@ export const Home = () => {
       <div className="buttonWrapper">
         <Button
           caption={trainingButtonCaption}
-          handleFunction={startNewTraining}
+          handleFunction={handleIsTrainingPressed}
           classes="button primary"
         />
         <Button
@@ -89,6 +105,13 @@ export const Home = () => {
           confirmMessage={LOGGING_CONFIRM_MESSAGE}
           confirmAcceptFunction={logOutConfirmAccepted}
           confirmDeclineFunction={logOutConfirmDeclined}
+        />
+      )}
+      {isTrainingPressed && (
+        <ConfirmModal
+          confirmMessage={trainingButtonCaption}
+          confirmAcceptFunction={trainingConfirmAccepted}
+          confirmDeclineFunction={trainingConfirmDeclined}
         />
       )}
     </>
