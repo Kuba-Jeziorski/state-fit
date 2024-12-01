@@ -1,7 +1,19 @@
 {
-  "trainings": {
-    "id": 0,
-    "exercise": "Existing Exercise",
-    "numberOfRows": 0
-  }
+  "trainings": [
+    {
+      "id": 0,
+      "exercise": "Existing Exercise",
+      "numberOfRows": 0
+    },
+    {
+      "id": 0,
+      "exercise": "Test Exercise",
+      "numberOfRows": 5
+    },
+    {
+      "id": 1,
+      "exercise": "Test Exercise",
+      "numberOfRows": 5
+    }
+  ]
 }

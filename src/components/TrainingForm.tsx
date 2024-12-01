@@ -1,19 +1,5 @@
 import { ReactNode } from "react";
 import { AllExercises } from "./AllExercises";
-import axios from "axios";
-
-const testTraining = {
-  id: 1,
-  exercise: "Test Exercise",
-  numberOfRows: 5,
-};
-
-const testFetch = async () => {
-  const response = await axios.post(
-    "http://localhost:3000/trainings",
-    testTraining
-  );
-};
 
 type TrainingFormWrapperProps = {
   children: ReactNode;
@@ -24,8 +10,6 @@ const TrainingFormWrapper = ({ children }: TrainingFormWrapperProps) => {
     event.preventDefault();
 
     alert(`Submitted`);
-
-    testFetch();
   };
 
   return (

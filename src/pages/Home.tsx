@@ -23,6 +23,31 @@ import { trainingsAtom } from "../atoms/trainings-atom";
 import { tokenAtom } from "../atoms/readonly/token-atop";
 import { startTrainingAtom } from "../atoms/writeonly/start-training-atom";
 
+import axios from "axios";
+
+const FetchButton = () => {
+  const [id, setId] = useState(0);
+
+  const testTraining = {
+    id: id,
+    exercise: "Test Exercise",
+    numberOfRows: 5,
+  };
+
+  const handleFetch = async () => {
+    setId((id) => id + 1);
+    const response = await axios.post(
+      "http://localhost:3000/trainings",
+      testTraining
+    );
+    alert("Fetch");
+    console.log(id);
+    console.log(response);
+  };
+
+  return <button onClick={handleFetch}>Fetch</button>;
+};
+
 export const Home = () => {
   const [isLogoutPressed, setIsLoggoutPressed] = useState(false);
   const [isTrainingPressed, setIsTrainingPressed] = useState(false);
@@ -100,6 +125,7 @@ export const Home = () => {
           handleFunction={handleIsLogoutPressed}
           classes="button primary"
         />
+        <FetchButton />
       </div>
       {isLogoutPressed && (
         <ConfirmModal
