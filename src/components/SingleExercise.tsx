@@ -18,19 +18,21 @@ type SingleExericseProp = {
 };
 
 export const SingleExercise = ({ exerciseId }: SingleExericseProp) => {
-  const [sets, setSets] = useAtom(exerciseSetsAtom);
-
+  console.log(`single`);
   const currentExerciseAtom = useMemo(
     () => currentExerciseSetsAtom(exerciseId),
     [exerciseId]
   );
+
+  const [sets, setSets] = useAtom(exerciseSetsAtom);
   const currentExercise = useAtomValue(currentExerciseAtom);
+  const setExercises = useSetAtom(exercisesAtom);
+
   const currentExerciseSets = currentExercise.exerciseSetIds;
 
   const [selectedExercise, setSelectedExercise] = useState<SelectExercises>(
     "Incline dumbbell press"
   );
-  const setExercises = useSetAtom(exercisesAtom);
 
   const isSetsEmpty = currentExerciseSets.length === 0;
 

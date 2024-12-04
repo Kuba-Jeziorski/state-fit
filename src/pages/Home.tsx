@@ -2,6 +2,7 @@ import {
   CURRENT_TRAINING_CAPTION,
   HOME_PAGE_TITLE,
   LOGGING_CONFIRM_MESSAGE,
+  NEW_TRAINING_CONFIRM_MESSAGE,
   START_NEW_TRAINING_CAPTION,
   TRAINING_OFF,
   TRAINING_ON,
@@ -59,7 +60,7 @@ export const Home = () => {
   const setExercises = useSetAtom(exercisesAtom);
   const setExerciseSets = useSetAtom(exerciseSetsAtom);
   const setToken = useSetAtom(tokenAtom);
-  //
+
   const startTraining = useSetAtom(startTrainingAtom);
 
   const isTrainingOn = trainingStateValue === TRAINING_ON;
@@ -136,7 +137,7 @@ export const Home = () => {
       )}
       {isTrainingPressed && (
         <ConfirmModal
-          confirmMessage={trainingButtonCaption}
+          confirmMessage={NEW_TRAINING_CONFIRM_MESSAGE}
           confirmAcceptFunction={trainingConfirmAccepted}
           confirmDeclineFunction={trainingConfirmDeclined}
         />

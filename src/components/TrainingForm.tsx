@@ -17,7 +17,7 @@ const TrainingFormWrapper = ({ children }: TrainingFormWrapperProps) => {
       {children}
       <div className="buttonWrapper">
         <button className="button primary" type="submit">
-          SUBMIT
+          SUBMIT (no function)
         </button>
       </div>
     </form>
