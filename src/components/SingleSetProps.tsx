@@ -11,6 +11,10 @@ type SingleSetProps = {
 export const SingleSet = ({ currentSet, sets, id }: SingleSetProps) => {
   const currentSetObject = sets[currentSet];
 
+  if (currentSetObject === undefined) {
+    return null;
+  }
+
   const hasRepsCheck = hasReps(currentSetObject);
   const hasWeightCheck = hasWeight(currentSetObject);
 

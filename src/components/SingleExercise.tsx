@@ -18,7 +18,10 @@ type SingleExericseProp = {
 };
 
 export const SingleExercise = ({ exerciseId }: SingleExericseProp) => {
-  console.log(`single`);
+  const [selectedExercise, setSelectedExercise] = useState<SelectExercises>(
+    "Incline dumbbell press"
+  );
+
   const currentExerciseAtom = useMemo(
     () => currentExerciseSetsAtom(exerciseId),
     [exerciseId]
@@ -28,11 +31,11 @@ export const SingleExercise = ({ exerciseId }: SingleExericseProp) => {
   const currentExercise = useAtomValue(currentExerciseAtom);
   const setExercises = useSetAtom(exercisesAtom);
 
-  const currentExerciseSets = currentExercise.exerciseSetIds;
+  if (currentExercise === undefined) {
+    return null;
+  }
 
-  const [selectedExercise, setSelectedExercise] = useState<SelectExercises>(
-    "Incline dumbbell press"
-  );
+  const currentExerciseSets = currentExercise.exerciseSetIds;
 
   const isSetsEmpty = currentExerciseSets.length === 0;
 
@@ -64,6 +67,11 @@ export const SingleExercise = ({ exerciseId }: SingleExericseProp) => {
 
     setExercises((prevExercises) => {
       const exercise = prevExercises[exerciseId];
+
+      if (!exercise) {
+        console.error(`Exercise with ID ${exerciseId} not found.`);
+        return prevExercises;
+      }
 
       const updatedExercise = {
         ...exercise,

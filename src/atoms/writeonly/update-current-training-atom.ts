@@ -18,7 +18,7 @@ export const updateCurrentTrainingAtom = atom(
 
     const trainings = get(trainingsAtom);
     const currentTrainingId = currentTraining.id;
-
+    console.log(`updateCurrentTrainingAtom`);
     set(trainingsAtom, {
       ...trainings,
       [currentTrainingId]: {

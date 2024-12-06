@@ -15,6 +15,6 @@ export const exerciseCreateAtom = atom(null, (get, set) => {
     ...get(exercisesAtom),
     [id]: newExercise,
   });
-
+  console.log(`exerciseCreateAtom()`);
   set(updateCurrentTrainingAtom, { id });
 });

@@ -24,6 +24,7 @@ export const AllExercises = () => {
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     addExercise();
+    console.log(`addExercise()`);
   };
 
   return (
