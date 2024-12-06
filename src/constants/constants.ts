@@ -36,3 +36,5 @@ export const TRAINING_CAPTION = "Training";
 export const OPENING_CAPTION = "Log in";
 
 export const TOKEN_PROVIDED = "token-provided";
+export const TOKEN_NOT_PROVIDED = "token-not-provided";
+export const TOKEN_PENDING = "token-pending";

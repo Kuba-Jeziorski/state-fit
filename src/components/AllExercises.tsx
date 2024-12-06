@@ -1,5 +1,4 @@
 import { useAtomValue, useSetAtom } from "jotai";
-import { exercisesAtom } from "../atoms/exercises-atom";
 import { SingleExercise } from "./SingleExercise";
 import { exerciseCreateAtom } from "../atoms/writeonly/exercise-create-atom";
 import { currentTrainingIdAtom } from "../atoms/current-training-id-atom";
@@ -9,9 +8,10 @@ import {
   FIRST_EXERCISE_CAPTION,
 } from "../constants/constants";
 import { Title } from "./Title";
+import { currentTrainingExercises } from "../atoms/readonly/current-training-exercises";
 
 export const AllExercises = () => {
-  const exercises = useAtomValue(exercisesAtom);
+  const exercises = useAtomValue(currentTrainingExercises);
   const addExercise = useSetAtom(exerciseCreateAtom);
   const currentTrainingId = useAtomValue(currentTrainingIdAtom);
 

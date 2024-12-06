@@ -38,7 +38,7 @@ export type ExerciseSet =
     };
 
 // all sets of single exercise
-export type ExerciseSets = Record<ExerciseSetId, ExerciseSet>;
+export type ExerciseSets = Record<ExerciseSetId, ExerciseSet | undefined>;
 
 export type ExerciseId = string;
 
@@ -50,7 +50,7 @@ export type Exercise = {
 };
 
 // all exercises of single training day
-export type Exercises = Record<ExerciseId, Exercise>;
+export type Exercises = Record<ExerciseId, Exercise | undefined>;
 
 type TrainingId = string;
 
@@ -62,7 +62,7 @@ export type Training = {
 };
 
 // all trainings
-export type Trainings = Record<TrainingId, Training>;
+export type Trainings = Record<TrainingId, Training | undefined>;
 
 export type SelectExercises =
   | "Incline dumbbell press"

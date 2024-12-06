@@ -12,8 +12,12 @@ import { Summary } from "./pages/Summary";
 import { Training } from "./pages/Training";
 import { NoPage } from "./pages/NoPage";
 import { useAtomValue } from "jotai";
-import { TOKEN_PROVIDED } from "./constants/constants";
-import { tokenAtom } from "./atoms/readonly/token-atop";
+import {
+  TOKEN_NOT_PROVIDED,
+  TOKEN_PENDING,
+  TOKEN_PROVIDED,
+} from "./constants/constants";
+import { tokenAtom } from "./atoms/readonly/token-atom";
 
 type AuthGuardProps = {
   element: JSX.Element;
@@ -21,15 +25,19 @@ type AuthGuardProps = {
 
 const AuthGuard = ({ element }: AuthGuardProps) => {
   const tokenValue = useAtomValue(tokenAtom);
-  const isLoggedIn = tokenValue === TOKEN_PROVIDED;
 
-  return isLoggedIn ? element : <Navigate to="/opening" replace />;
+  switch (tokenValue) {
+    case TOKEN_PROVIDED:
+      return element;
+    case TOKEN_NOT_PROVIDED:
+      return <Navigate to="/opening" replace />;
+    case TOKEN_PENDING:
+    default:
+      return <p>Loading</p>;
+  }
 };
 
 const App = () => {
-  const tokenValue = useAtomValue(tokenAtom);
-  const isLoggedIn = tokenValue === TOKEN_PROVIDED;
-
   const router = createBrowserRouter([
     {
       path: "/",
@@ -37,7 +45,7 @@ const App = () => {
     },
     {
       path: "/opening",
-      element: isLoggedIn ? <Navigate to="/" replace /> : <Opening />,
+      element: <Opening />,
     },
     {
       path: "/training",

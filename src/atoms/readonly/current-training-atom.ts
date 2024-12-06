@@ -7,7 +7,7 @@ export const currentTrainingAtom = atom((get) => {
   const trainings = get(trainingsAtom);
 
   if (currentTrainingId === null) {
-    throw new Error("current triannig is null!");
+    throw new Error("current training is null!");
   }
 
   return trainings[currentTrainingId];

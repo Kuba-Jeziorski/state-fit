@@ -24,7 +24,7 @@ export const SingleExercise = ({ exerciseId }: SingleExericseProp) => {
     [exerciseId]
   );
 
-  const [sets, setSets] = useAtom(exerciseSetsAtom);
+  const [sets, setSets] = useAtom(exerciseSetsAtom); // filter with current exercise id
   const currentExercise = useAtomValue(currentExerciseAtom);
   const setExercises = useSetAtom(exercisesAtom);
 

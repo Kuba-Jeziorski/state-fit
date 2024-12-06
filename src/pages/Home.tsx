@@ -4,6 +4,7 @@ import {
   LOGGING_CONFIRM_MESSAGE,
   NEW_TRAINING_CONFIRM_MESSAGE,
   START_NEW_TRAINING_CAPTION,
+  TOKEN_NOT_PROVIDED,
   TRAINING_OFF,
   TRAINING_ON,
 } from "../constants/constants";
@@ -21,7 +22,7 @@ import { trainingStateAtom } from "../atoms/training-state-atom";
 import { exercisesAtom } from "../atoms/exercises-atom";
 import { exerciseSetsAtom } from "../atoms/exercise-sets-atom";
 import { trainingsAtom } from "../atoms/trainings-atom";
-import { tokenAtom } from "../atoms/readonly/token-atop";
+import { tokenAtom } from "../atoms/readonly/token-atom";
 import { startTrainingAtom } from "../atoms/writeonly/start-training-atom";
 
 import axios from "axios";
@@ -93,7 +94,7 @@ export const Home = () => {
     setIsLoggoutPressed(true);
   };
   const logOutConfirmAccepted = () => {
-    setToken(null);
+    setToken(TOKEN_NOT_PROVIDED);
     setTraningState(TRAINING_OFF);
     setIsLoggoutPressed(false);
     setCurrentTrainingId(null);

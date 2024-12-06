@@ -1,7 +1,7 @@
 import { atom } from "jotai";
 import { trainingsAtom } from "../trainings-atom";
-import { currentTrainingIdAtom } from "../current-training-id-atom";
 import { ExerciseId } from "../../constants/types";
+import { currentTrainingAtom } from "../readonly/current-training-atom";
 
 type Payload = {
   id: ExerciseId;
@@ -10,14 +10,14 @@ type Payload = {
 export const updateCurrentTrainingAtom = atom(
   null,
   (get, set, payload: Payload) => {
-    const trainings = get(trainingsAtom);
-    const currentTrainingId = get(currentTrainingIdAtom);
+    const currentTraining = get(currentTrainingAtom);
 
-    if (currentTrainingId === null) {
-      throw new Error("current triannig id is null!");
+    if (currentTraining === undefined) {
+      throw new Error(`attempt to update the training that doesn't exist`);
     }
 
-    const currentTraining = trainings[currentTrainingId];
+    const trainings = get(trainingsAtom);
+    const currentTrainingId = currentTraining.id;
 
     set(trainingsAtom, {
       ...trainings,
