@@ -38,3 +38,7 @@ export const OPENING_CAPTION = "Log in";
 export const TOKEN_PROVIDED = "token-provided";
 export const TOKEN_NOT_PROVIDED = "token-not-provided";
 export const TOKEN_PENDING = "token-pending";
+
+export const HOME_ACTIVE_BUTTON_TRAINING = "training";
+export const HOME_ACTIVE_BUTTON_LOGOUT = "logout";
+export const HOME_ACTIVE_BUTTON_NULL = null;

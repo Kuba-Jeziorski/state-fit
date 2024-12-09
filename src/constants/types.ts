@@ -1,4 +1,10 @@
-import { TRAINING_OFF, TRAINING_ON } from "./constants";
+import {
+  HOME_ACTIVE_BUTTON_LOGOUT,
+  HOME_ACTIVE_BUTTON_NULL,
+  HOME_ACTIVE_BUTTON_TRAINING,
+  TRAINING_OFF,
+  TRAINING_ON,
+} from "./constants";
 
 // trainingState
 export type TrainingState = typeof TRAINING_ON | typeof TRAINING_OFF;
@@ -68,3 +74,8 @@ export type SelectExercises =
   | "Incline dumbbell press"
   | "Dumbbell flyes"
   | "Push up";
+
+export type ActiveHomeButton =
+  | typeof HOME_ACTIVE_BUTTON_TRAINING
+  | typeof HOME_ACTIVE_BUTTON_LOGOUT
+  | typeof HOME_ACTIVE_BUTTON_NULL;
