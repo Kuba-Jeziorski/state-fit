@@ -1,15 +1,13 @@
-import { ExerciseSets } from "../constants/types";
+import { ExerciseSet } from "../constants/types";
 import { hasReps } from "../utils/hasReps";
 import { hasWeight } from "../utils/hasWeight";
 
 type SingleSetProps = {
-  currentSet: string;
-  sets: ExerciseSets;
-  id: string;
+  exerciseSet: ExerciseSet;
 };
 
-export const SingleSet = ({ currentSet, sets, id }: SingleSetProps) => {
-  const currentSetObject = sets[currentSet];
+export const SingleSet = ({ exerciseSet }: SingleSetProps) => {
+  const currentSetObject = exerciseSet;
 
   if (currentSetObject === undefined) {
     return null;
@@ -27,7 +25,7 @@ export const SingleSet = ({ currentSet, sets, id }: SingleSetProps) => {
 
   return (
     <div className="set">
-      <p>SET {id}</p>
+      <p>SET {currentSetObject.id}</p>
       {hasRepsCheck && (
         <>
           <label>Weight</label>

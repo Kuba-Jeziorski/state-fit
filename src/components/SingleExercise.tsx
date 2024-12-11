@@ -1,4 +1,4 @@
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import { useMemo, useState } from "react";
 import { exercisesAtom } from "../atoms/exercises-atom";
 import {
@@ -10,7 +10,7 @@ import {
 import { SelectExercises } from "../constants/types";
 import { SingleSet } from "./SingleSetProps";
 import { Button } from "./Button";
-import { currentExerciseSetsAtom } from "../atoms/readonly/current-exercise-sets-atom";
+import { currentExerciseSetsAtomFactory } from "../atoms/factories/current-exercise-sets-atom-factory";
 import { exerciseSetsAtom } from "../atoms/exercise-sets-atom";
 
 type SingleExericseProp = {
@@ -22,22 +22,18 @@ export const SingleExercise = ({ exerciseId }: SingleExericseProp) => {
     "Incline dumbbell press"
   );
 
-  const currentExerciseAtom = useMemo(
-    () => currentExerciseSetsAtom(exerciseId),
+  const currentExerciseSetsAtom = useMemo(
+    () => currentExerciseSetsAtomFactory(exerciseId),
     [exerciseId]
   );
+  // make custom hook useCurrentExercise
 
-  const [sets, setSets] = useAtom(exerciseSetsAtom); // filter with current exercise id
-  const currentExercise = useAtomValue(currentExerciseAtom);
+  const setSets = useSetAtom(exerciseSetsAtom);
   const setExercises = useSetAtom(exercisesAtom);
 
-  if (currentExercise === undefined) {
-    return null;
-  }
+  const exerciseSets = useAtomValue(currentExerciseSetsAtom);
 
-  const currentExerciseSets = currentExercise.exerciseSetIds;
-
-  const isSetsEmpty = currentExerciseSets.length === 0;
+  const isSetsEmpty = exerciseSets.length === 0;
 
   const buttonCaption = isSetsEmpty ? FIRST_SET_CAPTION : ANOTHER_SET_CAPTION;
 
@@ -64,6 +60,7 @@ export const SingleExercise = ({ exerciseId }: SingleExericseProp) => {
 
       return newSets;
     });
+    // exercise-sets-atom
 
     setExercises((prevExercises) => {
       const exercise = prevExercises[exerciseId];
@@ -94,7 +91,7 @@ export const SingleExercise = ({ exerciseId }: SingleExericseProp) => {
       <select
         value={selectedExercise}
         onChange={handleChange}
-        disabled={Object.keys(sets).length !== 0}
+        disabled={exerciseSets.length !== 0}
       >
         <optgroup label="Chest">
           {ALL_CHEST_EXERCISES.map((exercise) => {
@@ -102,10 +99,9 @@ export const SingleExercise = ({ exerciseId }: SingleExericseProp) => {
           })}
         </optgroup>
       </select>
-      {sets &&
-        Object.keys(sets).map((key) => {
-          return <SingleSet key={key} currentSet={key} sets={sets} id={key} />;
-        })}
+      {exerciseSets.map((exerciseSet) => {
+        return <SingleSet key={exerciseSet.id} exerciseSet={exerciseSet} />;
+      })}
       <Button
         caption={buttonCaption}
         handleFunction={addSet}

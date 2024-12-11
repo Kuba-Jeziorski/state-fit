@@ -27,13 +27,14 @@ export const AllExercises = () => {
     console.log(`addExercise()`);
   };
 
+  console.log(exercises);
+
   return (
     <>
       <Title tag="h2">Current training id: {currentTrainingId}</Title>
-      {exercises &&
-        Object.keys(exercises).map((key) => {
-          return <SingleExercise key={key} exerciseId={key} />;
-        })}
+      {exercises.map((exercise) => {
+        return <SingleExercise key={exercise.id} exerciseId={exercise.id} />;
+      })}
 
       <div>
         <Button
