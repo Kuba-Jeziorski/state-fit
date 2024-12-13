@@ -6,7 +6,7 @@ import {
 import { usePageTitle } from "../utils/usePageTitle";
 import { Button } from "../components/Button";
 import { useSetAtom } from "jotai";
-import { tokenAtom } from "../atoms/readonly/token-atom";
+import { tokenAtom } from "../atoms/token-atom";
 import { useRedirectToHome } from "../utils/useRedirectToHome";
 
 export const Opening = () => {

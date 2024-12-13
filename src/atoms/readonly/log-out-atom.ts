@@ -4,7 +4,7 @@ import { trainingsAtom } from "../trainings-atom";
 import { exercisesAtom } from "../exercises-atom";
 import { exerciseSetsAtom } from "../exercise-sets-atom";
 import { TOKEN_NOT_PROVIDED, TRAINING_OFF } from "../../constants/constants";
-import { tokenAtom } from "./token-atom";
+import { tokenAtom } from "../token-atom";
 import { trainingStateAtom } from "../training-state-atom";
 
 export const logOutAtom = atom(null, (_, set) => {

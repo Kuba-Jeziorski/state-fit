@@ -17,7 +17,8 @@ import {
   TOKEN_PENDING,
   TOKEN_PROVIDED,
 } from "./constants/constants";
-import { tokenAtom } from "./atoms/readonly/token-atom";
+import { tokenAtom } from "./atoms/token-atom";
+import { DummyTokenFetch } from "./utils/dummyTokenFetch";
 
 type AuthGuardProps = {
   element: JSX.Element;
@@ -33,7 +34,7 @@ const AuthGuard = ({ element }: AuthGuardProps) => {
       return <Navigate to="/opening" replace />;
     case TOKEN_PENDING:
     default:
-      return <p>Loading</p>;
+      return <DummyTokenFetch/>;
   }
 };
 
