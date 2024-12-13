@@ -14,7 +14,7 @@ import { useState } from "react";
 import { useAtomValue, useSetAtom } from "jotai";
 import { currentTrainingIdAtom } from "../atoms/current-training-id-atom";
 import { useRedirectToSummary } from "../utils/useRedirectToSummary";
-import { trainingFinishAtom } from "../atoms/readonly/training-finish-atom";
+import { trainingFinishAtom } from "../atoms/writeonly/training-finish-atom";
 
 export const Training = () => {
   const [trainingFinishModal, setTrainingFinishModal] = useState(false);
