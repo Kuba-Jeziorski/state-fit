@@ -1,6 +1,6 @@
 import { useAtomValue, useSetAtom } from "jotai";
 import { trainingStateAtom } from "../atoms/training-state-atom";
-import { logOutAtom } from "../atoms/readonly/log-out-atom";
+import { logOutAtom } from "../atoms/writeonly/log-out-atom";
 import { startTrainingAtom } from "../atoms/writeonly/start-training-atom";
 import { useRedirectToTraining } from "../utils/useRedirectToTraining";
 import {
