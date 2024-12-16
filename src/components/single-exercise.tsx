@@ -8,7 +8,7 @@ import {
   ANOTHER_SET_CAPTION,
 } from "../constants/constants";
 import { SelectExercises } from "../constants/types";
-import { SingleSet } from "./single-set-props";
+import { SingleSet } from "./single-set";
 import { Button } from "./the-button";
 import { currentExerciseSetsAtomFactory } from "../atoms/factories/current-exercise-sets-atom-factory";
 import { exerciseSetsAtom } from "../atoms/exercise-sets-atom";

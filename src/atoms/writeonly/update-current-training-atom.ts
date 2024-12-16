@@ -11,12 +11,12 @@ export const updateCurrentTrainingAtom = atom(
   null,
   (get, set, payload: Payload) => {
     const currentTraining = get(currentTrainingAtom);
+    const trainings = get(trainingsAtom);
 
     if (currentTraining === undefined) {
       throw new Error(`attempt to update the training that doesn't exist`);
     }
 
-    const trainings = get(trainingsAtom);
     const currentTrainingId = currentTraining.id;
     console.log(`updateCurrentTrainingAtom`);
     set(trainingsAtom, {
