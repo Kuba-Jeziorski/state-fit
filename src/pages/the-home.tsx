@@ -8,17 +8,17 @@ import {
   TRAINING_ON,
 } from "../constants/constants";
 
-import { Title } from "../components/Title";
+import { Title } from "../components/the-title";
 import { useState } from "react";
-import { usePageTitle } from "../utils/usePageTitle";
-import { useRedirectToSummary } from "../utils/useRedirectToSummary";
-import { useRedirectToTraining } from "../utils/useRedirectToTraining";
-import { Button } from "../components/Button";
+import { usePageTitle } from "../utils/use-page-title";
+import { useRedirectToSummary } from "../utils/use-redirect-to-summary";
+import { useRedirectToTraining } from "../utils/use-redirec-to-training";
+import { Button } from "../components/the-button";
 import { useAtomValue } from "jotai";
 import { trainingStateAtom } from "../atoms/training-state-atom";
 
 import axios from "axios";
-import { HomeConfirmModal } from "../components/HomeConfirmModal";
+import { HomeConfirmModal } from "../components/home-confirm-modal";
 import { ActiveHomeButton } from "../constants/types";
 
 const FetchButton = () => {

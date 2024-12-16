@@ -3,11 +3,11 @@ import {
   OPENING_PAGE_TITLE,
   TOKEN_PROVIDED,
 } from "../constants/constants";
-import { usePageTitle } from "../utils/usePageTitle";
-import { Button } from "../components/Button";
+import { usePageTitle } from "../utils/use-page-title";
+import { Button } from "../components/the-button";
 import { useSetAtom } from "jotai";
 import { tokenAtom } from "../atoms/token-atom";
-import { useRedirectToHome } from "../utils/useRedirectToHome";
+import { useRedirectToHome } from "../utils/use-redirect-to-home";
 
 export const Opening = () => {
   const setToken = useSetAtom(tokenAtom);

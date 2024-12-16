@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { AllExercises } from "./AllExercises";
+import { AllExercises } from "./all-exercises";
 
 type TrainingFormWrapperProps = {
   children: ReactNode;

@@ -1,4 +1,4 @@
-import { Button } from "./Button";
+import { Button } from "./the-button";
 
 type ConfirmModal = {
   confirmMessage: string;

@@ -6,11 +6,11 @@ import {
 
 import "./index.css";
 
-import { Opening } from "./pages/Opening";
-import { Home } from "./pages/Home";
-import { Summary } from "./pages/Summary";
-import { Training } from "./pages/Training";
-import { NoPage } from "./pages/NoPage";
+import { Opening } from "./pages/the-opening";
+import { Home } from "./pages/the-home";
+import { Summary } from "./pages/the-summary";
+import { Training } from "./pages/the-training";
+import { NoPage } from "./pages/no-page";
 import { useAtomValue } from "jotai";
 import {
   TOKEN_NOT_PROVIDED,
@@ -18,7 +18,7 @@ import {
   TOKEN_PROVIDED,
 } from "./constants/constants";
 import { tokenAtom } from "./atoms/token-atom";
-import { DummyTokenFetch } from "./utils/dummyTokenFetch";
+import { DummyTokenFetch } from "./utils/dummy-token-fetch";
 
 type AuthGuardProps = {
   element: JSX.Element;
@@ -34,7 +34,7 @@ const AuthGuard = ({ element }: AuthGuardProps) => {
       return <Navigate to="/opening" replace />;
     case TOKEN_PENDING:
     default:
-      return <DummyTokenFetch/>;
+      return <DummyTokenFetch />;
   }
 };
 

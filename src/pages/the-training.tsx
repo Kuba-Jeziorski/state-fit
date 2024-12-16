@@ -4,16 +4,16 @@ import {
   HOME_CAPTION,
   TRAINING_CAPTION,
 } from "../constants/constants";
-import { Title } from "../components/Title";
-import { TrainingForm } from "../components/TrainingForm";
-import { usePageTitle } from "../utils/usePageTitle";
-import { useRedirectToHome } from "../utils/useRedirectToHome";
-import { Button } from "../components/Button";
-import { ConfirmModal } from "../components/ConfirmModal";
+import { Title } from "../components/the-title";
+import { TrainingForm } from "../components/training-form";
+import { usePageTitle } from "../utils/use-page-title";
+import { useRedirectToHome } from "../utils/use-redirect-to-home";
+import { Button } from "../components/the-button";
+import { ConfirmModal } from "../components/confirm-modal";
 import { useState } from "react";
 import { useAtomValue, useSetAtom } from "jotai";
 import { currentTrainingIdAtom } from "../atoms/current-training-id-atom";
-import { useRedirectToSummary } from "../utils/useRedirectToSummary";
+import { useRedirectToSummary } from "../utils/use-redirect-to-summary";
 import { trainingFinishAtom } from "../atoms/writeonly/training-finish-atom";
 
 export const Training = () => {

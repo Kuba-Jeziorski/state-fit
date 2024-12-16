@@ -2,7 +2,7 @@ import { useAtomValue, useSetAtom } from "jotai";
 import { trainingStateAtom } from "../atoms/training-state-atom";
 import { logOutAtom } from "../atoms/writeonly/log-out-atom";
 import { startTrainingAtom } from "../atoms/writeonly/start-training-atom";
-import { useRedirectToTraining } from "../utils/useRedirectToTraining";
+import { useRedirectToTraining } from "../utils/use-redirec-to-training";
 import {
   HOME_ACTIVE_BUTTON_LOGOUT,
   HOME_ACTIVE_BUTTON_NULL,
@@ -11,7 +11,7 @@ import {
   NEW_TRAINING_CONFIRM_MESSAGE,
   TRAINING_ON,
 } from "../constants/constants";
-import { ConfirmModal } from "./ConfirmModal";
+import { ConfirmModal } from "./confirm-modal";
 import { ActiveHomeButton } from "../constants/types";
 
 type HomeConfirmModal = {

@@ -1,6 +1,6 @@
 import { ExerciseSet } from "../constants/types";
-import { hasReps } from "../utils/hasReps";
-import { hasWeight } from "../utils/hasWeight";
+import { hasReps } from "../utils/has-reps";
+import { hasWeight } from "../utils/has-weight";
 
 type SingleSetProps = {
   exerciseSet: ExerciseSet;

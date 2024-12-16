@@ -1,13 +1,13 @@
 import { useAtomValue, useSetAtom } from "jotai";
-import { SingleExercise } from "./SingleExercise";
+import { SingleExercise } from "./single-exercise";
 import { exerciseCreateAtom } from "../atoms/writeonly/exercise-create-atom";
 import { currentTrainingIdAtom } from "../atoms/current-training-id-atom";
-import { Button } from "./Button";
+import { Button } from "./the-button";
 import {
   ANOTHER_EXERCISE_CAPTION,
   FIRST_EXERCISE_CAPTION,
 } from "../constants/constants";
-import { Title } from "./Title";
+import { Title } from "./the-title";
 import { currentTrainingExercises } from "../atoms/readonly/current-training-exercises";
 
 export const AllExercises = () => {
