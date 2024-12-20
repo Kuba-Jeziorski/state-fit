@@ -5,7 +5,6 @@ import {
   TRAINING_CAPTION,
 } from "../constants/constants";
 import { Title } from "../components/the-title";
-import { TrainingForm } from "../components/training-form";
 import { usePageTitle } from "../utils/use-page-title";
 import { useRedirectToHome } from "../utils/use-redirect-to-home";
 import { Button } from "../components/the-button";
@@ -15,6 +14,7 @@ import { useAtomValue, useSetAtom } from "jotai";
 import { currentTrainingIdAtom } from "../atoms/current-training-id-atom";
 import { useRedirectToSummary } from "../utils/use-redirect-to-summary";
 import { trainingFinishAtom } from "../atoms/writeonly/training-finish-atom";
+import { AllExercises } from "../components/all-exercises";
 
 export const Training = () => {
   const [trainingFinishModal, setTrainingFinishModal] = useState(false);
@@ -49,7 +49,7 @@ export const Training = () => {
         classes="button primary"
       />
       <Title tag="h1">New training</Title>
-      <TrainingForm />
+      <AllExercises />
       <Button
         caption={FINISH_TRAINING_CAPTION}
         handleFunction={handleFinishTraining}

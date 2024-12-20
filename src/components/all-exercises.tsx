@@ -30,7 +30,7 @@ export const AllExercises = () => {
   console.log(exercises);
 
   return (
-    <>
+    <form>
       <Title tag="h2">Current training id: {currentTrainingId}</Title>
       {exercises.map((exercise) => {
         return <SingleExercise key={exercise.id} exerciseId={exercise.id} />;
@@ -43,6 +43,6 @@ export const AllExercises = () => {
           classes="button primary"
         />
       </div>
-    </>
+    </form>
   );
 };
