@@ -17,32 +17,8 @@ import { Button } from "../components/the-button";
 import { useAtomValue } from "jotai";
 import { trainingStateAtom } from "../atoms/training-state-atom";
 
-import axios from "axios";
 import { HomeConfirmModal } from "../components/home-confirm-modal";
 import { ActiveHomeButton } from "../constants/types";
-
-const FetchButton = () => {
-  const [id, setId] = useState(0);
-
-  const testTraining = {
-    id: id,
-    exercise: "Test Exercise",
-    numberOfRows: 5,
-  };
-
-  const handleFetch = async () => {
-    setId((id) => id + 1);
-    const response = await axios.post(
-      "http://localhost:3000/trainings",
-      testTraining
-    );
-    alert("Fetch");
-    console.log(id);
-    console.log(response);
-  };
-
-  return <button onClick={handleFetch}>Fetch</button>;
-};
 
 export const Home = () => {
   const [activeButton, setActiveButton] = useState<ActiveHomeButton>(null);
@@ -90,7 +66,6 @@ export const Home = () => {
           handleFunction={handleIsLogoutPressed}
           classes="button primary"
         />
-        <FetchButton />
       </div>
       <HomeConfirmModal
         activeButton={activeButton}
