@@ -27,19 +27,19 @@ type ExerciseSetId = string;
 export type ExerciseSet =
   | {
       id: ExerciseSetId;
-      type: "Incline dumbbell press";
+      type: "INCLINE DUMBBELL PRESS";
       weight: number;
       reps: number;
     }
   | {
       id: ExerciseSetId;
-      type: "Dumbbell flyes";
+      type: "DUMBBELL FLYERS";
       weight: number;
       reps: number;
     }
   | {
       id: ExerciseSetId;
-      type: "Push up";
+      type: "PUSH UP";
       reps: number;
     };
 
@@ -70,10 +70,12 @@ export type Training = {
 // all trainings
 export type Trainings = Record<TrainingId, Training | undefined>;
 
-export type SelectExercises =
-  | "Incline dumbbell press"
-  | "Dumbbell flyes"
-  | "Push up";
+export type SelectChestExercises =
+  | "INCLINE DUMBBELL PRESS"
+  | "DUMBBELL FLYERS"
+  | "PUSH UP";
+
+export type SelectedBackExercises = "PULL UP" | "LAT PULLDOWN";
 
 export type ActiveHomeButton =
   | typeof HOME_ACTIVE_BUTTON_TRAINING

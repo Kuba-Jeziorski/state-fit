@@ -1,4 +1,4 @@
-import { SelectExercises } from "./types";
+import { SelectChestExercises, SelectedBackExercises } from "./types";
 
 export const HOME_PAGE_TITLE = "Home";
 export const OPENING_PAGE_TITLE = "Log in";
@@ -13,11 +13,26 @@ export const NEW_TRAINING_CONFIRM_MESSAGE =
 export const FINISH_TRAINING_CONFIRM_MESSAGE =
   "Do you want to finish the training?";
 
-export const ALL_CHEST_EXERCISES: SelectExercises[] = [
-  "Incline dumbbell press",
-  "Dumbbell flyes",
-  "Push up",
+export const ALL_CHEST_EXERCISES: SelectChestExercises[] = [
+  "DUMBBELL FLYERS",
+  "INCLINE DUMBBELL PRESS",
+  "PUSH UP",
 ];
+
+export const ALL_BACK_EXERCISES: SelectedBackExercises[] = [
+  "PULL UP",
+  "LAT PULLDOWN",
+];
+
+export const CHEST_EXERCISES = {
+  CHEST: ["INCLINE DUMBBELL PRESS", "DUMBBELL FLYERS", "PUSH UP"],
+};
+
+export const BACK_EXERCISES = {
+  BACK: ["PULL UP", "LAT PULLDOWN"],
+};
+
+export const ALL_EXERCISES = { ...CHEST_EXERCISES, ...BACK_EXERCISES };
 
 export const FIRST_EXERCISE_CAPTION = "ADD FIRST EXERCISE";
 export const ANOTHER_EXERCISE_CAPTION = "ADD ANOTHER EXERCISE";

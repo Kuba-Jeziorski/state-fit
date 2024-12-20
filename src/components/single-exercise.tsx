@@ -3,24 +3,23 @@ import { useMemo, useState } from "react";
 import { exercisesAtom } from "../atoms/exercises-atom";
 import {
   DEFAULT_NUMERIC_INPUT_PLACEHOLDER_VALUE,
-  ALL_CHEST_EXERCISES,
   FIRST_SET_CAPTION,
   ANOTHER_SET_CAPTION,
 } from "../constants/constants";
-import { SelectExercises } from "../constants/types";
+import { SelectChestExercises } from "../constants/types";
 import { SingleSet } from "./single-set";
 import { Button } from "./the-button";
 import { currentExerciseSetsAtomFactory } from "../atoms/factories/current-exercise-sets-atom-factory";
 import { exerciseSetsAtom } from "../atoms/exercise-sets-atom";
+import { SelectOptions } from "./select-options";
 
 type SingleExericseProp = {
   exerciseId: string;
 };
 
 export const SingleExercise = ({ exerciseId }: SingleExericseProp) => {
-  const [selectedExercise, setSelectedExercise] = useState<SelectExercises>(
-    "Incline dumbbell press"
-  );
+  const [selectedExercise, setSelectedExercise] =
+    useState<SelectChestExercises>("INCLINE DUMBBELL PRESS");
 
   const currentExerciseSetsAtom = useMemo(
     () => currentExerciseSetsAtomFactory(exerciseId),
@@ -38,7 +37,7 @@ export const SingleExercise = ({ exerciseId }: SingleExericseProp) => {
   const buttonCaption = isSetsEmpty ? FIRST_SET_CAPTION : ANOTHER_SET_CAPTION;
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = e.target.value as SelectExercises;
+    const value = e.target.value as SelectChestExercises;
     setSelectedExercise(value);
   };
 
@@ -93,11 +92,7 @@ export const SingleExercise = ({ exerciseId }: SingleExericseProp) => {
         onChange={handleChange}
         disabled={exerciseSets.length !== 0}
       >
-        <optgroup label="Chest">
-          {ALL_CHEST_EXERCISES.map((exercise) => {
-            return <option key={exercise}>{exercise}</option>;
-          })}
-        </optgroup>
+        <SelectOptions />
       </select>
       {exerciseSets.map((exerciseSet) => {
         return <SingleSet key={exerciseSet.id} exerciseSet={exerciseSet} />;
