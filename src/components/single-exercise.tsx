@@ -82,10 +82,7 @@ export const SingleExercise = ({ exerciseId }: SingleExericseProp) => {
   };
 
   return (
-    <div className="training">
-      <p>
-        Exercise ID: <strong>{exerciseId}</strong>
-      </p>
+    <div className="trainingExercise" data-exercise={exerciseId}>
       <label>Choose an exercise</label>
       <select
         value={selectedExercise}

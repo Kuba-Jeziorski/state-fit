@@ -152,7 +152,7 @@ footer {
   gap: 20px;
 }
 
-.training {
+.trainingExercise {
   border: 1px solid black;
   padding: 10px;
   gap: 10px;
@@ -176,9 +176,26 @@ select {
   margin: 0 auto;
 }
 
-/* footer */
 .footerWrapper {
   max-width: 600px;
   margin: auto auto 0;
   padding: 15px 30px;
+}
+
+.setInputs {
+  display: flex;
+  justify-content: space-between;
+}
+
+.setInput {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  text-align: center;
+  gap: 12px;
+}
+
+.buttonSet {
+  padding-top: 15px;
+  margin: 0 auto;
 }

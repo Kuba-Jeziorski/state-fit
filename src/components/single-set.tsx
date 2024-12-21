@@ -45,21 +45,22 @@ export const SingleSet = ({ exerciseSet }: SingleSetProps) => {
     : "";
 
   return (
-    <div className="set">
-      <p>SET {currentSetObject.id}</p>
-      {hasRepsCheck && (
-        <>
-          <label>Weight</label>
-          <input type="number" placeholder={currentSetRepsPlaceholder} />
-        </>
-      )}
-      {hasWeightCheck && (
-        <>
-          <label>Reps</label>
-          <input type="number" placeholder={currentSetWeightPlaceholder} />
-        </>
-      )}
-      <div className="buttonWrapper" style={{ paddingTop: "15px" }}>
+    <div className="set" data-set={currentSetObject.id}>
+      <div className="setInputs">
+        {hasRepsCheck && (
+          <div className="setInput">
+            <label>Weight</label>
+            <input type="number" placeholder={currentSetRepsPlaceholder} />
+          </div>
+        )}
+        {hasWeightCheck && (
+          <div className="setInput">
+            <label>Reps</label>
+            <input type="number" placeholder={currentSetWeightPlaceholder} />
+          </div>
+        )}
+      </div>
+      <div className="buttonWrapper buttonSet">
         <Button
           caption="Delete set"
           classes="button primary"
