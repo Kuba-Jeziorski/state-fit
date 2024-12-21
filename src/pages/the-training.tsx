@@ -2,7 +2,8 @@ import {
   FINISH_TRAINING_CAPTION,
   FINISH_TRAINING_CONFIRM_MESSAGE,
   HOME_CAPTION,
-  TRAINING_CAPTION,
+  TRAINING_PAGE_TAB_TITLE,
+  TRAINING_PAGE_TITLE,
 } from "../constants/constants";
 import { Title } from "../components/the-title";
 import { usePageTitle } from "../utils/use-page-title";
@@ -23,7 +24,7 @@ export const Training = () => {
   const finishTraining = useSetAtom(trainingFinishAtom);
   const redirectToHome = useRedirectToHome();
   const redirectToSummary = useRedirectToSummary();
-  usePageTitle(TRAINING_CAPTION);
+  usePageTitle(TRAINING_PAGE_TAB_TITLE);
 
   if (currentTrainingId === null) {
     return null;
@@ -48,7 +49,7 @@ export const Training = () => {
         handleFunction={redirectToHome}
         classes="button primary"
       />
-      <Title tag="h1">New training</Title>
+      <Title tag="h1">{TRAINING_PAGE_TITLE}</Title>
       <AllExercises />
       <Button
         caption={FINISH_TRAINING_CAPTION}

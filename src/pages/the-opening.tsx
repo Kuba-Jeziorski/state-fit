@@ -1,6 +1,6 @@
 import {
   OPENING_CAPTION,
-  OPENING_PAGE_TITLE,
+  OPENING_PAGE_TAB_TITLE,
   TOKEN_PROVIDED,
 } from "../constants/constants";
 import { usePageTitle } from "../utils/use-page-title";
@@ -18,7 +18,7 @@ export const Opening = () => {
     redirectToHome();
   };
 
-  usePageTitle(OPENING_PAGE_TITLE);
+  usePageTitle(OPENING_PAGE_TAB_TITLE);
   return (
     <>
       <Button

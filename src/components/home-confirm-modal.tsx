@@ -7,7 +7,7 @@ import {
   HOME_ACTIVE_BUTTON_LOGOUT,
   HOME_ACTIVE_BUTTON_NULL,
   HOME_ACTIVE_BUTTON_TRAINING,
-  LOGGING_CONFIRM_MESSAGE,
+  LOG_OUT_CONFIRM_MESSAGE,
   NEW_TRAINING_CONFIRM_MESSAGE,
   TRAINING_ON,
 } from "../constants/constants";
@@ -68,7 +68,7 @@ export const HomeConfirmModal = ({
   if (activeButton === HOME_ACTIVE_BUTTON_LOGOUT) {
     return (
       <ConfirmModal
-        confirmMessage={LOGGING_CONFIRM_MESSAGE}
+        confirmMessage={LOG_OUT_CONFIRM_MESSAGE}
         confirmAcceptFunction={logOutConfirmAccepted}
         confirmDeclineFunction={logOutConfirmDeclined}
       />

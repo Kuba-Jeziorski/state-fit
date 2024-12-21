@@ -11,19 +11,64 @@
   --color-lily-white: rgb(233, 239, 236);
   --color-muted-red: rgb(207, 83, 79);
   --color-muted-red-06: rgba(207, 83, 79, 0.6);
+
+  --font-size-12px: 12px;
 }
 
 * {
   box-sizing: border-box;
 }
 
+html,
+body {
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+}
+
+html {
+  height: 100vh;
+}
+
+body {
+  height: 100%;
+}
+
 body {
   font-family: sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
 }
 
 form {
   display: flex;
   flex-direction: column;
+}
+
+footer {
+  margin-top: 30px;
+  color: var(--color-white);
+  background-color: var(--color-patina);
+  font-size: var(--font-size-12px);
+}
+
+#root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .button {
@@ -64,12 +109,6 @@ form {
   gap: 20px;
   display: flex;
   flex-direction: column;
-}
-
-.wrapper {
-  max-width: 1000px;
-  border: 1px solid var(--color-black);
-  padding: 10px;
 }
 
 .confirmModalOverlay {
@@ -130,4 +169,16 @@ form {
 
 select {
   margin-bottom: 10px;
+}
+
+.wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* footer */
+.footerWrapper {
+  max-width: 600px;
+  margin: auto auto 0;
+  padding: 15px 30px;
 }

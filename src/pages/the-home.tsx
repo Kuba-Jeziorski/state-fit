@@ -3,7 +3,10 @@ import {
   HOME_ACTIVE_BUTTON_LOGOUT,
   HOME_ACTIVE_BUTTON_NULL,
   HOME_ACTIVE_BUTTON_TRAINING,
+  HOME_PAGE_TAB_TITLE,
   HOME_PAGE_TITLE,
+  LOG_OUT_CAPTION,
+  SEE_SUMMARY_CAPTION,
   START_NEW_TRAINING_CAPTION,
   TRAINING_ON,
 } from "../constants/constants";
@@ -27,7 +30,7 @@ export const Home = () => {
 
   const redirectToTraining = useRedirectToTraining();
   const redirectToSummary = useRedirectToSummary();
-  usePageTitle(HOME_PAGE_TITLE);
+  usePageTitle(HOME_PAGE_TAB_TITLE);
 
   const isTrainingOn = trainingStateValue === TRAINING_ON;
 
@@ -49,7 +52,7 @@ export const Home = () => {
 
   return (
     <>
-      <Title tag="h1">Home</Title>
+      <Title tag="h1">{HOME_PAGE_TITLE}</Title>
       <div className="buttonWrapper">
         <Button
           caption={trainingButtonCaption}
@@ -57,12 +60,12 @@ export const Home = () => {
           classes="button primary"
         />
         <Button
-          caption="See Summary"
+          caption={SEE_SUMMARY_CAPTION}
           handleFunction={redirectToSummary}
           classes="button primary"
         />
         <Button
-          caption="Log me out"
+          caption={LOG_OUT_CAPTION}
           handleFunction={handleIsLogoutPressed}
           classes="button primary"
         />

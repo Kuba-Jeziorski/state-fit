@@ -1,3 +1,7 @@
+import {
+  MODAL_ACCEPT_CAPTION,
+  MODAL_DECLINE_CAPTION,
+} from "../constants/constants";
 import { Button } from "./the-button";
 
 type ConfirmModal = {
@@ -18,12 +22,12 @@ export const ConfirmModal = ({
           <p className="confirmModalDescription">{confirmMessage}</p>
           <div className="confirmModalButtons">
             <Button
-              caption="Decline"
+              caption={MODAL_DECLINE_CAPTION}
               handleFunction={confirmDeclineFunction}
               classes="button secondary"
             />
             <Button
-              caption="Accept"
+              caption={MODAL_ACCEPT_CAPTION}
               handleFunction={confirmAcceptFunction}
               classes="button primary"
             />
