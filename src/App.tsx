@@ -19,7 +19,6 @@ import {
 } from "./constants/constants";
 import { tokenAtom } from "./atoms/token-atom";
 import { DummyTokenFetch } from "./utils/dummy-token-fetch";
-import { Footer } from "./components/the-footer";
 
 type AuthGuardProps = {
   element: JSX.Element;
@@ -58,12 +57,9 @@ const App = () => {
   ]);
 
   return (
-    <>
-      <div className="wrapper">
-        <RouterProvider router={router} />
-      </div>
-      <Footer />
-    </>
+    <div className="wrapper">
+      <RouterProvider router={router} />
+    </div>
   );
 };
 
