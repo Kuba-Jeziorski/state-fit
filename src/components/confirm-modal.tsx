@@ -15,9 +15,13 @@ export const ConfirmModal = ({
   confirmAcceptFunction,
   confirmDeclineFunction,
 }: ConfirmModal) => {
+  const handleBoxClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    event.stopPropagation();
+  };
+
   return (
-    <div className="confirmModalOverlay">
-      <div className="confirmModalBox">
+    <div className="confirmModalOverlay" onClick={confirmDeclineFunction}>
+      <div className="confirmModalBox" onClick={handleBoxClick}>
         <div className="confirmModalContent">
           <p className="confirmModalDescription">{confirmMessage}</p>
           <div className="confirmModalButtons">
