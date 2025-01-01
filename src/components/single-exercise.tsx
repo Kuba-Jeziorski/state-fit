@@ -42,15 +42,24 @@ export const SingleExercise = ({ exerciseId }: SingleExericseProp) => {
     setSelectedExercise(value);
   };
 
+  // console.log(`selectedExercise:`, selectedExercise);
+  console.log(`exerciseSets`, exerciseSets);
+
   const addSet = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     const newSetId = crypto.randomUUID();
 
+    // const hasRepsCheck = hasReps(selectedExercise);
+    // const hasWeightCheck = hasWeight(selectedExercise);
+    // const hasDistanceCheck = hasDistance(selectedExercise);
+    // const hasTimeCheck = hasTime(selectedExercise);
+
     setSets((prevSets) => {
       const newSets = {
         ...prevSets,
         [newSetId]: {
+          // weight, reps, time or distance should be displayed conditionally
           id: newSetId,
           type: selectedExercise,
           weight: DEFAULT_NUMERIC_INPUT_PLACEHOLDER_VALUE,

@@ -73,6 +73,10 @@ form {
   flex-direction: column;
 }
 
+label {
+  font-weight: var(--fw-600);
+}
+
 #root {
   height: 100%;
   display: flex;
@@ -109,12 +113,17 @@ form {
   margin-top: var(--d24);
 }
 
+.button.navigation {
+  margin-bottom: var(--d12);
+}
+
 .button[type="submit"] {
   margin-top: var(--d24);
 }
 
 .buttonWrapper {
   width: var(--wrapper-250);
+  margin: 0 auto;
   gap: var(--d24);
   display: flex;
   flex-direction: column;
@@ -162,8 +171,9 @@ form {
 }
 
 .trainingExercise {
-  border: 1px solid black;
-  padding: var(--d12);
+  border: 2px solid var(--color-patina);
+  border-radius: var(--d12);
+  padding: var(--d24);
   gap: var(--d12);
   margin-bottom: var(--d12);
   display: flex;
@@ -171,7 +181,8 @@ form {
 }
 
 .set {
-  border: 1px solid red;
+  border: 1px solid var(--color-patina);
+  border-radius: var(--d12);
   padding: var(--d12);
   margin-bottom: var(--d12);
 }
@@ -181,7 +192,7 @@ select {
 }
 
 .wrapper {
-  max-width: var(--wrapper-600);
+  width: var(--wrapper-600);
   margin: 0 auto;
   padding-top: var(--d12);
 }

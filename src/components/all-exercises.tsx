@@ -7,7 +7,6 @@ import {
   ANOTHER_EXERCISE_CAPTION,
   FIRST_EXERCISE_CAPTION,
 } from "../constants/constants";
-import { Title } from "./the-title";
 import { currentTrainingExercises } from "../atoms/readonly/current-training-exercises";
 
 export const AllExercises = () => {
@@ -30,8 +29,7 @@ export const AllExercises = () => {
   console.log(exercises);
 
   return (
-    <form>
-      <Title tag="h2">Current training id: {currentTrainingId}</Title>
+    <form data-training-id={currentTrainingId}>
       {exercises.map((exercise) => {
         return <SingleExercise key={exercise.id} exerciseId={exercise.id} />;
       })}

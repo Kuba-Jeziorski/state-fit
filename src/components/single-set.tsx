@@ -6,6 +6,8 @@ import { Button } from "./the-button";
 import { deleteSetAtom } from "../atoms/writeonly/delete-set-atom";
 import { useState } from "react";
 import { ConfirmModal } from "./confirm-modal";
+import { hasDistance } from "../utils/has-distance";
+import { hasTime } from "../utils/has-time";
 
 type SingleSetProps = {
   exerciseSet: ExerciseSet;
@@ -36,27 +38,34 @@ export const SingleSet = ({ exerciseSet }: SingleSetProps) => {
 
   const hasRepsCheck = hasReps(currentSetObject);
   const hasWeightCheck = hasWeight(currentSetObject);
-
-  const currentSetRepsPlaceholder = hasRepsCheck
-    ? currentSetObject.reps.toString()
-    : "";
-  const currentSetWeightPlaceholder = hasWeightCheck
-    ? currentSetObject.weight.toString()
-    : "";
+  const hasDistanceCheck = hasDistance(currentSetObject);
+  const hasTimeCheck = hasTime(currentSetObject);
 
   return (
     <div className="set" data-set={currentSetObject.id}>
       <div className="setInputs">
         {hasRepsCheck && (
           <div className="setInput">
-            <label>Weight</label>
-            <input type="number" placeholder={currentSetRepsPlaceholder} />
+            <label>Reps</label>
+            <input type="number" />
           </div>
         )}
         {hasWeightCheck && (
           <div className="setInput">
-            <label>Reps</label>
-            <input type="number" placeholder={currentSetWeightPlaceholder} />
+            <label>Weight</label>
+            <input type="number" />
+          </div>
+        )}
+        {hasDistanceCheck && (
+          <div className="setInput">
+            <label>Distance</label>
+            <input type="number" />
+          </div>
+        )}
+        {hasTimeCheck && (
+          <div className="setInput">
+            <label>Time</label>
+            <input type="number" />
           </div>
         )}
       </div>

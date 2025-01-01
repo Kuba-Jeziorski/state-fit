@@ -46,7 +46,7 @@ export const Training = () => {
       <Button
         caption={HOME_CAPTION}
         handleFunction={redirectToHome}
-        classes="button primary"
+        classes="button primary navigation"
       />
       <Title tag="h1">{TRAINING_PAGE_TITLE}</Title>
       <AllExercises />
