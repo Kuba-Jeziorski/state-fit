@@ -18,23 +18,79 @@ export const NEW_TRAINING_CONFIRM_MESSAGE =
 export const FINISH_TRAINING_CONFIRM_MESSAGE =
   "DO YOU WANT TO FINISH THE TRAINING?";
 
+// Exercises
+// Chest Exercises
+export const DUMBBELL_PRESS_FLAT = "Dumbbell press (flat)";
+export const DUMBBELL_PRESS_UPWARDS = "Dumbbell press (upwards)";
+export const DUMBBELL_PRESS_DOWNWARDS = "Dumbbell press (downwards)";
+export const BARBELL_PRESS_FLAT = "Barbell press (flat)";
+export const BARBELL_PRESS_UPWARDS = "Barbell press (upwards)";
+export const BARBELL_PRESS_DOWNWARDS = "Barbell press (downwards)";
+export const DUMBBELL_FLYES = "Dumbbell flyes";
+export const PUSH_UP_FLAT = "Push-up (flat)";
+export const PUSH_UP_UPWARDS = "Push-up (upwards)";
+export const PUSH_UP_DOWNWARDS = "Push-up (downwards)";
+export const TRX_RING_PUSH_UP = "TRX/Ring push-up";
+export const DIP_CHEST = "Dip (chest)";
+
+// Back Exercises
+export const PULL_UP_BACK = "Pull-up (back)";
+export const LAT_PULLDOWN = "Lat Pulldown";
+export const LAT_PULLDOWN_HAMMER_GRIP = "Lat Pulldown (hammer grip)";
+export const ROWING = "Rowing";
+export const DUMBBELL_SINGLE_ARM_ROW = "Dumbbell Single-Arm Row";
+export const LAT_PULLDOWN_MACHINE_HAMMER_GRIP =
+  "Lat Pulldown (machine, hammer grip)";
+export const LAT_PULLDOWN_MACHINE = "Lat Pulldown (machine)";
+export const BACK_EXTENSION = "Back Extension";
+
+// Leg Exercises
+export const SQUAT = "Squat";
+export const LUNGE = "Lunge";
+export const LEG_EXTENSION = "Leg extension";
+export const LEG_CURL = "Leg curl";
+
+// Shoulder Exercises
+export const LATERAL_RAISE = "Lateral raise";
+export const FRONT_RAISE = "Front raise";
+export const SEATED_DUMBBELL_PRESS = "Seated dumbbell press";
+export const OVERHEAD_PRESS = "Overhead press";
+export const FACE_PULL = "Face pull";
+
+// Biceps Exercises
+export const PULL_UP_BICEPS = "Pull-up (biceps)";
+export const HAMMER_CURLS = "Hammer curls";
+
+// Triceps Exercises
+export const DIPS_TRICEPS = "Dips (triceps)";
+export const TRICEPS_PUSH_UP = "Triceps push-up";
+export const DIAMOND_PUSH_UP = "Diamond push-up";
+export const ROPE_PUSHDOWN = "Rope pushdown";
+export const CLOSE_GRIP_BENCH_PRESS = "Close grip bench press";
+
+// Abs Exercises
+export const LEG_RAISE = "Leg raise";
+export const AB_WHEEL = "AB Wheel";
+
+// Grip/Forearm Exercises
+export const DEAD_HANG = "Dead hang";
+
+// Cardio Exercises
+export const RUNNING = "Running";
+export const SWIMMING = "Swimming";
+
 export const ALL_CHEST_EXERCISES: SelectChestExercises[] = [
-  "DUMBBELL FLYERS",
-  "INCLINE DUMBBELL PRESS",
-  "PUSH UP",
+  DUMBBELL_PRESS_FLAT,
 ];
 
-export const ALL_BACK_EXERCISES: SelectedBackExercises[] = [
-  "PULL UP",
-  "LAT PULLDOWN",
-];
+export const ALL_BACK_EXERCISES: SelectedBackExercises[] = [PULL_UP_BACK];
 
 export const CHEST_EXERCISES = {
-  CHEST: ["INCLINE DUMBBELL PRESS", "DUMBBELL FLYERS", "PUSH UP"],
+  CHEST: [DUMBBELL_PRESS_FLAT],
 };
 
 export const BACK_EXERCISES = {
-  BACK: ["PULL UP", "LAT PULLDOWN"],
+  BACK: [PULL_UP_BACK],
 };
 
 export const ALL_EXERCISES = { ...CHEST_EXERCISES, ...BACK_EXERCISES };

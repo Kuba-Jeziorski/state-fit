@@ -1,10 +1,23 @@
 import {
+  DUMBBELL_PRESS_FLAT,
   HOME_ACTIVE_BUTTON_LOGOUT,
   HOME_ACTIVE_BUTTON_NULL,
   HOME_ACTIVE_BUTTON_TRAINING,
+  PULL_UP_BACK,
   TRAINING_OFF,
   TRAINING_ON,
 } from "./constants";
+import {
+  AbExercises,
+  BackExercises,
+  BicepsExercises,
+  CardioExercises,
+  ChestExercises,
+  GripExercises,
+  LegExercises,
+  ShoulderExercises,
+  TricepsExercises,
+} from "./exercise-types";
 
 // trainingState
 export type TrainingState = typeof TRAINING_ON | typeof TRAINING_OFF;
@@ -22,26 +35,18 @@ export type TrainingStateValueWithUpdater = TrainingStateValue &
 
 // trainings
 
-type ExerciseSetId = string;
+export type ExerciseSetId = string;
 
 export type ExerciseSet =
-  | {
-      id: ExerciseSetId;
-      type: "INCLINE DUMBBELL PRESS";
-      weight: number;
-      reps: number;
-    }
-  | {
-      id: ExerciseSetId;
-      type: "DUMBBELL FLYERS";
-      weight: number;
-      reps: number;
-    }
-  | {
-      id: ExerciseSetId;
-      type: "PUSH UP";
-      reps: number;
-    };
+  | ChestExercises
+  | BackExercises
+  | LegExercises
+  | ShoulderExercises
+  | BicepsExercises
+  | TricepsExercises
+  | AbExercises
+  | GripExercises
+  | CardioExercises;
 
 // all sets of single exercise
 export type ExerciseSets = Record<ExerciseSetId, ExerciseSet | undefined>;
@@ -70,12 +75,9 @@ export type Training = {
 // all trainings
 export type Trainings = Record<TrainingId, Training | undefined>;
 
-export type SelectChestExercises =
-  | "INCLINE DUMBBELL PRESS"
-  | "DUMBBELL FLYERS"
-  | "PUSH UP";
+export type SelectChestExercises = typeof DUMBBELL_PRESS_FLAT;
 
-export type SelectedBackExercises = "PULL UP" | "LAT PULLDOWN";
+export type SelectedBackExercises = typeof PULL_UP_BACK;
 
 export type ActiveHomeButton =
   | typeof HOME_ACTIVE_BUTTON_TRAINING

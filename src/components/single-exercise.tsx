@@ -5,6 +5,7 @@ import {
   DEFAULT_NUMERIC_INPUT_PLACEHOLDER_VALUE,
   FIRST_SET_CAPTION,
   ANOTHER_SET_CAPTION,
+  DUMBBELL_PRESS_FLAT,
 } from "../constants/constants";
 import { SelectChestExercises } from "../constants/types";
 import { SingleSet } from "./single-set";
@@ -19,7 +20,7 @@ type SingleExericseProp = {
 
 export const SingleExercise = ({ exerciseId }: SingleExericseProp) => {
   const [selectedExercise, setSelectedExercise] =
-    useState<SelectChestExercises>("INCLINE DUMBBELL PRESS");
+    useState<SelectChestExercises>(DUMBBELL_PRESS_FLAT);
 
   const currentExerciseSetsAtom = useMemo(
     () => currentExerciseSetsAtomFactory(exerciseId),
