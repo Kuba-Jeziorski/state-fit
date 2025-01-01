@@ -12,7 +12,18 @@
   --color-muted-red: rgb(207, 83, 79);
   --color-muted-red-06: rgba(207, 83, 79, 0.6);
 
-  --font-size-12px: 12px;
+  --fw-600: 600;
+
+  --fs-16: 16px;
+  --fs-22: 22px;
+
+  --d12: 12px;
+  --d24: 24px;
+  --d96: 96px;
+
+  --wrapper-600: 600px;
+  --wrapper-500: 500px;
+  --wrapper-250: 250px;
 }
 
 * {
@@ -52,16 +63,14 @@ p {
   margin-inline-end: 0;
 }
 
+h1 {
+  text-align: center;
+  padding-bottom: var(--d12);
+}
+
 form {
   display: flex;
   flex-direction: column;
-}
-
-footer {
-  margin-top: 30px;
-  color: var(--color-white);
-  background-color: var(--color-patina);
-  font-size: var(--font-size-12px);
 }
 
 #root {
@@ -75,10 +84,10 @@ footer {
   background: transparent;
   outline: none;
   border: none;
-  padding: 15px 30px;
-  border-radius: 10px;
-  font-size: 16px;
-  font-weight: 600;
+  padding: var(--d12) var(--d24);
+  border-radius: var(--d12);
+  font-size: var(--fs-16);
+  font-weight: var(--fw-600);
   cursor: pointer;
   transition: filter 0.3s;
 }
@@ -97,16 +106,16 @@ footer {
 }
 
 .button.temporary-mt {
-  margin-top: 20px;
+  margin-top: var(--d24);
 }
 
 .button[type="submit"] {
-  margin-top: 20px;
+  margin-top: var(--d24);
 }
 
 .buttonWrapper {
-  width: 250px;
-  gap: 20px;
+  width: var(--wrapper-250);
+  gap: var(--d24);
   display: flex;
   flex-direction: column;
 }
@@ -125,23 +134,23 @@ footer {
   top: 50%;
   left: 50%;
   translate: -50% -50%;
-  width: 500px;
-  height: 200px;
+  width: var(--wrapper-500);
   background-color: var(--color-white);
-  border-radius: 10px;
-  padding: 20px;
+  border-radius: var(--d12);
+  padding: var(--d24);
 }
 
 .confirmModalContent {
-  display: flex;
-  flex-direction: column;
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
+  gap: var(--d96);
 }
 
 .confirmModalDescription {
-  font-size: 22px;
+  font-size: var(--fs-22);
   color: var(--color-tiber);
 }
 
@@ -149,37 +158,32 @@ footer {
   display: flex;
   justify-content: flex-end;
   width: 100%;
-  gap: 20px;
+  gap: var(--d24);
 }
 
 .trainingExercise {
   border: 1px solid black;
-  padding: 10px;
-  gap: 10px;
-  margin-bottom: 10px;
+  padding: var(--d12);
+  gap: var(--d12);
+  margin-bottom: var(--d12);
   display: flex;
   flex-direction: column;
 }
 
 .set {
   border: 1px solid red;
-  padding: 10px;
-  margin-bottom: 10px;
+  padding: var(--d12);
+  margin-bottom: var(--d12);
 }
 
 select {
-  margin-bottom: 10px;
+  margin-bottom: var(--d12);
 }
 
 .wrapper {
-  max-width: 600px;
+  max-width: var(--wrapper-600);
   margin: 0 auto;
-}
-
-.footerWrapper {
-  max-width: 600px;
-  margin: auto auto 0;
-  padding: 15px 30px;
+  padding-top: var(--d12);
 }
 
 .setInputs {
@@ -192,10 +196,10 @@ select {
   flex-direction: column;
   align-content: center;
   text-align: center;
-  gap: 12px;
+  gap: var(--d12);
 }
 
 .buttonSet {
-  padding-top: 15px;
+  padding-top: var(--d12);
   margin: 0 auto;
 }
