@@ -19,6 +19,7 @@ import {
 } from "./constants/constants";
 import { tokenAtom } from "./atoms/token-atom";
 import { DummyTokenFetch } from "./utils/dummy-token-fetch";
+import { FAQ } from "./pages/the-faq";
 
 type AuthGuardProps = {
   element: JSX.Element;
@@ -53,6 +54,7 @@ const App = () => {
       element: <AuthGuard element={<Training />} />,
     },
     { path: "/summary", element: <AuthGuard element={<Summary />} /> },
+    { path: "/faq", element: <AuthGuard element={<FAQ />} /> },
     { path: "*", element: <NoPage /> },
   ]);
 

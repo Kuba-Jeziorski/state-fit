@@ -4,9 +4,11 @@ export const HOME_PAGE_TAB_TITLE = "Home";
 export const TRAINING_PAGE_TAB_TITLE = "Training";
 export const OPENING_PAGE_TAB_TITLE = "Log in";
 export const SUMMARY_PAGE_TAB_TITLE = "Summary";
+export const FAQ_PAGE_TAB_TITLE = "FAQ";
 
 export const HOME_PAGE_TITLE = "HOME";
 export const SUMMARY_PAGE_TITLE = "SUMMARY";
+export const FAQ_PAGE_TITLE = "FAQ";
 export const TRAINING_PAGE_TITLE = "NEW TRAINIG";
 
 export const LOG_OUT_CONFIRM_MESSAGE = "ARE YOU SURE YOU WANT TO LOG OUT?";
@@ -120,6 +122,8 @@ export const HOME_ACTIVE_BUTTON_LOGOUT = "logout";
 export const HOME_ACTIVE_BUTTON_NULL = null;
 
 export const SEE_SUMMARY_CAPTION = "SEE SUMMARY";
+
+export const FAQ_CAPTION = "FAQ";
 
 export const LOG_OUT_CAPTION = "LOG ME OUT";
 

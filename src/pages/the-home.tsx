@@ -1,5 +1,6 @@
 import {
   CURRENT_TRAINING_CAPTION,
+  FAQ_CAPTION,
   HOME_ACTIVE_BUTTON_LOGOUT,
   HOME_ACTIVE_BUTTON_NULL,
   HOME_ACTIVE_BUTTON_TRAINING,
@@ -22,6 +23,7 @@ import { trainingStateAtom } from "../atoms/training-state-atom";
 
 import { HomeConfirmModal } from "../components/home-confirm-modal";
 import { ActiveHomeButton } from "../constants/types";
+import { useRedirectToFAQ } from "../utils/use-redirect-to-faq";
 
 export const Home = () => {
   const [activeButton, setActiveButton] = useState<ActiveHomeButton>(null);
@@ -30,6 +32,7 @@ export const Home = () => {
 
   const redirectToTraining = useRedirectToTraining();
   const redirectToSummary = useRedirectToSummary();
+  const redirectToFAQ = useRedirectToFAQ();
   usePageTitle(HOME_PAGE_TAB_TITLE);
 
   const isTrainingOn = trainingStateValue === TRAINING_ON;
@@ -62,6 +65,11 @@ export const Home = () => {
         <Button
           caption={SEE_SUMMARY_CAPTION}
           handleFunction={redirectToSummary}
+          classes="button primary"
+        />
+        <Button
+          caption={FAQ_CAPTION}
+          handleFunction={redirectToFAQ}
           classes="button primary"
         />
         <Button
