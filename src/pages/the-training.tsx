@@ -7,23 +7,22 @@ import {
 } from "../constants/constants";
 import { Title } from "../components/the-title";
 import { usePageTitle } from "../utils/use-page-title";
-import { useRedirectToHome } from "../utils/use-redirect-to-home";
 import { Button } from "../components/the-button";
 import { ConfirmModal } from "../components/confirm-modal";
 import { useState } from "react";
 import { useAtomValue, useSetAtom } from "jotai";
 import { currentTrainingIdAtom } from "../atoms/current-training-id-atom";
-import { useRedirectToSummary } from "../utils/use-redirect-to-summary";
 import { trainingFinishAtom } from "../atoms/writeonly/training-finish-atom";
 import { AllExercises } from "../components/all-exercises";
+import { useRedirectToPage } from "../utils/use-redirect-to-page";
 
 export const Training = () => {
   const [trainingFinishModal, setTrainingFinishModal] = useState(false);
 
   const currentTrainingId = useAtomValue(currentTrainingIdAtom);
   const finishTraining = useSetAtom(trainingFinishAtom);
-  const redirectToHome = useRedirectToHome();
-  const redirectToSummary = useRedirectToSummary();
+  const redirectToHome = useRedirectToPage();
+  const redirectToSummary = useRedirectToPage("summary");
   usePageTitle(TRAINING_PAGE_TAB_TITLE);
 
   if (currentTrainingId === null) {

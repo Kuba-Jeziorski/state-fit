@@ -15,24 +15,22 @@ import {
 import { Title } from "../components/the-title";
 import { useState } from "react";
 import { usePageTitle } from "../utils/use-page-title";
-import { useRedirectToSummary } from "../utils/use-redirect-to-summary";
-import { useRedirectToTraining } from "../utils/use-redirec-to-training";
 import { Button } from "../components/the-button";
 import { useAtomValue } from "jotai";
 import { trainingStateAtom } from "../atoms/training-state-atom";
 
 import { HomeConfirmModal } from "../components/home-confirm-modal";
 import { ActiveHomeButton } from "../constants/types";
-import { useRedirectToFAQ } from "../utils/use-redirect-to-faq";
+import { useRedirectToPage } from "../utils/use-redirect-to-page";
 
 export const Home = () => {
   const [activeButton, setActiveButton] = useState<ActiveHomeButton>(null);
 
   const trainingStateValue = useAtomValue(trainingStateAtom);
 
-  const redirectToTraining = useRedirectToTraining();
-  const redirectToSummary = useRedirectToSummary();
-  const redirectToFAQ = useRedirectToFAQ();
+  const redirectToTraining = useRedirectToPage("training");
+  const redirectToSummary = useRedirectToPage("summary");
+  const redirectToFAQ = useRedirectToPage("faq");
   usePageTitle(HOME_PAGE_TAB_TITLE);
 
   const isTrainingOn = trainingStateValue === TRAINING_ON;

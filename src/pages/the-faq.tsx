@@ -6,10 +6,10 @@ import {
   HOME_CAPTION,
 } from "../constants/constants";
 import { usePageTitle } from "../utils/use-page-title";
-import { useRedirectToHome } from "../utils/use-redirect-to-home";
+import { useRedirectToPage } from "../utils/use-redirect-to-page";
 
 export const FAQ = () => {
-  const redirectToHome = useRedirectToHome();
+  const redirectToHome = useRedirectToPage();
 
   usePageTitle(FAQ_PAGE_TAB_TITLE);
 

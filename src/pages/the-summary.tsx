@@ -6,10 +6,10 @@ import {
   SUMMARY_PAGE_TITLE,
 } from "../constants/constants";
 import { usePageTitle } from "../utils/use-page-title";
-import { useRedirectToHome } from "../utils/use-redirect-to-home";
+import { useRedirectToPage } from "../utils/use-redirect-to-page";
 
 export const Summary = () => {
-  const redirectToHome = useRedirectToHome();
+  const redirectToHome = useRedirectToPage();
 
   usePageTitle(SUMMARY_PAGE_TAB_TITLE);
 

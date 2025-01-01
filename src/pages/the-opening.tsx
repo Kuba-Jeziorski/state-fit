@@ -7,11 +7,11 @@ import { usePageTitle } from "../utils/use-page-title";
 import { Button } from "../components/the-button";
 import { useSetAtom } from "jotai";
 import { tokenAtom } from "../atoms/token-atom";
-import { useRedirectToHome } from "../utils/use-redirect-to-home";
+import { useRedirectToPage } from "../utils/use-redirect-to-page";
 
 export const Opening = () => {
   const setToken = useSetAtom(tokenAtom);
-  const redirectToHome = useRedirectToHome();
+  const redirectToHome = useRedirectToPage();
 
   const logIn = () => {
     setToken(TOKEN_PROVIDED);

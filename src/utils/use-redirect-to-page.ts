@@ -1,9 +1,11 @@
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
-export const useRedirectToTraining = () => {
+type Page = string;
+
+export const useRedirectToPage = (page: Page = "") => {
   const navigate = useNavigate();
   return useCallback(() => {
-    navigate("/training");
-  }, [navigate]);
+    navigate(`/${page}`);
+  }, [navigate, page]);
 };

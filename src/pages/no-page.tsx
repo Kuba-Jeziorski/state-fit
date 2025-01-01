@@ -1,9 +1,9 @@
 import { Button } from "../components/the-button";
 import { Title } from "../components/the-title";
-import { useRedirectToHome } from "../utils/use-redirect-to-home";
+import { useRedirectToPage } from "../utils/use-redirect-to-page";
 
 export const NoPage = () => {
-  const redirectToHome = useRedirectToHome();
+  const redirectToHome = useRedirectToPage();
 
   return (
     <>
