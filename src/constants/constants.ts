@@ -112,6 +112,7 @@ export const DEAD_HANG = "Dead hang";
 export const RUNNING = "Running";
 export const SWIMMING = "Swimming";
 
+// Exercise types
 export const WEIGHT_REPS_EXERCISES = [
   DUMBBELL_PRESS_FLAT,
   DUMBBELL_PRESS_UPWARDS,
@@ -169,6 +170,7 @@ const ALL_EXERCISE_TYPES = [
 
 export const ALL_EXERCISE_TYPES_FLATTEN = ALL_EXERCISE_TYPES.flat();
 
+// Exercise names
 export const CHEST_EXERCISE_NAMES = {
   CHEST: [
     DUMBBELL_PRESS_FLAT,
@@ -250,4 +252,3 @@ export const ALL_EXERCISES = {
   ...GRIP_FOREARM_EXERCISE_NAMES,
   ...CARDIO_EXERCISE_NAMES,
 };
-//
