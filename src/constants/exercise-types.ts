@@ -1,5 +1,6 @@
 import {
   AB_WHEEL,
+  ALL_EXERCISE_TYPES_FLATTEN,
   BACK_EXTENSION,
   BARBELL_PRESS_DOWNWARDS,
   BARBELL_PRESS_FLAT,
@@ -43,262 +44,68 @@ import {
 } from "./constants";
 import { ExerciseSetId } from "./types";
 
-const TIME_EXCERSISES = ["lifting", "holding", "tluczenie"]
+export type RepsExercises = {
+  id: ExerciseSetId;
+  type:
+    | typeof PUSH_UP_FLAT
+    | typeof PUSH_UP_UPWARDS
+    | typeof PUSH_UP_DOWNWARDS
+    | typeof TRX_RING_PUSH_UP
+    | typeof TRICEPS_PUSH_UP
+    | typeof DIAMOND_PUSH_UP
+    | typeof LEG_RAISE
+    | typeof AB_WHEEL;
+  reps: number;
+};
 
-type TimeExcersise = {
-  type: keyof typeof TIME_EXCERSISES
-}
-
-export type ChestExercises =
-  | {
-      id: ExerciseSetId;
-      type: typeof DUMBBELL_PRESS_FLAT;
-      weight: number;
-      reps: number;
-    }
-  | {
-      id: ExerciseSetId;
-      type: typeof DUMBBELL_PRESS_UPWARDS;
-      weight: number;
-      reps: number;
-    }
-  | {
-      id: ExerciseSetId;
-      type: typeof DUMBBELL_PRESS_DOWNWARDS;
-      weight: number;
-      reps: number;
-    }
-  | {
-      id: ExerciseSetId;
-      type: typeof BARBELL_PRESS_FLAT;
-      weight: number;
-      reps: number;
-    }
-  | {
-      id: ExerciseSetId;
-      type: typeof BARBELL_PRESS_UPWARDS;
-      weight: number;
-      reps: number;
-    }
-  | {
-      id: ExerciseSetId;
-      type: typeof BARBELL_PRESS_DOWNWARDS;
-      weight: number;
-      reps: number;
-    }
-  | {
-      id: ExerciseSetId;
-      type: typeof DUMBBELL_FLYES;
-      weight: number;
-      reps: number;
-    }
-  | {
-      id: ExerciseSetId;
-      type: typeof DIP_CHEST;
-      weight: number;
-      reps: number;
-    }
-  | {
-      id: ExerciseSetId;
-      type: typeof PUSH_UP_FLAT;
-      reps: number;
-    }
-  | {
-      id: ExerciseSetId;
-      type: typeof PUSH_UP_UPWARDS;
-      reps: number;
-    }
-  | {
-      id: ExerciseSetId;
-      type: typeof PUSH_UP_DOWNWARDS;
-      reps: number;
-    }
-  | {
-      id: ExerciseSetId;
-      type: typeof TRX_RING_PUSH_UP;
-      reps: number;
-    };
-
-export type BackExercises =
-  | {
-      id: ExerciseSetId;
-      type: typeof PULL_UP_BACK;
-      weight: number;
-      reps: number;
-    }
-  | {
-      id: ExerciseSetId;
-      type: typeof LAT_PULLDOWN;
-      weight: number;
-      reps: number;
-    }
-  | {
-      id: ExerciseSetId;
-      type: typeof LAT_PULLDOWN_HAMMER_GRIP;
-      weight: number;
-      reps: number;
-    }
-  | {
-      id: ExerciseSetId;
-      type: typeof ROWING;
-      weight: number;
-      reps: number;
-    }
-  | {
-      id: ExerciseSetId;
-      type: typeof DUMBBELL_SINGLE_ARM_ROW;
-      weight: number;
-      reps: number;
-    }
-  | {
-      id: ExerciseSetId;
-      type: typeof LAT_PULLDOWN_MACHINE_HAMMER_GRIP;
-      weight: number;
-      reps: number;
-    }
-  | {
-      id: ExerciseSetId;
-      type: typeof LAT_PULLDOWN_MACHINE;
-      weight: number;
-      reps: number;
-    }
-  | {
-      id: ExerciseSetId;
-      type: typeof BACK_EXTENSION;
-      weight: number;
-      reps: number;
-    };
-
-export type LegExercises =
-  | {
-      id: ExerciseSetId;
-      type: typeof SQUAT;
-      weight: number;
-      reps: number;
-    }
-  | {
-      id: ExerciseSetId;
-      type: typeof LUNGE;
-      weight: number;
-      reps: number;
-    }
-  | {
-      id: ExerciseSetId;
-      type: typeof LEG_EXTENSION;
-      weight: number;
-      reps: number;
-    }
-  | {
-      id: ExerciseSetId;
-      type: typeof LEG_CURL;
-      weight: number;
-      reps: number;
-    };
-
-export type ShoulderExercises =
-  | {
-      id: ExerciseSetId;
-      type: typeof LATERAL_RAISE;
-      weight: number;
-      reps: number;
-    }
-  | {
-      id: ExerciseSetId;
-      type: typeof FRONT_RAISE;
-      weight: number;
-      reps: number;
-    }
-  | {
-      id: ExerciseSetId;
-      type: typeof SEATED_DUMBBELL_PRESS;
-      weight: number;
-      reps: number;
-    }
-  | {
-      id: ExerciseSetId;
-      type: typeof OVERHEAD_PRESS;
-      weight: number;
-      reps: number;
-    }
-  | {
-      id: ExerciseSetId;
-      type: typeof FACE_PULL;
-      weight: number;
-      reps: number;
-    };
-
-export type BicepsExercises =
-  | {
-      id: ExerciseSetId;
-      type: typeof PULL_UP_BICEPS;
-      weight: number;
-      reps: number;
-    }
-  | {
-      id: ExerciseSetId;
-      type: typeof HAMMER_CURLS;
-      weight: number;
-      reps: number;
-    };
-
-export type TricepsExercises =
-  | {
-      id: ExerciseSetId;
-      type: typeof DIPS_TRICEPS;
-      weight: number;
-      reps: number;
-    }
-  | {
-      id: ExerciseSetId;
-      type: typeof ROPE_PUSHDOWN;
-      weight: number;
-      reps: number;
-    }
-  | {
-      id: ExerciseSetId;
-      type: typeof CLOSE_GRIP_BENCH_PRESS;
-      weight: number;
-      reps: number;
-    }
-  | {
-      id: ExerciseSetId;
-      type: typeof TRICEPS_PUSH_UP;
-      reps: number;
-    }
-  | {
-      id: ExerciseSetId;
-      type: typeof DIAMOND_PUSH_UP;
-      reps: number;
-    };
-
-export type AbExercises =
-  | {
-      id: ExerciseSetId;
-      type: typeof LEG_RAISE;
-      reps: number;
-    }
-  | {
-      id: ExerciseSetId;
-      type: typeof AB_WHEEL;
-      reps: number;
-    };
-
-export type GripExercises = {
+export type TimeExercises = {
   id: ExerciseSetId;
   type: typeof DEAD_HANG;
   time: number;
 };
 
-export type CardioExercises =
-  | {
-      id: ExerciseSetId;
-      type: typeof RUNNING;
-      distance: number;
-      time: number;
-    }
-  | {
-      id: ExerciseSetId;
-      type: typeof SWIMMING;
-      distance: number;
-      time: number;
-    };
+export type WeightRepsExercises = {
+  id: ExerciseSetId;
+  type:
+    | typeof DUMBBELL_PRESS_FLAT
+    | typeof DUMBBELL_PRESS_UPWARDS
+    | typeof DUMBBELL_PRESS_DOWNWARDS
+    | typeof BARBELL_PRESS_FLAT
+    | typeof BARBELL_PRESS_UPWARDS
+    | typeof BARBELL_PRESS_DOWNWARDS
+    | typeof DUMBBELL_FLYES
+    | typeof DIP_CHEST
+    | typeof PULL_UP_BACK
+    | typeof LAT_PULLDOWN
+    | typeof LAT_PULLDOWN_HAMMER_GRIP
+    | typeof ROWING
+    | typeof DUMBBELL_SINGLE_ARM_ROW
+    | typeof LAT_PULLDOWN_MACHINE_HAMMER_GRIP
+    | typeof LAT_PULLDOWN_MACHINE
+    | typeof BACK_EXTENSION
+    | typeof SQUAT
+    | typeof LUNGE
+    | typeof LEG_EXTENSION
+    | typeof LEG_CURL
+    | typeof LATERAL_RAISE
+    | typeof FRONT_RAISE
+    | typeof SEATED_DUMBBELL_PRESS
+    | typeof OVERHEAD_PRESS
+    | typeof FACE_PULL
+    | typeof PULL_UP_BICEPS
+    | typeof HAMMER_CURLS
+    | typeof DIPS_TRICEPS
+    | typeof ROPE_PUSHDOWN
+    | typeof CLOSE_GRIP_BENCH_PRESS;
+  weight: number;
+  reps: number;
+};
+
+export type TimeDistanceExercises = {
+  id: ExerciseSetId;
+  type: typeof RUNNING | typeof SWIMMING;
+  distance: number;
+  time: number;
+};
+
+export type AnyExerciseType = (typeof ALL_EXERCISE_TYPES_FLATTEN)[number];

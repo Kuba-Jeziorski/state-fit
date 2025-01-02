@@ -2,7 +2,6 @@ import { useAtomValue, useSetAtom } from "jotai";
 import { useMemo, useState } from "react";
 import { exercisesAtom } from "../atoms/exercises-atom";
 import {
-  DEFAULT_NUMERIC_INPUT_PLACEHOLDER_VALUE,
   FIRST_SET_CAPTION,
   ANOTHER_SET_CAPTION,
   DUMBBELL_PRESS_FLAT,
@@ -13,6 +12,8 @@ import { Button } from "./the-button";
 import { currentExerciseSetsAtomFactory } from "../atoms/factories/current-exercise-sets-atom-factory";
 import { exerciseSetsAtom } from "../atoms/exercise-sets-atom";
 import { SelectOptions } from "./select-options";
+import { AnyExerciseType } from "../constants/exercise-types";
+import { getExerciseProperties } from "../utils/get-exercise-properties";
 
 type SingleExericseProp = {
   exerciseId: string;
@@ -20,7 +21,7 @@ type SingleExericseProp = {
 
 export const SingleExercise = ({ exerciseId }: SingleExericseProp) => {
   const [selectedExercise, setSelectedExercise] =
-    useState<SelectChestExercises>(DUMBBELL_PRESS_FLAT);
+    useState<AnyExerciseType>(DUMBBELL_PRESS_FLAT);
 
   const currentExerciseSetsAtom = useMemo(
     () => currentExerciseSetsAtomFactory(exerciseId),
@@ -42,29 +43,18 @@ export const SingleExercise = ({ exerciseId }: SingleExericseProp) => {
     setSelectedExercise(value);
   };
 
-  // console.log(`selectedExercise:`, selectedExercise);
-  console.log(`exerciseSets`, exerciseSets);
-
   const addSet = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     const newSetId = crypto.randomUUID();
 
-    // const hasRepsCheck = hasReps(selectedExercise);
-    // const hasWeightCheck = hasWeight(selectedExercise);
-    // const hasDistanceCheck = hasDistance(selectedExercise);
-    // const hasTimeCheck = hasTime(selectedExercise);
-
     setSets((prevSets) => {
       const newSets = {
         ...prevSets,
         [newSetId]: {
-          // weight, reps, time or distance should be displayed conditionally
           id: newSetId,
           type: selectedExercise,
-          weight: DEFAULT_NUMERIC_INPUT_PLACEHOLDER_VALUE,
-          reps: DEFAULT_NUMERIC_INPUT_PLACEHOLDER_VALUE,
-          ...(TIME_excersiste.includes() ? {time: 0} : {})
+          ...getExerciseProperties(selectedExercise),
         },
       };
 
