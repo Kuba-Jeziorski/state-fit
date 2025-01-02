@@ -64,6 +64,7 @@ export const SingleExercise = ({ exerciseId }: SingleExericseProp) => {
           type: selectedExercise,
           weight: DEFAULT_NUMERIC_INPUT_PLACEHOLDER_VALUE,
           reps: DEFAULT_NUMERIC_INPUT_PLACEHOLDER_VALUE,
+          ...(TIME_excersiste.includes() ? {time: 0} : {})
         },
       };
 

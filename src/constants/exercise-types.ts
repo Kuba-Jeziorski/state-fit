@@ -43,6 +43,12 @@ import {
 } from "./constants";
 import { ExerciseSetId } from "./types";
 
+const TIME_EXCERSISES = ["lifting", "holding", "tluczenie"]
+
+type TimeExcersise = {
+  type: keyof typeof TIME_EXCERSISES
+}
+
 export type ChestExercises =
   | {
       id: ExerciseSetId;
